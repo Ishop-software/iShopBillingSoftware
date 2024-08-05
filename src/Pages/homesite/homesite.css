@@ -128,81 +128,31 @@
     display: flex;
     gap: 10px;
   }
-  .view-list, .view-register, .e-invoices, .add-new ,.add-newS,.add-newF,.view-registerF,.view-listT,.view-registerT,.e-invoices1,.add-new2 {
-    display: flex;
-    align-items: center;
-    color: white;
-    padding: 5px;
-    border-radius: 1px;
-    cursor: pointer;
-    font-size: small;
-  }
-  
-  .view-list {
-    color: white;
-  }
-  
-  .view-register {
-    color: white;
-    margin-left: 30px;
-  
-  }
-  
-  .e-invoices {
-    color: white;
-    margin-left: 10px;
-  }
-  
-  .add-new {
-    color: white;
-    margin-left: 10px;
-  }
-  .add-newS{
-    color: white;
-    margin-left: 150px;
-  
-  }
-  .add-newF{
-    color: white;
-    margin-left: 70px;
-  
-  }
-  .view-registerF{
-    margin-left:50px ;
-  }
-  .view-registerT{
-     margin-right: 10px; 
-    /* margin-left: 50px; */
-  }
-  
-  
-  .e-invoices1{
-    margin-right: 200px;
-    white-space: nowrap;
-    color: white;
-  }
-  .add-newT {
-    display: flex;
-    align-items: center;
-    color: white;
-    padding: 5px;
-    border-radius: 1px;
-    cursor: pointer;
-    font-size: small;
-    margin-right: 10px; /* Adjust margin-right as needed */
-  }
-  
-  .add-newT .icon {
-    margin-right: 5px; /* Space between icon and text */
-  }
-  
-  .add-newT:hover {
-    background-color: #cfe1ec;
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  
+ .view-list, .add-newS{
+  color: white;
+ }
+ .add-newS{
+  margin-left: 150px;
+ }
+ .view-listT , .view-registerT,.e-invoices1, .add-newT{
+  color: white;
+ }
+ .add-newT{
+  margin-left: 20px;
+ }
+ .e-invoices1{
+  margin-left: 10px;
+ }
+ .view-registerF, .add-newF{
+  color: white;
+ }
+ .view-listF{
+  margin-left: 100px;
+ }
+ .add-newF{
+  margin-left: 120px;
+  white-space: nowrap;
+ }
   
   .view-list:hover, .view-register:hover, .e-invoices:hover, .add-new:hover , .add-newF:hover, .add-newS:hover, .view-registerF:hover ,.add-new2:hover,.view-listT:hover,.view-registerT:hover,.e-invoices1:hover {
     background-color: #cfe1ec;
@@ -236,6 +186,7 @@
     border-radius: 4px;
     padding: 5px;
     background-color: #fff;
+    width: 500px;
   }
   
   .search-icon {
