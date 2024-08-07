@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Homesite from './Pages/homesite/homesite';
 import Items from './Pages/Item Page/Items';
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
+         <Route exact path="/" element={<Homesite />} />
           <Route exact path="/" element={<Items />} />
         </Routes>
       </BrowserRouter>
