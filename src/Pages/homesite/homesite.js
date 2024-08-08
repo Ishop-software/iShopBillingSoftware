@@ -3,8 +3,16 @@ import React from 'react';
 import { FaTachometerAlt, FaFileAlt, FaBook, FaMoneyBillWave, FaReceipt, FaJournalWhills, FaGavel, FaDollarSign, FaSearch, FaCog, FaChevronDown, FaFileInvoice, FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './homesite.css';
+import Subscription from '../Subscription Page/Subscription';
+import { Navigate } from 'react-router-dom';
+
+
+
 
 const LeftDiv = () => {
+
+  const navigate = useNavigate();
+
   return (
     <div className="left-div">
       <div>
@@ -33,8 +41,9 @@ const LeftDiv = () => {
           <div className="nav-item">
             <FaGavel className="nav-icon" /> GST
           </div>
-          <div className="nav-item">
+          <div className="nav-item" onClick={() => navigate('/subscription')}>
             <FaDollarSign className="nav-icon" /> Subscriptions
+
           </div>
         </nav>
       </div>
