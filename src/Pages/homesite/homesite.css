@@ -1,344 +1,368 @@
 /* General Container Styles */
 .container {
-    display: flex;
-    background-color: #f6f6f6;
-    min-height: 100vh; /* Ensures container takes full height */
-  }
-  
-  /* Left Sidebar Styling */
-  .left-div {
-    width: 200px;
-    height: 100%; /* Full height of the viewport */
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    position: fixed; /* Keeps it fixed on the left side */
-    top: 0;
-    left: 0;
-    overflow-y: auto;
-    transition: width 0.3s; 
-   
-  }
-  
-  .logo {
-    width: 100px;
-    height: auto;
-    margin-bottom: 20px;
-  }
-  
-  .nav-items {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  .nav-item {
-    text-decoration: none;
-    color: #333;
-    margin: 10px 0;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: 10px;
-  }
-  
-  .nav-item:hover {
-    background-color: #cfe1ec;
-    border-radius: 5px;
-  }
-  
-  .nav-icon {
-    margin-right: 10px;
-    font-size: 1.2em;
-  }
-  
-  .nav-item.dashboard {
-    color: #35affd;
-    font-weight: bold;
-  }
-  
-  /* Main Content Area */
-  .rightDiv {
-    margin-left: 220px; /* Space for fixed left-div */
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Bottom Div Styling */
-  .bottom-div {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    margin: 10px 20px;
-    height: 200px;
-    flex: 1;
-  }
-  
-  /* Dashboard Heading Styling */
-  .dashboard-heading {
-    font-size: 1.5em;
-    color: #776b6b;
-    margin: 20px 0;
-  }
-  
-  /* Card Grid Styling */
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto; /* Centers the grid */
-  }
-  
-  /* Card Styling */
-  .card {
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    position: relative;
-  }
-  
-  .card img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  .card-name {
-    position: absolute;
-    bottom: 50px;
-    left: 10px;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 3px;
-    font-size: 0.9em;
-  }
-  
-  .card-icons {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    display: flex;
-    gap: 10px;
-  }
- .view-list, .add-newS{
-  color: white;
- }
- .add-newS{
-  margin-left: 150px;
- }
- .view-listT , .view-registerT,.e-invoices1, .add-newT{
-  color: white;
- }
- .add-newT{
+  display: flex;
+  background-color: #f6f6f6;
+  min-height: 100vh; 
+}
+
+/* Left Sidebar Styling */
+.left-div {
+  width: 200px;
+  height: 100%; 
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  transition: width 0.3s; 
+ 
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.nav-items {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #333;
+  margin: 10px 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.nav-item:hover {
+  background-color: #cfe1ec;
+  border-radius: 5px;
+}
+
+.nav-icon {
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+.nav-item.dashboard {
+  color: #35affd;
+  font-weight: bold;
+}
+
+/* Main Content Area */
+.rightDiv {
+  margin-left: 220px; 
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Bottom Div Styling */
+.bottom-div {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px 20px;
+  height: 200px;
+  flex: 1;
+}
+
+/* Dashboard Heading Styling */
+.dashboard-heading {
+  font-size: 1.5em;
+  color: #776b6b;
+  margin: 20px 0;
+}
+
+/* Card Grid Styling */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto; 
+}
+
+/* Card Styling */
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card-name {
+  position: absolute;
+  bottom: 50px;
+  left: 10px;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.card-icons {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  display: flex;
+  gap: 10px;
+}
+.view-list, .add-newS{
+color: white;
+}
+.add-newS{
+margin-left: 150px;
+}
+.view-listT , .view-registerT,.e-invoices1, .add-newT{
+color: white;
+}
+.add-newT{
+margin-left: 20px;
+}
+.e-invoices1{
+margin-left: 10px;
+}
+.view-registerF, .add-newF{
+color: white;
+}
+.view-listF{
+margin-left: 100px;
+}
+.add-newF{
+margin-left: 120px;
+white-space: nowrap;
+}
+
+.view-list:hover, .view-register:hover, .e-invoices:hover, .add-new:hover , .add-newF:hover, .add-newS:hover, .view-registerF:hover ,.add-new2:hover,.view-listT:hover,.view-registerT:hover,.e-invoices1:hover {
+  background-color: #cfe1ec;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.view-list .icon, .view-register .icon, .e-invoices .icon, .add-new .icon {
+  margin-right: 5px;
+}
+/* TopDiv Styling */
+.top-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white; 
+  padding: 10px 20px;
+  height: 50px;
+  width: 1200px;
+  border-radius: 10px;
   margin-left: 20px;
- }
- .e-invoices1{
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+/* Search Bar Styling */
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 5px;
+  background-color: #fff;
+  width: 500px;
+}
+
+.search-icon {
+  margin-right: 5px;
+}
+
+.search-field {
+  border: none;
+  outline: none;
+  padding: 5px;
+}
+
+/* Right Section Styling */
+.right-section {
+  display: flex;
+  align-items: center;
+}
+
+.settings-icon {
+  margin-right: 10px;
+}
+
+.profile-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   margin-left: 10px;
- }
- .view-registerF, .add-newF{
-  color: white;
- }
- .view-listF{
-  margin-left: 100px;
- }
- .add-newF{
-  margin-left: 120px;
-  white-space: nowrap;
- }
-  
-  .view-list:hover, .view-register:hover, .e-invoices:hover, .add-new:hover , .add-newF:hover, .add-newS:hover, .view-registerF:hover ,.add-new2:hover,.view-listT:hover,.view-registerT:hover,.e-invoices1:hover {
-    background-color: #cfe1ec;
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .view-list .icon, .view-register .icon, .e-invoices .icon, .add-new .icon {
-    margin-right: 5px;
-  }
-  /* TopDiv Styling */
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.dropbtn {
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #ddd;
+}
+
+
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
   .top-div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white; /* Adjust as needed */
-    padding: 10px 20px;
-    height: 50px;
-    width: 1200px;
-    border-radius: 10px;
-    margin-left: 20px;
-    margin-top: 10px;
-    margin-right: 20px;
+    width: calc(100% - 240px);
   }
-  
-  /* Search Bar Styling */
+
   .search-bar {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    padding: 5px;
-    background-color: #fff;
-    width: 500px;
+    width: 400px;
   }
-  
-  .search-icon {
-    margin-right: 5px;
+}
+
+@media (max-width: 1024px) {
+  .left-div {
+    width: 150px;
+    padding: 15px;
   }
-  
-  .search-field {
-    border: none;
-    outline: none;
-    padding: 5px;
+
+  .nav-item {
+    font-size: 14px;
   }
-  
-  /* Right Section Styling */
-  .right-section {
-    display: flex;
-    align-items: center;
+
+  .logo {
+    width: 75px;
+    margin-bottom: 15px;
   }
-  
-  .settings-icon {
-    margin-right: 10px;
+
+  .top-div {
+    width: calc(100% - 170px);
   }
-  
-  .profile-icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-left: 10px;
+
+  .rightDiv {
+    margin-left: 170px;
   }
-  
-  .dropdown {
+
+  .search-bar {
+    width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .left-div {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    margin: 0;
+    box-shadow: none;
     position: relative;
-    display: inline-block;
-    margin-right: 10px;
   }
-  
-  .dropbtn {
-    background-color: #fff;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    padding: 5px 10px;
-    cursor: pointer;
+
+  .nav-items {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    min-width: 100px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
+
+  .nav-item {
+    margin: 5px;
+    font-size: 14px;
   }
-  
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+
+  .logo {
+    width: 50px;
+    margin-bottom: 10px;
   }
-  
-  .dropdown-content a:hover {
-    background-color: #ddd;
+
+  .top-div {
+    width: 100%;
+    margin-left: 0;
   }
-  
-  .dropdown:hover .dropdown-content {
-    display: block;
+
+  .rightDiv {
+    margin-left: 0;
   }
-  
-  .dropdown:hover .dropbtn {
-    background-color: #ddd;
+
+  .search-bar {
+    width: 250px;
   }
-  
-  /* Responsive Styles */
-  @media (max-width: 1024px) {
-    .left-div {
-      width: 150px;
-      padding: 15px;
-    }
-  
-    .nav-item {
-      font-size: 14px;
-    }
-  
-    .logo {
-      width: 75px;
-      margin-bottom: 15px;
-    }
-  
-    .top-div {
-      width: calc(100% - 170px); /* Adjust width to accommodate left-div */
-    }
-  
-    .rightDiv {
-      margin-left: 170px; /* Space for left-div */
-    }
+}
+
+@media (max-width: 480px) {
+  .left-div {
+    padding: 5px;
   }
-  
-  @media (max-width: 768px) {
-    .left-div {
-      width: 100%;
-      height: auto;
-      padding: 10px;
-      margin: 0;
-      box-shadow: none;
-      position: relative;
-    }
-  
-    .nav-items {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-  
-    .nav-item {
-      margin: 5px;
-      font-size: 14px;
-    }
-  
-    .logo {
-      width: 50px;
-      margin-bottom: 10px;
-    }
-  
-    .top-div {
-      width: 100%; /* Full width on mobile */
-    }
-  
-    .rightDiv {
-      margin-left: 0; /* Remove margin on mobile */
-    }
+
+  .nav-item {
+    font-size: 12px;
+    margin: 3px;
   }
-  
-  @media (max-width: 480px) {
-    .left-div {
-      padding: 5px;
-    }
-  
-    .nav-item {
-      font-size: 12px;
-      margin: 3px;
-    }
-  
-    .logo {
-      width: 40px;
-      margin-bottom: 5px;
-    }
-  
-    .top-div {
-      padding: 5px; /* Adjust padding for smaller screens */
-    }
-  
-    .rightDiv {
-      margin-left: 0; /* Remove margin on mobile */
-    }
+
+  .logo {
+    width: 40px;
+    margin-bottom: 5px;
   }
-  
+
+  .top-div {
+    padding: 5px;
+  }
+
+  .rightDiv {
+    margin-left: 0;
+  }
+
+  .search-bar {
+    width: 200px;
+  }
+}
