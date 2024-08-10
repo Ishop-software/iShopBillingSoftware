@@ -1,0 +1,29 @@
+.card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#btn {
+    background-color: #35AFFD;
+}
+
+.txt {
+    color: #35AFFD;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    background-color: #35AFFD;
+    color: white;
+
+    #btn {
+        background-color: white;
+        color: #35AFFD;
+    }
+
+    .txt {
+        color: white;
+    }
+}
