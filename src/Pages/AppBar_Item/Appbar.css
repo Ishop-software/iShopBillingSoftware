@@ -1,0 +1,56 @@
+.flip {
+    opacity: 1;
+    outline: 0;
+    color: #fff;
+    line-height: 40px;
+    position: relative;
+    text-align: center;
+    letter-spacing: 1px;
+    display: inline-block;
+    text-decoration: none;
+    font-family: 'Open Sans';
+    text-transform: uppercase;
+
+    &:hover {
+
+        &:after {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+
+        &:before {
+            opacity: 0;
+            transform: translateY(50%) rotateX(90deg);
+        }
+    }
+
+    &:after {
+        top: 0;
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        color: white;
+        display: block;
+        transition: 0.5s;
+        position: absolute;
+        line-height: 40px;
+        background: #35AFFD;
+        content: attr(data-back);
+        transform: translateY(-50%) rotateX(90deg);
+    }
+
+    &:before {
+        top: 0;
+        left: 0;
+        opacity: 1;
+        color: #35AFFD;
+        display: block;
+        padding: 0 30px;
+        line-height: 40px;
+        transition: 0.5s;
+        position: relative;
+        background: white;
+        content: attr(data-front);
+        transform: translateY(0) rotateX(0);
+    }
+}
