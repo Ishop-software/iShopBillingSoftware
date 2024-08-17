@@ -5,6 +5,8 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import './Items.css';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { useNavigate } from 'react-router-dom';
+
 
 const btns = ["Save", "Delete", "List", "QR Code"];
 const txtfld = ["item Name", "short Name", "HSN Code"];
@@ -49,7 +51,8 @@ function Items() {
         details: ""
     });
 
- 
+    const navigate = useNavigate();
+
     const handleOpenCompany = () => setOpenCompany(true);
     const handleCloseCompany = () => setOpenCompany(false);
     const handleOpenGroup = () => setOpenGroup(true);
@@ -102,6 +105,7 @@ function Items() {
                 const result = await response.json();
                 if (response.ok) {
                     alert('Item saved successfully!');
+                    navigate('/view')
                     console.log('Saved item:', result);
                 } else {
                     alert('Failed to save item.');

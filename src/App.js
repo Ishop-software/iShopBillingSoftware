@@ -6,6 +6,8 @@ import Subscription from './Pages/Subscription Page/Subscription';
 import SelectCompany from './Pages/Select Company Page/SelectCompany';
 import Appbar from './Pages/AppBar_Item/AppBar';
 import CreateCompany from './Pages/CreateCompany/CreateCompany';
+import Viewlist from './Pages/View List/Viewlist';
+   
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
           <Route path="/subscription" element={<Subscription />} />
           <Route path="/selectcompany" element={<SelectCompany />} />
           <Route path="/createacompany" element={<CreateCompany />} />
+          <Route path="/view" element={<Viewlist />} />
 
         </Routes>
       </BrowserRouter>
