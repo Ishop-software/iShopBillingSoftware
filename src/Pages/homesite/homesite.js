@@ -80,6 +80,9 @@ const BottomDiv = () => {
   const navigateToViewList = () => {
     navigate('/view-list');
   };
+  const navigateToViewListS = () => {
+    navigate('/view');
+  };
 
   const navigateToAddNew = () => {
     navigate('/add-new');
@@ -165,7 +168,7 @@ const BottomDiv = () => {
                 )}
                 {(index === 1) && ( // Icons for other cards
                   <>
-                    <div className="view-list" onClick={navigateToViewList}>
+                    <div className="view-list" onClick={navigateToViewListS}>
                       <FaFileInvoice className="icon" /> View List
                     </div>
                     <div className="add-newS" onClick={navigateToAddNewS}>
