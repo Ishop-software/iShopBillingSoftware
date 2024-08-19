@@ -1,0 +1,191 @@
+
+.top-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    margin-top: 20px;
+    margin-bottom: 600px;
+    
+}
+
+.head{
+    font-size: small;
+    white-space: nowrap;
+    margin-left: 40px;
+}
+
+.top-container h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #35affd;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    /* margin-left: auto;  */
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.header-buttons {
+    margin-left: 80px;
+    display: flex;
+    gap: 10px;
+}
+
+.add-new,
+.ok,
+.print,
+.deletes,
+.app,
+.sms-whatsapp,
+.export,
+.import,
+.search,
+.setting {
+    background-color: white;
+    color: #35affd;
+    border: 2px solid #35affd; 
+    border-radius: 5px; 
+}
+
+.add-new { width: 120px; }
+.ok { width: 120px; }
+.print { width: 120px; }
+.deletes { width: 150px; white-space: nowrap; }
+.app { width: 100px; }
+.sms-whatsapp { width: 120px; }
+.export { width: 120px; }
+.import { width: 120px; }
+.search { width: 120px; }
+.setting {width: 80px;}
+
+ .headbutton {
+    display: flex;
+    margin-top: 120px;
+    margin-left: 0; 
+    position: absolute;
+    left: 0; 
+    gap: 1px; 
+} 
+
+/* Button Styles */
+ .tick, .item, .short, .tax, .hsncode, .company, .group, .pchase, 
+.sales, .mr, .opb, .opv, .Edit, .Delete, .Copy, .Details {
+    background-color: #35affd;
+    color: white;
+    border: 1px solid white;
+    height: 45px;
+} 
+
+/* Adjust widths as necessary */
+ .tick { width: 62px; }
+.item { width: 172px; }
+.short { width: 90px; }
+.tax { width: 89px; }
+.hsncode { width: 85px; }
+.company { width: 170px; }
+.group { width: 86px; }
+.pchase { width: 120px; }
+.sales { width: 80px; }
+.mr, .opb, .opv { width: 60px; }
+.Edit, .Delete, .Copy, .Details { width: 80px; } 
+
+
+.parent-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+    margin-top: 200px;
+    justify-content: flex-start;
+    margin-left: 0; 
+    position: absolute;
+    
+}
+
+.textboxes {
+    display: flex ;
+    align-items: center;
+    
+    margin-bottom: 10px; /* Space between each row */  
+   
+}
+
+.text1 {
+    height: 30px;
+    width: 54px;
+   
+}
+
+.textitem {
+    width: 170px;
+    height: 30px;
+}
+
+.text3,
+.text4,
+.text5
+ {
+    width: 80px;
+    height: 30px;
+}
+ .textCompany{
+    height: 30px;
+ }
+ .text7{
+    height: 30px;
+    width: 80px;
+ }
+.text8 {
+    width: 122px;
+    height: 30px;
+}
+
+.text12 {
+    width: 75px;
+    height: 30px;
+}
+
+.text13,
+.text14,
+.text15 ,
+.textitem6{
+    width: 52px;
+    height: 30px;
+}
+
+.text9,
+.text10,
+.text11,
+.text16 {
+    cursor: pointer;
+    color: #35affd;
+    margin-left: 10px; /* Add space between icons */
+}
+
+.text9{
+    margin-left: 40px;
+}
+
+.text10{
+    margin-left: 60px;
+}
+.text11{
+    margin-left: 60px;
+}
+.text16{
+    margin-left: 65px;
+}
