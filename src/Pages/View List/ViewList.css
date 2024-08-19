@@ -1,99 +1,20 @@
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #dee2e6;
-    height: 50px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 20px;
-    border-radius: 5px;
-}
 
-.navbar-left {
-    display: flex;
-    align-items: center;
-}
-
-.navbar-links {
-    display: flex;
-    gap: 30px;
-    margin-left: 80px;
-}
-
-.navbar-links a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-}
-
-.navbar-links a:hover {
-    text-decoration: underline;
-}
-
-.navbar-center {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    height: 45px;
-
-}
-
-.search-bar {
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 300px;
-}
-
-.navbar-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-right: 40px;
-}
-
-.icon {
-    font-size: 1.5rem;
-    cursor: pointer;
-    margin-left: 10px;
-}
-
-.icon:hover {
-    color: #007bff;
-}
-
-.language-dropdown {
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    cursor: pointer;
-    
-}
-
-.profile-icon{
-    margin-right: 20px;
-}
-
-
-.header-container {
+.top-container {
     display: flex;
     align-items: center;
     margin-right: 10px;
     margin-top: 20px;
+    margin-bottom: 600px;
     
 }
 
 .head{
     font-size: small;
     white-space: nowrap;
-    margin-left: 4px;
+    margin-left: 40px;
 }
 
-.header-container h1 {
+.top-container h1 {
     margin: 0;
     font-size: 1.5rem;
     color: #35affd;
@@ -102,7 +23,7 @@
 .buttons {
     display: flex;
     gap: 10px;
-    margin-left: auto; 
+    /* margin-left: auto;  */
 }
 
 .btn {
@@ -152,395 +73,119 @@
 .search { width: 120px; }
 .setting {width: 80px;}
 
-
-.headbutton{
+ .headbutton {
     display: flex;
-    margin-top: 10px;
-   
-}
+    margin-top: 120px;
+    margin-left: 0; 
+    position: absolute;
+    left: 0; 
+    gap: 1px; 
+} 
 
-.tick{
-    width: 62px;
-    height: 35px;
-    margin-left: 20px;
-    background-color:#35affd;
+/* Button Styles */
+ .tick, .item, .short, .tax, .hsncode, .company, .group, .pchase, 
+.sales, .mr, .opb, .opv, .Edit, .Delete, .Copy, .Details {
+    background-color: #35affd;
     color: white;
     border: 1px solid white;
-}
-.item{
-    width: 172px;
-    height: 35px;
-    background-color:#35affd;
-    color: white;
-    border: 1px solid white;
-   
-}
-.short{
-    width: 90px;
-    height: 35px;
-    background-color:#35affd;
-    color: white;
-    border: 1px solid white;
-   
-}
-.tax{
-    width: 89px;
-    background-color:#35affd;
-    color: white;
-    border: 1px solid white;
-   
-}
-.hsncode{
-    background-color:#35affd;
-    color: white;
-    border: 1px solid white;
-    width: 85px;
-}
-.company{
-    width: 170px;
-    background-color:#35affd;
-    color: white;
-    border: 1px solid white;
-   
-}
-.group{
-    width: 86px;
-    background-color:#35affd;
-    color: white;
-    border: 1px solid white;
-   
-}
-.pchase{
-    width: 130px;
-    background-color:#35affd;
-    color: white;
-    border: 1px solid white;
-   
-}
-.sales{
-    width: 80px;
-    background-color:#35affd;
-    color: white;
-    border: 1px solid white;
-   
-}
-.mr,.opb,.opv{
-    width: 60px;
-    background-color:#35affd;
-    color: white;
-    border: 1px solid white;
-   
-}
-.Edit,.Delete,.Copy,.Details{
-    width: 80px;
-    background-color:#35affd;
-    color: white;
-    border: 1px solid white;
-   
-}
+    height: 45px;
+} 
 
+/* Adjust widths as necessary */
+ .tick { width: 62px; }
+.item { width: 172px; }
+.short { width: 90px; }
+.tax { width: 89px; }
+.hsncode { width: 85px; }
+.company { width: 170px; }
+.group { width: 86px; }
+.pchase { width: 120px; }
+.sales { width: 80px; }
+.mr, .opb, .opv { width: 60px; }
+.Edit, .Delete, .Copy, .Details { width: 80px; } 
+
+
+.parent-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+    margin-top: 200px;
+    justify-content: flex-start;
+    margin-left: 0; 
+    position: absolute;
+    
+}
 
 .textboxes {
-    display: flex;
-    margin-top: 10px;
-    height: 35px;
+    display: flex ;
+    align-items: center;
     
-}
-.text1{
-    margin-left: 40px;
-    height:20px ;
-    width: 64px;
-} 
-.textitem{
-    margin-left: 30px;
-    width: 300px;
-}
-.text3{
-    width: 80px;
+    margin-bottom: 10px; /* Space between each row */  
    
 }
-.text4{
-    width: 80px;
+
+.text1 {
+    height: 30px;
+    width: 54px;
+   
 }
-.text5{
-    width: 80px;
+
+.textitem {
+    width: 170px;
+    height: 30px;
 }
-.text7{
+
+.text3,
+.text4,
+.text5
+ {
     width: 80px;
-    white-space: nowrap;
+    height: 30px;
 }
-.text8{
+ .textCompany{
+    height: 30px;
+ }
+ .text7{
+    height: 30px;
+    width: 80px;
+ }
+.text8 {
     width: 122px;
+    height: 30px;
 }
-.text12{
+
+.text12 {
     width: 75px;
+    height: 30px;
 }
-.text13{
+
+.text13,
+.text14,
+.text15 ,
+.textitem6{
     width: 52px;
-    
+    height: 30px;
 }
-.text14{
-    width: 52px;
-}
-.text15{
-    width: 52px;
-    margin-right: 34px;
+
+.text9,
+.text10,
+.text11,
+.text16 {
+    cursor: pointer;
+    color: #35affd;
+    margin-left: 10px; /* Add space between icons */
 }
 
 .text9{
-   margin-right: 65px;
-   cursor: pointer;
-   color: #35affd;
-   align-items: center;
+    margin-left: 40px;
 }
+
 .text10{
-   margin-right: 70px;
-   cursor: pointer;
-   color: #35affd;
+    margin-left: 60px;
 }
 .text11{
-    margin-right: 52px;
-    cursor: pointer;
-    color: #35affd;
-}  
+    margin-left: 60px;
+}
 .text16{
-    cursor: pointer;
-    margin-right: 40px;
-    color: #35affd;
-    margin-left: 5px;
+    margin-left: 65px;
 }
-
-
-
-
-
- 
-@media (max-width: 992px) {
-    .navbar {
-        padding: 8px;
-        margin: 10px;
-    }
-
-    .navbar-links {
-        gap: 20px;
-        margin-left: 20px;
-    }
-
-    .navbar-right {
-        margin-right: 10px;
-    }
-
-    .header-container {
-        margin-right: 5px;
-        margin-top: 10px;
-    }
-
-    .header-buttons {
-        margin-left: 40px;
-    }
-
-    .btn {
-        padding: 6px 12px;
-        font-size: 12px;
-    }
-
-    .add-new, .ok, .print, .birthday-remainders, .app, 
-    .sms-whatsapp, .export, .import, .search, .setting {
-        width: auto;
-        padding: 6px;
-    }
-
-    .textboxes {
-        flex-wrap: wrap;
-    }
-
-    .textitem {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .tick, .item, .short, .tax, .hsncode, .company, 
-    .group, .pchase, .sales, .mr, .opb, .opv, .Edit, .Delete, .Copy, .Details {
-        width: 100%;
-        margin-bottom: 5px;
-    }
-}
-
-
-@media (max-width: 992px) {
-    .navbar {
-        padding: 8px;
-        margin: 10px;
-    }
-
-    .navbar-links {
-        gap: 20px;
-        margin-left: 20px;
-    }
-
-    .navbar-right {
-        margin-right: 10px;
-    }
-
-    .header-container {
-        margin-right: 5px;
-        margin-top: 10px;
-    }
-
-    .header-buttons {
-        margin-left: 40px;
-    }
-
-    .btn {
-        padding: 6px 12px;
-        font-size: 12px;
-    }
-
-    .textboxes {
-        flex-wrap: wrap;
-    }
-
-    .textitem {
-        width: 100%;
-        margin-left: 0;
-    }
-}
-
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 5px;
-        margin: 0 5px;
-        height: auto;
-    }
-
-    .navbar-center {
-        justify-content: flex-start;
-        width: 100%;
-    }
-
-    .navbar-left, .navbar-right, .header-buttons {
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-    }
-
-    .navbar-links {
-        flex-direction: column;
-        gap: 10px;
-        margin-left: 0;
-        width: 100%;
-    }
-
-    .search-bar {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .header-container {
-        margin: 0;
-    }
-
-    .buttons {
-        margin-left: 0;
-        margin-top: 10px;
-        width: 100%;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .headbutton {
-        flex-direction: column;
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    .textboxes {
-        flex-direction: column;
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    .btn {
-        width: 100%;
-        padding: 6px;
-    }
-}
-
-@media (max-width: 480px) {
-    .navbar {
-        padding: 5px;
-        margin: 0;
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .navbar-left, .navbar-right {
-        flex-direction: column;
-        align-items: stretch;
-        width: 100%;
-    }
-
-    .navbar-links {
-        flex-direction: column;
-        gap: 5px;
-        margin: 0;
-        width: 100%;
-    }
-
-    .navbar-center {
-        margin-top: 10px;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .search-bar {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .header-container {
-        flex-direction: column;
-        align-items: flex-start;
-        margin: 0;
-    }
-
-    .header-buttons {
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-    }
-
-    .btn {
-        width: 100%;
-        padding: 6px;
-        font-size: 14px;
-    }
-
-    .headbutton {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-        width: 100%;
-    }
-
-    .textboxes {
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-    }
-
-    .text1, .textitem, .text3, .text4, .text5, .text7, 
-    .text8, .text12, .text13, .text14, .text15 {
-        width: 100%;
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    .icon, .profile-icon, .language-dropdown {
-        font-size: 1rem;
-    }
-}
-
-

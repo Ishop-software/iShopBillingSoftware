@@ -10,7 +10,7 @@ import ConfirmDeleteModal from './Delete/ConfirmDeleteModal';
 
 
 function Viewlist() {
-  const [selectedLanguage, setSelectedLanguage] = useState('English');
+ 
   const [showExportModal, setShowExportModal] = useState(false);
   const [showImportModal, setShowImportModal] = useState(false);
   const [showSettingModal, setShowSettingModal] = useState(false);
@@ -22,7 +22,7 @@ function Viewlist() {
   const [editingProductItem, setEditingProductItem] = useState(null); 
   const [searchCriteria, setSearchCriteria] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
-  
+  const [selectedProductItems, setSelectedProductItems] = useState([]);
   const navigate = useNavigate();
 
   const fetchAllProductItems = async () => {
@@ -69,9 +69,9 @@ function Viewlist() {
     fetchAllProductItems();
   }, []);
 
-  const handleLanguageChange = (e) => {
-    setSelectedLanguage(e.target.value);
-  };
+  // const handleLanguageChange = (e) => {
+  //   setSelectedLanguage(e.target.value);
+  // };
 
   const handleEdit = (index) => {
     const selectedProductItem = productItems[index];
@@ -104,6 +104,7 @@ function Viewlist() {
     }
     setShowDeleteModal(false); 
   };
+
 
   const handleCancelDelete = () => {
     setShowDeleteModal(false);
@@ -202,8 +203,7 @@ function Viewlist() {
 
   return (
     <div className="container">
-     
-      <div className="header-container">
+      <div className="top-container">
         <h1 className='head'>List of items</h1>
         <div className="header-buttons">
           <button className="btn add-new" onClick={handleAddNewList}>Add New List</button>
@@ -217,7 +217,7 @@ function Viewlist() {
           
           <button className="btn setting" onClick={() => setShowSettingModal(true)}>Settings</button>
         </div>
-      </div>
+     
       <div className="headbutton">
           <button className="tick">Tick</button>
           <button className="item">itemName</button>
@@ -236,6 +236,8 @@ function Viewlist() {
           <button className="Copy">Copy</button>
           <button className="Details">Details</button>
       </div>
+      </div>    
+      <div className="parent-container">                    
       {filteredProductItems.map((element, index) => (
         <div className="textboxes" key={index}>
           <input type="checkbox" className="text1" />
@@ -269,7 +271,7 @@ function Viewlist() {
           />
            <input
             type="text"
-            className="text6"
+            className="textCompany"
             value={editingProductItem && editingProductItem.productItemId === element.productItemId ? editingProductItem.company : element.company || ''}
             placeholder=""
             onChange={(e) => setEditingProductItem({ ...editingProductItem, company: e.target.value })}
@@ -346,6 +348,7 @@ function Viewlist() {
         onClose={handleCancelDelete}
         onDelete={handleDelete}
       />   
+    </div>
     </div>
   );
 }
