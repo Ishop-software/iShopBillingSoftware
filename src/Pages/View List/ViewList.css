@@ -23,7 +23,7 @@
 .buttons {
     display: flex;
     gap: 10px;
-    /* margin-left: auto;  */
+  
 }
 
 .btn {
@@ -120,7 +120,7 @@
     display: flex ;
     align-items: center;
     
-    margin-bottom: 10px; /* Space between each row */  
+    margin-bottom: 10px;
    
 }
 
@@ -173,7 +173,7 @@
 .text16 {
     cursor: pointer;
     color: #35affd;
-    margin-left: 10px; /* Add space between icons */
+    margin-left: 10px;
 }
 
 .text9{
