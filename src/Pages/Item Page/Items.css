@@ -6,7 +6,7 @@
 }
 
 .card-styles {
-  height: 62vh;
+  height: 70vh;
   width: 180vh;
   padding: 20px;
   margin-left: 120px;
@@ -43,7 +43,7 @@
 .text-field-wrapper {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
   margin: 10px;
   margin-left: 0px;
 }
@@ -91,11 +91,12 @@
 
 
 .primary-unit-container {
-  width: 190%;
+  width: 180%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   height: 50vh;
+  
 }
 
 .primary-unit-label {
@@ -313,8 +314,8 @@
 .text-box13 { width: 85px; padding: 8px; border: 1px solid #ccc; }
 .text-box14 { width: 85px; padding: 8px; border: 1px solid #ccc; }
 .text-box15 { width: 70px; padding: 8px; border: 1px solid #ccc; }
-.text-box16 { width: 70px; padding: 8px; border: 1px solid #ccc; }
-.text-box17 { width: 55px; padding: 8px; border: 1px solid #ccc; }
+.text-box16 { width: 80px; padding: 8px; border: 1px solid #ccc; }
+.text-box17 { width: 65px; padding: 8px; border: 1px solid #ccc; }
 
 .primary-unit-dropdown {
   width: 450px; 
@@ -324,27 +325,21 @@
   width: 150px;
 }
 
-
-.tax-slab-dropdown {
-  width: 100%; 
-}
-
-
-.dropdown-text-field {
-  width: 100%; 
-}
-
-
 .text-field-container .text-field-wrapper .text-field-input {
   width: 100%; 
-}
-
-
-.primary-unit-dropdown {
-  width: 450px; 
 }
 
 .dropdown-container .dropdown-wrapper .dropdown-actions .MuiTextField-root {
   width: 150px; 
 }
+.alternate-unit-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px; 
+}
 
+.alternate-unit-field,
+.conversion-factor-field,
+.price-per-field {
+  width: 300px;
+}
