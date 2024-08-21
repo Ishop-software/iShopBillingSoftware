@@ -22,7 +22,7 @@ function Viewlist() {
   const [editingProductItem, setEditingProductItem] = useState(null); 
   const [searchCriteria, setSearchCriteria] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedProductItems, setSelectedProductItems] = useState([]);
+ 
   const navigate = useNavigate();
 
   const fetchAllProductItems = async () => {
@@ -69,9 +69,6 @@ function Viewlist() {
     fetchAllProductItems();
   }, []);
 
-  // const handleLanguageChange = (e) => {
-  //   setSelectedLanguage(e.target.value);
-  // };
 
   const handleEdit = (index) => {
     const selectedProductItem = productItems[index];
@@ -86,7 +83,7 @@ function Viewlist() {
   const handleDelete = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/productitems/deleteProductItem', {
-        method: 'DELETE',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -198,16 +195,12 @@ function Viewlist() {
     }
   };
 
-  
-  
-
   return (
     <div className="container">
       <div className="top-container">
         <h1 className='head'>List of items</h1>
         <div className="header-buttons">
           <button className="btn add-new" onClick={handleAddNewList}>Add New List</button>
-          <button className="btn deletes">Delete</button>
           <button className="btn print">Print</button>
           <button className="btn app">App</button>
           <button className="btn sms-whatsapp">OR Code</button>
