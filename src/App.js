@@ -10,7 +10,7 @@ import Viewlist from './Pages/View List/Viewlist';
 import Field from './Pages/Billpage/field';
 import Bill from './Pages/Billpage/bill';
 import PageFormat from './Pages/Billpage/page';
-
+import Sales from './Pages/salesPage/sale';
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
           <Route path='/bill' element={<Bill />}></Route>
           <Route path="/view" element={<Viewlist />} />
           <Route path='/page' element={<PageFormat />}></Route>
-
+          <Route path='/sale' element={<Sales />}></Route>
 
         </Routes>
       </BrowserRouter>

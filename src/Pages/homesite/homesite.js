@@ -87,6 +87,9 @@ const BottomDiv = () => {
   const navigateToAddNew = () => {
     navigate('/add-new');
   };
+  const navigateToAddNewSale = () => {
+    navigate('/sale');
+  };
   const navigateToAddNewS = () => {
     navigate('/items');
   };
@@ -125,7 +128,7 @@ const BottomDiv = () => {
                     <div className="e-invoices1" onClick={navigateToEInvoices}>
                       <FaReceipt className="icon" /> E-invoices
                     </div>
-                    <div className="add-newT" onClick={navigateToAddNew}>
+                    <div className="add-newT" onClick={navigateToAddNewSale}>
                       <FaPlus className="icon" /> Add New
                     </div>
                   </>
