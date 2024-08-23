@@ -5,10 +5,10 @@
     margin-right: 10px;
     margin-top: 20px;
     margin-bottom: 600px;
-    
+    flex-wrap: wrap; 
 }
 
-.head{
+.head {
     font-size: small;
     white-space: nowrap;
     margin-left: 40px;
@@ -24,6 +24,7 @@
     display: flex;
     gap: 10px;
   
+    flex-wrap: wrap; 
 }
 
 .btn {
@@ -44,22 +45,15 @@
     margin-left: 80px;
     display: flex;
     gap: 10px;
+    flex-wrap: wrap; 
 }
 
-.add-new,
-.ok,
-.print,
-.deletes,
-.app,
-.sms-whatsapp,
-.export,
-.import,
-.search,
-.setting {
+.add-new, .ok, .print, .deletes, .app, .sms-whatsapp, .export, .import, .search, .setting {
     background-color: white;
     color: #35affd;
     border: 2px solid #35affd; 
     border-radius: 5px; 
+    min-width: 80px; 
 }
 
 .add-new { width: 120px; }
@@ -71,28 +65,27 @@
 .export { width: 120px; }
 .import { width: 120px; }
 .search { width: 120px; }
-.setting {width: 80px;}
+.setting { width: 80px; }
 
- .headbutton {
+.headbutton {
     display: flex;
     margin-top: 120px;
     margin-left: 0; 
     position: absolute;
     left: 0; 
     gap: 1px; 
+    flex-wrap: wrap; 
 } 
 
-/* Button Styles */
- .tick, .item, .short, .tax, .hsncode, .company, .group, .pchase, 
-.sales, .mr, .opb, .opv, .Edit, .Delete, .Copy, .Details {
+.tick, .item, .short, .tax, .hsncode, .company, .group, .pchase, .sales, .mr, .opb, .opv, .Edit, .Delete, .Copy, .Details {
     background-color: #35affd;
     color: white;
     border: 1px solid white;
     height: 45px;
+    flex: 0 1 auto; 
 } 
 
-/* Adjust widths as necessary */
- .tick { width: 62px; }
+.tick { width: 62px; }
 .item { width: 172px; }
 .short { width: 90px; }
 .tax { width: 89px; }
@@ -104,7 +97,6 @@
 .mr, .opb, .opv { width: 60px; }
 .Edit, .Delete, .Copy, .Details { width: 80px; } 
 
-
 .parent-container {
     display: flex;
     flex-direction: column; 
@@ -112,60 +104,90 @@
     margin-top: 200px;
     justify-content: flex-start;
     margin-left: 0; 
-    position: absolute;
-    
+    position: absolute;   
 }
 
 .textboxes {
-    display: flex ;
+    display: flex;
     align-items: center;
     
     margin-bottom: 10px;
    
+    margin-bottom: 10px;   
+    flex-wrap: wrap; 
 }
 
-.text1 {
-    height: 30px;
-    width: 54px;
-   
+.text1 { height: 30px; width: 54px;  }
+.textitem { width: 170px; height: 30px;}
+.text3, .text4, .text5 {  width: 80px;height: 30px;}
+.textCompany { height: 30px; }
+.text7 { height: 30px; width: 80px; }
+.text8 { width: 122px; height: 30px; }
+.text12 { width: 75px; height: 30px; }
+.text13, .text14, .text15, .textitem6 { width: 52px; height: 30px; }
+.text9, .text10, .text11, .text16 { cursor: pointer; color: #35affd; margin-left: 10px; }
+.text9 { margin-left: 40px; }
+.text10 { margin-left: 60px; }
+.text11 { margin-left: 60px; }
+.text16 { margin-left: 65px; }
+
+
+@media screen and (max-width: 1200px) {
+    .header-buttons {
+        margin-left: 40px;
+        justify-content: flex-start;
+    }
+
+    .headbutton {
+        position: relative;
+    }
+
+    .parent-container {
+        position: relative;
+    }
 }
 
-.textitem {
-    width: 170px;
-    height: 30px;
+@media screen and (max-width: 768px) {
+    .head {
+        margin-left: 20px;
+        font-size: smaller;
+    }
+
+    .top-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-buttons {
+        margin-left: 0;
+        justify-content: flex-start;
+    }
+
+    .headbutton {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 60px;
+    }
+
+    .parent-container {
+        margin-top: 100px;
+    }
 }
 
-.text3,
-.text4,
-.text5
- {
-    width: 80px;
-    height: 30px;
-}
- .textCompany{
-    height: 30px;
- }
- .text7{
-    height: 30px;
-    width: 80px;
- }
-.text8 {
-    width: 122px;
-    height: 30px;
-}
+@media screen and (max-width: 480px) {
+    .top-container {
+        margin-right: 5px;
+        margin-top: 10px;
+        margin-bottom: 300px;
+    }
 
-.text12 {
-    width: 75px;
-    height: 30px;
-}
+    .top-container h1 {
+        font-size: 1rem;
+    }
 
-.text13,
-.text14,
-.text15 ,
-.textitem6{
-    width: 52px;
-    height: 30px;
-}
+    .buttons {
+        gap: 5px;
+    }
 
 .text9,
 .text10,
@@ -175,17 +197,23 @@
     color: #35affd;
     margin-left: 10px;
 }
+    .btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
 
-.text9{
-    margin-left: 40px;
-}
+    .header-buttons {
+        flex-direction: column;
+        margin-left: 0;
+    }
 
-.text10{
-    margin-left: 60px;
-}
-.text11{
-    margin-left: 60px;
-}
-.text16{
-    margin-left: 65px;
+    .headbutton {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 60px;
+    }
+
+    .parent-container {
+        margin-top: 50px;
+    }
 }

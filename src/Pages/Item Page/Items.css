@@ -6,7 +6,7 @@
 }
 
 .card-styles {
-  height: 62vh;
+  height: 70vh;
   width: 180vh;
   padding: 20px;
   margin-left: 120px;
@@ -43,7 +43,7 @@
 .text-field-wrapper {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
   margin: 10px;
   margin-left: 0px;
 }
@@ -91,11 +91,12 @@
 
 
 .primary-unit-container {
-  width: 190%;
+  width: 180%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   height: 50vh;
+  
 }
 
 .primary-unit-label {
@@ -151,7 +152,7 @@
   align-items: center;
   text-align: center;
   position: relative;
-  width: 70vh;
+  width: 60vh;
   height: 100%;
   margin-top: 10px;
 }
@@ -161,7 +162,7 @@
 }
 
 .upload-image-button {
-  width: 500px;
+  width: 450px;
   height: 200px; 
   display: flex;
   align-items: center;
@@ -204,6 +205,10 @@
   justify-content: center;
   align-items: flex-start;
   color: pink;
+}
+.checkboxcontainer{
+  margin-top: 300px;
+  margin-left: 45px;
 }
 
 
@@ -268,53 +273,45 @@
   cursor: pointer;
 }
 
-
-.action-buttons {
+.actionbutton{
   display: flex;
-  gap: 6px;
-  margin: 20px 20px 0; 
+  margin-top: 10px;
+ 
+}
+.variation{background-color: #35AFFD;border-color: #35AFFD;width: 100px;height: 35px;color: white;}
+.color{background-color: #35AFFD;border-color: #35AFFD;width: 100px;height: 35px; color: white;}
+.size{background-color: #35AFFD;border-color: #35AFFD;width: 100px;height: 35px;color: white;}
+.exp{background-color: #35AFFD;border-color: #35AFFD; width: 100px; height: 35px; color: white;}
+.mfg{ background-color: #35AFFD; border-color: #35AFFD; width: 100px; height: 35px; color: white;}
+.purchase{ background-color: #35AFFD; border-color: #35AFFD; width:130px; height: 35px; color: white;}
+.saleprice{background-color: #35AFFD;border-color: #35AFFD;width: 120px; height: 35px; color: white;}
+.mrp{ background-color: #35AFFD; border-color: #35AFFD; width: 100px; height: 35px; color: white;}
+.basicprice{ background-color: #35AFFD; border-color: #35AFFD; width: 120px; height: 35px; color: white;}
+.selfval{ background-color: #35AFFD; border-color: #35AFFD; width: 100px; height: 35px; color: white;}
+.min{ background-color: #35AFFD; border-color: #35AFFD; width: 100px; height: 35px; color: white;}
+.barcode{background-color: #35AFFD;border-color: #35AFFD;width: 100px;height: 35px; color: white;}
+.openingpck{ background-color: #35AFFD; border-color: #35AFFD; width: 130px; height: 35px; color: white;}
+.openingvalue{background-color: #35AFFD; border-color: #35AFFD;  width: 130px;height: 35px;  color: white;}
+
+.textfield {
+  display: flex;
+  margin-top: 5px;
 }
 
-.variation { width: 80px; background-color: #35affd; color: white; border-color: #35AFFD; border-radius: 3px; }
-.color { width: 80px; background-color: #35affd; color: white; border-color: #35AFFD; border-radius: 3px; }
-.size { width: 80px; background-color: #35affd; color: white; border-color: #35AFFD; border-radius: 3px; }
-.exp { width: 80px; background-color: #35affd; margin-left: 4px; color: white; border-color: #35AFFD; border-radius: 3px;}
-.mfg { width: 80px; background-color: #35affd; color: white; border-color: #35AFFD; border-radius: 3px; }
-.purchase { width: 80px; background-color: #35affd; color: white; border-color: #35AFFD; border-radius: 3px; }
-.sale-price { width: 80px; background-color: #35affd; white-space: nowrap; color: white; border-color: #35AFFD; border-radius: 3px; }
-.mrp { width: 80px;  background-color: #35affd; color: white; border-color: #35AFFD; border-radius: 3px; }
-.basic-price { width:100px;  background-color: #35affd; color: white; border-color: #35AFFD; border-radius: 3px; }
-.self-val { width: 80px; background-color: #35affd; color: white; border-color: #35AFFD; border-radius: 3px; }
-.min { width: 80px;  background-color: #35affd; color: white; border-color: #35AFFD; border-radius: 3px; }
-.barcode { width: 80px;  background-color: #35affd; color: white;  border-color: #35AFFD; border-radius: 3px;}
-.opening-pck { width: 100px;  background-color: #35affd; color: white; border-color: #35AFFD; border-radius: 3px; }
-.opening-value { width: 100px;  background-color: #35affd; color: white; border-color: #35AFFD; border-radius: 3px; }
-.delete { width: 80px;  background-color: #35affd; color: white; border-color: #35AFFD;  border-radius: 3px;}
-.copy { width: 80px;  background-color: #35affd; color: white; border-color: #35AFFD;  border-radius: 3px;}
-.details { width: 80px;  background-color: #35affd; color: white; border-color: #35AFFD; border-radius: 3px; }
-
-.text-field {
-  display: flex;
-  margin: 5px 20px 0; 
-}
-
-.text-box1 { width: 60px; padding: 8px; border: 1px solid #ccc; }
-.text-box2 { width: 68px; padding: 8px; border: 1px solid #ccc; }
-.text-box3 { width: 68px; padding: 8px; border: 1px solid #ccc; }
-.text-box4 { width: 65px; padding: 8px; border: 1px solid #ccc; }
-.text-box5 { width: 65px; padding: 8px; border: 1px solid #ccc; }
-.text-box6 { width: 70px; padding: 8px; border: 1px solid #ccc; }
-.text-box7 { width: 64px; padding: 8px; border: 1px solid #ccc; }
-.text-box8 { width: 67px; padding: 8px; border: 1px solid #ccc; }
-.text-box9 { width: 75px; padding: 8px; border: 1px solid #ccc; }
-.text-box10 { width: 70px; padding: 8px; border: 1px solid #ccc; }
-.text-box11 { width: 70px; padding: 8px; border: 1px solid #ccc; }
-.text-box12 { width: 65px; padding: 8px; border: 1px solid #ccc; }
-.text-box13 { width: 85px; padding: 8px; border: 1px solid #ccc; }
-.text-box14 { width: 85px; padding: 8px; border: 1px solid #ccc; }
-.text-box15 { width: 70px; padding: 8px; border: 1px solid #ccc; }
-.text-box16 { width: 70px; padding: 8px; border: 1px solid #ccc; }
-.text-box17 { width: 55px; padding: 8px; border: 1px solid #ccc; }
+.textbox1 { width: 80px; padding: 8px; border: 1px solid #ccc; }
+.textbox2 { width: 82px; padding: 8px; border: 1px solid #ccc; }
+.textbox3 { width: 80px; padding: 8px; border: 1px solid #ccc; }
+.textbox4 { width: 85px; padding: 8px; border: 1px solid #ccc; }
+.textbox5 { width: 82px; padding: 8px; border: 1px solid #ccc; }
+.textbox6 { width: 114px; padding: 8px; border: 1px solid #ccc; }
+.textbox7 { width: 100px; padding: 8px; border: 1px solid #ccc; }
+.textbox8 { width: 85px; padding: 8px; border: 1px solid #ccc; }
+.textbox9 { width: 103px; padding: 8px; border: 1px solid #ccc; }
+.textbox10 { width: 82px; padding: 8px; border: 1px solid #ccc; }
+.textbox11 { width: 83px; padding: 8px; border: 1px solid #ccc; }
+.textbox12 { width: 83px; padding: 8px; border: 1px solid #ccc; }
+.textbox13 { width: 112px; padding: 8px; border: 1px solid #ccc; }
+.textbox14 { width: 112px; padding: 8px; border: 1px solid #ccc; }
 
 .primary-unit-dropdown {
   width: 450px; 
@@ -324,27 +321,21 @@
   width: 150px;
 }
 
-
-.tax-slab-dropdown {
-  width: 100%; 
-}
-
-
-.dropdown-text-field {
-  width: 100%; 
-}
-
-
 .text-field-container .text-field-wrapper .text-field-input {
   width: 100%; 
-}
-
-
-.primary-unit-dropdown {
-  width: 450px; 
 }
 
 .dropdown-container .dropdown-wrapper .dropdown-actions .MuiTextField-root {
   width: 150px; 
 }
+.alternate-unit-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px; 
+}
 
+.alternate-unit-field,
+.conversion-factor-field,
+.price-per-field {
+  width: 300px;
+}

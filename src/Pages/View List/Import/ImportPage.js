@@ -47,7 +47,7 @@ const ImportPage = ({ show, onClose, onImport }) => {
       <div className="modal-container">
         <div className="modal-content">
           <div className="modal-header">
-            <h2>IMPORT ITEMS MASTER FORM EXCEL</h2>
+            <h2 className="head5">IMPORT ITEMS MASTER FORM EXCEL</h2>
             <button className="close-button" onClick={onClose}>X</button>
           </div>
           <div className="import-container">
