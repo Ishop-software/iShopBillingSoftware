@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { Button, Card, TextField, Typography, Grid, Checkbox, FormControlLabel, MenuItem, AppBar } from "@mui/material";
 import React, { useState, useEffect, useRef } from "react";
-import { Button, Card, TextField, Typography, Grid, Checkbox, FormControlLabel, MenuItem } from "@mui/material";
+import { Button, Card, TextField, Typography, Grid, Checkbox, FormControlLabel, MenuItem, AppBar } from "@mui/material";
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useNavigate } from 'react-router-dom';
@@ -350,7 +348,8 @@ function Items() {
                     ))}
                 </div>
             </div>
-            );
+        </div>
+    );
 }
 
-            export default Items;
+export default Items;
