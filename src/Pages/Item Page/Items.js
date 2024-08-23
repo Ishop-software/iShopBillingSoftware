@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { Button, Card, TextField, Typography, Grid, Checkbox, FormControlLabel, MenuItem } from "@mui/material";
+import { Button, Card, TextField, Typography, Grid, Checkbox, FormControlLabel, MenuItem, AppBar } from "@mui/material";
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import './Items.css';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useNavigate } from 'react-router-dom';
+import NavBar from '../AppBar_Item/AppBar';
 
 
 const btns = ["Save", "Delete", "List", "QR Code"];
 const txtfld = ["item Name", "short Name", "HSN Code"];
-const dropdown = ["company", "group"]; 
+const dropdown = ["company", "group"];
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function Items() {
@@ -75,7 +76,7 @@ function Items() {
         }
     };
 
-   
+
     const handleUploadClick = () => {
         document.getElementById('fileInput').click();
     };
@@ -85,12 +86,12 @@ function Items() {
     };
 
     const handleSave = async () => {
-       
+
         if (!itemData.itemName || !itemData.taxSlab) {
             alert('Please fill out all required fields.');
             return;
         }
-    
+
         try {
             const response = await fetch('http://localhost:5000/api/productitems/addProductItem', {
                 method: 'POST',
@@ -99,7 +100,7 @@ function Items() {
                 },
                 body: JSON.stringify(itemData)
             });
-    
+
             const contentType = response.headers.get('content-type');
             if (contentType && contentType.includes('application/json')) {
                 const result = await response.json();
@@ -123,9 +124,10 @@ function Items() {
     };
 
     return (
-        <div className="items-container">
-           
 
+        <div className="items-container">
+
+            <NavBar />
             <Card className="card-styles">
                 <div className="card-header">
                     <Typography className="header-title">Add New Item</Typography>
@@ -140,7 +142,7 @@ function Items() {
                         <div key={index} className="text-field-wrapper">
                             <Typography className="text-field-label">{index}</Typography>
                             <TextField size="small" className="text-field-input" value={itemData[index.replace(/ /g, '')]}
-                             onChange={(e) => setItemData(prev => ({ ...prev, [index.replace(/ /g, '')]: e.target.value }))}/>
+                                onChange={(e) => setItemData(prev => ({ ...prev, [index.replace(/ /g, '')]: e.target.value }))} />
                         </div>
                     ))}
                 </div>
@@ -155,9 +157,9 @@ function Items() {
                                     size="small"
                                     value={itemData.taxSlab}
                                     onChange={(e) => setItemData(prev => ({ ...prev, taxSlab: e.target.value }))}
-                                    className="tax-slab-dropdown" 
+                                    className="tax-slab-dropdown"
                                 >
-                                   
+
                                     <MenuItem value="0">05% GST</MenuItem>
                                     <MenuItem value="5">12% GST</MenuItem>
                                     <MenuItem value="12">18% GST</MenuItem>
@@ -171,8 +173,8 @@ function Items() {
                                 <Typography className="dropdown-label">{index}</Typography>
                                 <div className="dropdown-actions">
                                     <TextField size="small" value={itemData[index.replace(/ /g, '')]}
-                                 onChange={(e) => setItemData(prev => ({ ...prev, [index.replace(/ /g, '')]: e.target.value }))} 
-                                 className="dropdown-text-field"/> 
+                                        onChange={(e) => setItemData(prev => ({ ...prev, [index.replace(/ /g, '')]: e.target.value }))}
+                                        className="dropdown-text-field" />
                                 </div>
                             </div>
                         ))}
@@ -186,7 +188,7 @@ function Items() {
                                     size="small"
                                     value={itemData.primaryUnit}
                                     onChange={(e) => setItemData(prev => ({ ...prev, primaryUnit: e.target.value }))}
-                                    className="primary-unit-dropdown" 
+                                    className="primary-unit-dropdown"
                                 >
                                     <MenuItem value="kg">Bag</MenuItem>
                                     <MenuItem value="g">Box</MenuItem>
@@ -219,9 +221,9 @@ function Items() {
                                 </div>
                             ) : (
                                 <div className="alternate-unit-container">
-                                    <TextField size="small" className="alternate-unit-field" placeholder="Alternate Unit"/>
-                                    <TextField size="small" className="conversion-factor-field" placeholder="Conversion Factor"/>
-                                    <TextField size="small" className="price-per-field" placeholder="Price Per"/>
+                                    <TextField size="small" className="alternate-unit-field" placeholder="Alternate Unit" />
+                                    <TextField size="small" className="conversion-factor-field" placeholder="Conversion Factor" />
+                                    <TextField size="small" className="price-per-field" placeholder="Price Per" />
                                 </div>
                             )}
                         </div>
@@ -251,44 +253,44 @@ function Items() {
             </Card>
 
             <div className="action-buttons">
-        <button className="btn variation">Variation</button>
-        <button className="btn color">Color</button>
-        <button className="btn size">Size</button>
-        <button className="btn exp">Exp.Dt</button>
-        <button className="btn mfg">Mfg.Dt</button>
-        <button className="btn purchase">Purchase</button>
-        <button className="btn sale-price">Sale Price</button>
-        <button className="btn mrp">MRP</button>
-        <button className="btn basic-price">Basic Price</button>
-        <button className="btn self-val">Self.Val</button>
-        <button className="btn min">Min.Sale.P</button>
-        <button className="btn barcode">Barcode</button>
-        <button className="btn opening-pck">Opening Pck</button>
-        <button className="btn opening-value">Opening Value</button>
-        <button className="btn delete">Delete</button>
-        <button className="btn copy">Copy</button>
-        <button className="btn details">Details</button>
-      </div>
-      <div className="text-field">
-        <input type="text" className="text-box1"/>
-        <input type="text" className="text-box2"/>
-        <input type="text" className="text-box3"/>
-        <input type="text" className="text-box4"/>
-        <input type="text" className="text-box5"/>
-        <input type="text" className="text-box6"/>
-        <input type="text" className="text-box7"/>
-        <input type="text" className="text-box8"/>
-        <input type="text" className="text-box9"/>
-        <input type="text" className="text-box10"/>
-        <input type="text" className="text-box11"/>
-        <input type="text" className="text-box12"/>
-        <input type="text" className="text-box13"/>
-        <input type="text" className="text-box14"/>
-        <input type="text" className="text-box15"/>
-        <input type="text" className="text-box16"/>
-        <input type="text" className="text-box17"/>
-        
-      </div>
+                <button className="btn variation">Variation</button>
+                <button className="btn color">Color</button>
+                <button className="btn size">Size</button>
+                <button className="btn exp">Exp.Dt</button>
+                <button className="btn mfg">Mfg.Dt</button>
+                <button className="btn purchase">Purchase</button>
+                <button className="btn sale-price">Sale Price</button>
+                <button className="btn mrp">MRP</button>
+                <button className="btn basic-price">Basic Price</button>
+                <button className="btn self-val">Self.Val</button>
+                <button className="btn min">Min.Sale.P</button>
+                <button className="btn barcode">Barcode</button>
+                <button className="btn opening-pck">Opening Pck</button>
+                <button className="btn opening-value">Opening Value</button>
+                <button className="btn delete">Delete</button>
+                <button className="btn copy">Copy</button>
+                <button className="btn details">Details</button>
+            </div>
+            <div className="text-field">
+                <input type="text" className="text-box1" />
+                <input type="text" className="text-box2" />
+                <input type="text" className="text-box3" />
+                <input type="text" className="text-box4" />
+                <input type="text" className="text-box5" />
+                <input type="text" className="text-box6" />
+                <input type="text" className="text-box7" />
+                <input type="text" className="text-box8" />
+                <input type="text" className="text-box9" />
+                <input type="text" className="text-box10" />
+                <input type="text" className="text-box11" />
+                <input type="text" className="text-box12" />
+                <input type="text" className="text-box13" />
+                <input type="text" className="text-box14" />
+                <input type="text" className="text-box15" />
+                <input type="text" className="text-box16" />
+                <input type="text" className="text-box17" />
+
+            </div>
         </div>
 
     );
