@@ -7,13 +7,16 @@ import SelectCompany from './Pages/Select Company Page/SelectCompany';
 import Appbar from './Pages/AppBar_Item/AppBar';
 import CreateCompany from './Pages/CreateCompany/CreateCompany';
 import Viewlist from './Pages/View List/Viewlist';
-   
+import Field from './Pages/Billpage/field';
+import Bill from './Pages/Billpage/bill';
+import PageFormat from './Pages/Billpage/page';
+
 
 function App() {
   return (
     <div>
 
-      <Appbar />
+
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Homesite />} />
@@ -21,7 +24,11 @@ function App() {
           <Route path="/subscription" element={<Subscription />} />
           <Route path="/selectcompany" element={<SelectCompany />} />
           <Route path="/createacompany" element={<CreateCompany />} />
+          <Route path='/field' element={<Field />}></Route>
+          <Route path='/bill' element={<Bill />}></Route>
           <Route path="/view" element={<Viewlist />} />
+          <Route path='/page' element={<PageFormat />}></Route>
+
 
         </Routes>
       </BrowserRouter>
