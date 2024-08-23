@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Typography, TextField, Checkbox, Grid, FormControlLabel, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import axios from 'axios'; // Make sure you have axios installed
+import axios from 'axios';
+import NavBar from '../AppBar_Item/AppBar'
 
 const txtfld = ["Address Line 1", "Address Line 2", "City", "Pincode"];
 const contact = ["Mobile", "Phone", "E-mail", "Website"];
@@ -91,146 +92,150 @@ function CreateCompany() {
     };
 
     return (
-        <div style={{ padding: "20px" }}>
-            <Typography style={{ fontSize: "12px", fontWeight: "bold", marginBottom: "5px" }}>
-                Enter the Name of the Company / Firm / Organization
-            </Typography>
-            <TextField
-                fullWidth
-                name="enter_a_name_of_company"
-                value={formData.enter_a_name_of_company}
-                onChange={(e) => setFormData(e.target.value)}
-                inputProps={{ style: { height: "30px", padding: '0 5px' } }}
-            />
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                {txtfld.map((field, index) => {
-                    const fieldName = field;
-                    return (
-                        <div key={index}>
-                            <Typography style={{ fontSize: "12px", fontWeight: "bold", marginTop: "10px", marginBottom: "3px" }}>
-                                {field}
-                            </Typography>
-                            <TextField
-                                style={{ width: "50vh" }}
-                                value={formData[index]}
-                                onChange={(e) => setFormData(prev => ({ ...prev, [index]: e.target.value }))}
-                                inputProps={{ style: { height: "30px", padding: '0 5px' } }}
-                            />
-                        </div>
-                    );
-                })}
-            </div>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                {contact.map((field, index) => {
-                    const fieldName = field.replace(/\s+/g, '').toLowerCase();
-                    return (
-                        <div key={index}>
-                            <Typography style={{ fontSize: "12px", fontWeight: "bold", marginTop: "5px", marginBottom: "3px" }}>
-                                {field}
-                            </Typography>
-                            <TextField
-                                size="small"
-                                style={{ width: "50vh" }}
-                                name={`contact.${fieldName}`}
-                                value={formData[index]}
-                                onChange={(e) => setFormData(prev => ({ ...prev, [index]: e.target.value }))}
-                                inputProps={{ style: { height: "30px", padding: '0 5px' } }}
-                            />
-                            {field === "E-mail" && (
-                                <div style={{ display: 'flex', alignItems: "center", marginTop: "-10px" }}>
-                                    <Checkbox
+        <div>
+            <NavBar />
+            <div style={{ padding: "20px" }}>
 
-                                        checked={formData.sendBackup}
-                                        value={formData[index]}
-                                        onChange={(e) => setFormData(prev => ({ ...prev, [index]: e.target.value }))}
-                                        style={{ transform: "scale(0.6)" }}
-                                    />
-                                    <Typography style={{ fontSize: '8px', marginLeft: "-10px", marginTop: "2px", fontWeight: "bold" }}>
-                                        Send Data backup on same MailID
-                                    </Typography>
-                                </div>
-                            )}
-                        </div>
-                    );
-                })}
-            </div>
-            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "-25px" }}>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Typography style={{ fontSize: "12px", fontWeight: "bold", marginBottom: "3px" }}>Trade</Typography>
-                    <TextField
-                        size="small"
-                        style={{ width: "50vh" }}
-                        name="trade"
-                        value={formData.trade}
-                        onChange={(e) => setFormData(prev => ({ ...prev, primaryUnit: e.target.value }))}
-                        inputProps={{ style: { height: "30px", padding: '0 5px' } }}
-                    />
-                </div>
-                <div>
-                    <Typography style={{ fontSize: "12px", fontWeight: "bold", marginBottom: "3px" }}>Other</Typography>
-                    <TextField
-                        size="small"
-                        style={{ width: "50vh" }}
-                        name="other"
-                        value={formData.other}
-                        onChange={(e) => setFormData(prev => ({ ...prev, primaryUnit: e.target.value }))}
-                        inputProps={{ style: { height: "30px", padding: '0 5px' } }}
-                    />
-                </div>
-                <div style={{ display: "flex", justifyContent: "space-between", width: "48%", alignItems: "flex-end" }}>
-                    <Button size="small" variant="contained" style={{ width: 350, fontSize: "10px", height: "30px" }}>
-                        Create a new company on Main PC
-                    </Button>
-                    <Button size="small" variant="outlined" style={{ width: 200, fontSize: "10px", height: "30px" }}>
-                        Link Remote
-                    </Button>
-                </div>
-            </div>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Grid container spacing={2}>
-                    {engfld.map((field, index) => {
-                        const fieldName = field.replace(/\s+/g, '').toLowerCase();
+                <Typography style={{ fontSize: "12px", fontWeight: "bold", marginBottom: "5px" }}>
+                    Enter the Name of the Company / Firm / Organization
+                </Typography>
+                <TextField
+                    fullWidth
+                    name="enter_a_name_of_company"
+                    value={formData.enter_a_name_of_company}
+                    onChange={(e) => setFormData(e.target.value)}
+                    inputProps={{ style: { height: "30px", padding: '0 5px' } }}
+                />
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    {txtfld.map((field, index) => {
+                        const fieldName = field;
                         return (
-                            <Grid item xs={8} sm={6} md={2} key={index}>
-                                <Typography style={{ fontSize: "12px", fontWeight: "bold", marginTop: "7px", marginBottom: "3px" }}>
+                            <div key={index}>
+                                <Typography style={{ fontSize: "12px", fontWeight: "bold", marginTop: "10px", marginBottom: "3px" }}>
                                     {field}
                                 </Typography>
                                 <TextField
-                                    fullWidth
-                                    name={`engfld.${fieldName}`}
+                                    style={{ width: "50vh" }}
                                     value={formData[index]}
                                     onChange={(e) => setFormData(prev => ({ ...prev, [index]: e.target.value }))}
                                     inputProps={{ style: { height: "30px", padding: '0 5px' } }}
                                 />
-                            </Grid>
+                            </div>
                         );
                     })}
-                </Grid>
-            </div>
-            <div style={{ display: "flex", justifyContent: "space-evenly", padding: "20px" }}>
-                {check.map((index) => {
-
-                    return (
-                        <FormControlLabel
-
-                            control={
-                                <Checkbox
-
-
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    {contact.map((field, index) => {
+                        const fieldName = field.replace(/\s+/g, '').toLowerCase();
+                        return (
+                            <div key={index}>
+                                <Typography style={{ fontSize: "12px", fontWeight: "bold", marginTop: "5px", marginBottom: "3px" }}>
+                                    {field}
+                                </Typography>
+                                <TextField
+                                    size="small"
+                                    style={{ width: "50vh" }}
+                                    name={`contact.${fieldName}`}
                                     value={formData[index]}
                                     onChange={(e) => setFormData(prev => ({ ...prev, [index]: e.target.value }))}
-
-                                    size="small"
-                                    style={{ transform: "scale(0.8)" }}
+                                    inputProps={{ style: { height: "30px", padding: '0 5px' } }}
                                 />
-                            }
-                            label={<Typography style={{ fontSize: '13px' }}>{index}</Typography>}
+                                {field === "E-mail" && (
+                                    <div style={{ display: 'flex', alignItems: "center", marginTop: "-10px" }}>
+                                        <Checkbox
+
+                                            checked={formData.sendBackup}
+                                            value={formData[index]}
+                                            onChange={(e) => setFormData(prev => ({ ...prev, [index]: e.target.value }))}
+                                            style={{ transform: "scale(0.6)" }}
+                                        />
+                                        <Typography style={{ fontSize: '8px', marginLeft: "-10px", marginTop: "2px", fontWeight: "bold" }}>
+                                            Send Data backup on same MailID
+                                        </Typography>
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", marginTop: "-25px" }}>
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                        <Typography style={{ fontSize: "12px", fontWeight: "bold", marginBottom: "3px" }}>Trade</Typography>
+                        <TextField
+                            size="small"
+                            style={{ width: "50vh" }}
+                            name="trade"
+                            value={formData.trade}
+                            onChange={(e) => setFormData(prev => ({ ...prev, primaryUnit: e.target.value }))}
+                            inputProps={{ style: { height: "30px", padding: '0 5px' } }}
                         />
-                    );
-                })}
-                <Button variant="contained" size="small" style={{ width: 250, fontSize: "10px", height: "40px" }} onClick={handleSubmit}>
-                    Create Company
-                </Button>
+                    </div>
+                    <div>
+                        <Typography style={{ fontSize: "12px", fontWeight: "bold", marginBottom: "3px" }}>Other</Typography>
+                        <TextField
+                            size="small"
+                            style={{ width: "50vh" }}
+                            name="other"
+                            value={formData.other}
+                            onChange={(e) => setFormData(prev => ({ ...prev, primaryUnit: e.target.value }))}
+                            inputProps={{ style: { height: "30px", padding: '0 5px' } }}
+                        />
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between", width: "48%", alignItems: "flex-end" }}>
+                        <Button size="small" variant="contained" style={{ width: 350, fontSize: "10px", height: "30px" }}>
+                            Create a new company on Main PC
+                        </Button>
+                        <Button size="small" variant="outlined" style={{ width: 200, fontSize: "10px", height: "30px" }}>
+                            Link Remote
+                        </Button>
+                    </div>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <Grid container spacing={2}>
+                        {engfld.map((field, index) => {
+                            const fieldName = field.replace(/\s+/g, '').toLowerCase();
+                            return (
+                                <Grid item xs={8} sm={6} md={2} key={index}>
+                                    <Typography style={{ fontSize: "12px", fontWeight: "bold", marginTop: "7px", marginBottom: "3px" }}>
+                                        {field}
+                                    </Typography>
+                                    <TextField
+                                        fullWidth
+                                        name={`engfld.${fieldName}`}
+                                        value={formData[index]}
+                                        onChange={(e) => setFormData(prev => ({ ...prev, [index]: e.target.value }))}
+                                        inputProps={{ style: { height: "30px", padding: '0 5px' } }}
+                                    />
+                                </Grid>
+                            );
+                        })}
+                    </Grid>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-evenly", padding: "20px" }}>
+                    {check.map((index) => {
+
+                        return (
+                            <FormControlLabel
+
+                                control={
+                                    <Checkbox
+
+
+                                        value={formData[index]}
+                                        onChange={(e) => setFormData(prev => ({ ...prev, [index]: e.target.value }))}
+
+                                        size="small"
+                                        style={{ transform: "scale(0.8)" }}
+                                    />
+                                }
+                                label={<Typography style={{ fontSize: '13px' }}>{index}</Typography>}
+                            />
+                        );
+                    })}
+                    <Button variant="contained" size="small" style={{ width: 250, fontSize: "10px", height: "40px" }} onClick={handleSubmit}>
+                        Create Company
+                    </Button>
+                </div>
             </div>
         </div>
     );
