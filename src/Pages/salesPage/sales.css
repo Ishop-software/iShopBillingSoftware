@@ -1,0 +1,205 @@
+.sales-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.sales-header, .party-info, .content-sections, .bottom-section {
+  margin-top: 2px;
+}
+
+.sales-header, .party-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sales-header-left, .sales-header-right {
+  display: flex;
+  align-items: center;
+}
+
+.sales-form {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  margin-left: 160px;
+}
+
+label {
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-right: 10px;
+  min-width: 80px;
+}
+
+input[type="text"], input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 0px;
+}
+
+input[type="text"].small-input, input[type="date"].small-input {
+  width: 150px;
+}
+
+.save-btn, .print-btn, .einvoice-btn, .details-btn, .attach-btn {
+  font-size: 14px;
+  width: 100px;
+  height: 35px;
+  margin: 2px;
+  margin-bottom: 15px;
+  color: #35affd;
+  background-color: white;
+  border: 1px solid #35AEFE;
+  font-weight: bold;
+}
+
+.item-name {
+  width: 650px;
+}
+
+.add-item-btn {
+  margin-top: 5px;
+  margin-left: 320px;
+  font-weight: bold;
+  color: white;
+  background-color: #35affd;
+  border: 1px solid #35AEFE;
+  width: 190px;
+  height: 35px;
+}
+
+.edit-item-btn {
+  margin-left: 25px;
+  font-weight: bold;
+  color: #35affd;
+  background-color: white;
+  border: 1px solid #35AEFE;
+  width: 100px;
+  height: 35px;
+}
+
+.add-charge-btn {
+  margin-top: 5px;
+  margin-left: 370px;
+  font-weight: bold;
+  color: white;
+  background-color: #35affd;
+  border: 1px solid #35AEFE;
+  width: 190px;
+  height: 35px;
+}
+
+.edit-charge-btn {
+  margin-left: 25px;
+  font-weight: bold;
+  color: #35affd;
+  background-color: white;
+  border: 1px solid #35AEFE;
+  width: 100px;
+  height: 35px;
+}
+
+.party-info {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.party-details {
+  display: flex;
+  align-items: center;
+}
+
+.party-name {
+  width: 550px;
+}
+
+.bill-no {
+  margin-left: 150px;
+  width: 300px;
+}
+
+.due-date {
+  margin-left: 200px;
+  width: 200px;
+}
+
+.party-buttons {
+  margin-top: 5px;
+  display: flex;
+}
+
+.add-party-btn {
+  margin-left: 260px;
+  font-weight: bold;
+  color: white;
+  background-color: #35affd;
+  border: 1px solid #35AEFE;
+  width: 190px;
+  height: 35px;
+}
+
+.edit-party-btn {
+  margin-left: 20px;
+  font-weight: bold;
+  color: #35affd;
+  background-color: white;
+  border: 1px solid #35AEFE;
+  width: 100px;
+  height: 35px;
+}
+
+.content-sections {
+  display: flex;
+  margin-top: 10px;
+}
+
+.items-section, .charges-section {
+  flex: 1;
+  border: 2px solid #e6e6e6;
+  border-radius: 5px;
+  padding: 20px;
+  margin-right: 20px;
+}
+
+.items-section:last-child, .charges-section:last-child {
+  margin-right: 0;
+}
+
+.item-inputs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 5px;
+}
+
+.charges-inputs {
+  display: grid;
+  width: 90%;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 5px;
+}
+
+.bottom-section {
+  margin-top: 5px;
+}
+
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.summary-table th, .summary-table td {
+  border: 1px solid #e6e6e6;
+  padding: 10px;
+  text-align: left;
+}
+
+.summary-table th {
+  background-color: #35affd;
+  color: #fff;
+}
