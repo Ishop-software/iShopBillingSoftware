@@ -11,6 +11,11 @@ import Field from './Pages/Billpage/field';
 import Bill from './Pages/Billpage/bill';
 import PageFormat from './Pages/Billpage/page';
 import Sales from './Pages/salesPage/sale';
+import Login from './Pages/loginPage/LoginPage';
+import RegisterPage from './Pages/loginPage/Register/RegisterPage';
+import ActivationPage from './Pages/loginPage/Activation/ActivationPage';
+import ForgetPassword from './Pages/loginPage/password/forgetPassword';
+
 
 function App() {
   return (
@@ -19,7 +24,11 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Homesite />} />
+          <Route exact path="/"  element={<Login/>}/>
+          <Route path="/Register" element={<RegisterPage/>}/>
+          <Route path="/forgetpassword" element={<ForgetPassword/>}/>
+          <Route path="/Activation" element={<ActivationPage/>}/>
+          <Route path="/home" element={<Homesite />} />
           <Route path="/items" element={<Items />} />
           <Route path="/subscription" element={<Subscription />} />
           <Route path="/selectcompany" element={<SelectCompany />} />

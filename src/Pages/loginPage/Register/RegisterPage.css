@@ -1,0 +1,134 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200vh;
+  min-width: 200vh;
+  background: url("../../../Images/bg.jpg") no-repeat center center fixed; 
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  padding: 20px;
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 150px;
+  height: auto;
+}
+
+.register-box {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  padding: 20px;
+  height: auto; 
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.form-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.form-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 70px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.register-button {
+  background-color: #35affd;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 90px;
+}
+
+.register-button:hover {
+  background-color: #2070c6;
+}
+
+.success-message, .error-message {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  width: 90%;
+  max-width: 400px;
+  transform: translateX(-50%);
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.success-message {
+  background-color: rgb(236, 244, 236);
+  color: rgb(10, 10, 10);
+}
+
+.error-message {
+  background-color: rgb(255, 204, 204);
+  color: rgb(10, 10, 10);
+}
+
+.close-button {
+  background-color: white;
+  color: green;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.error-message .close-button {
+  color: red;
+}
+
+@media (min-width: 768px) {
+  .register-box {
+    flex-direction: row;
+  }
+  .form-left, .form-right {
+    padding: 30px;
+  }
+}
