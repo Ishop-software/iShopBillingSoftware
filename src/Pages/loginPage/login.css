@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.page-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    background: url("../../Images/bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+}
+
+.logo {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 100px;
+    height: auto;
+    z-index: 2;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-form h2 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.form-group input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.password-group {
+    position: relative;
+}
+
+.forgot-password-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 0.875rem;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+}
+
+button {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #35affd;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    max-width: 150px;
+    margin: 1rem 0;
+}
+
+button:hover {
+    background-color: #2070c6;
+}
+
+.register-link {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.register-link p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: black;
+}
+
+.register-link a {
+    color: black;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        width: 90%;
+        padding: 1.5rem;
+        max-width: none;
+    }
+
+    .logo {
+        width: 80px;
+        top: 0.5rem;
+        left: 0.5rem;
+    }
+
+    .form-group {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 1rem;
+    }
+
+    .logo {
+        width: 60px;
+    }
+
+    .form-group {
+        font-size: 0.875rem;
+    }
+
+    button {
+        height: 45px;
+    }
+}
