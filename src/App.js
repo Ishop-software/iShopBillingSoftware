@@ -15,7 +15,7 @@ import Login from './Pages/loginPage/LoginPage';
 import RegisterPage from './Pages/loginPage/Register/RegisterPage';
 import ActivationPage from './Pages/loginPage/Activation/ActivationPage';
 import ForgetPassword from './Pages/loginPage/password/forgetPassword';
-
+import Salelist from './Pages/salesPage/salelist/salelist';
 
 function App() {
   return (
@@ -38,6 +38,7 @@ function App() {
           <Route path="/view" element={<Viewlist />} />
           <Route path='/page' element={<PageFormat />}></Route>
           <Route path='/sale' element={<Sales />}></Route>
+          <Route path='/salelist' element={<Salelist />}></Route>
 
         </Routes>
       </BrowserRouter>

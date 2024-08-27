@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Charges from './charges/charges';
+import CashPage from './cashPage/cash'; // Import CashPage
 import './sales.css';
+import { useNavigate } from 'react-router-dom';
 
 const Sales = () => {
   const [showCharges, setShowCharges] = useState(false);
+  const [showCashPage, setShowCashPage] = useState(false); // State to manage CashPage visibility
 
   const handleAddCharges = () => {
     setShowCharges(true);
@@ -11,6 +14,14 @@ const Sales = () => {
 
   const handleCloseCharges = () => {
     setShowCharges(false);
+  };
+
+  const handleCashTenderedClick = () => {
+    setShowCashPage(true); // Show CashPage
+  };
+
+  const handleCloseCashPage = () => {
+    setShowCashPage(false); // Hide CashPage
   };
 
   return (
@@ -144,11 +155,37 @@ const Sales = () => {
             </tr>
           </tbody>
         </table>
-
         
+        {/* New input fields section */}
+        <div className="additional-inputs">
+          <input type="text" placeholder="Count" />
+          <input type="text" placeholder="Qty" />
+          <input type="text" placeholder="Alt" />
+          <input type="text" placeholder="Free" />
+          <input type="text" placeholder="Basic Amt" />
+          <input type="text" placeholder="Discount" />
+          <input type="text" placeholder="Ad.Disc" />
+          <input type="text" placeholder="Taxable" />
+          <input type="text" placeholder="Tax Amt" />
+          <input type="text" placeholder="Net Value" />
+          <input type="text" placeholder="Chares" />
+          <input type="text" placeholder="R.O" />
+          <input type="text" placeholder="Net Bill Amt" />
+          <input
+            type="text"
+            placeholder="Cash Tendered +"
+            onClick={handleCashTenderedClick}
+          />
+          <input type="text" placeholder="change" />
+        </div>
       </div>
 
       {showCharges && <Charges onClose={handleCloseCharges} />}
+      {showCashPage && (
+        <div className="cash-page-overlay">
+          <CashPage onClose={handleCloseCashPage} />
+        </div>
+      )}
     </div>
   );
 };
