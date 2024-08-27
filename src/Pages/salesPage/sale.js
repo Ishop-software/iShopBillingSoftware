@@ -146,6 +146,7 @@ const Sales = () => {
         </table>
 
         
+        
       </div>
 
       {showCharges && <Charges onClose={handleCloseCharges} />}
