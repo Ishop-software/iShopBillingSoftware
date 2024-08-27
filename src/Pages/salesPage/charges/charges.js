@@ -1,7 +1,14 @@
 import React from 'react';
 import './charges.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const Charges = ({ onClose }) => {
+  const navigate = useNavigate();
+
+  const handlecharges = () => {
+    navigate('/salelist'); 
+  };
   return (
     <div className="charges-modal">
       <div className="charges-container">
@@ -92,7 +99,7 @@ const Charges = ({ onClose }) => {
         </div>
 
         <div className="charges-footer">
-          <button className="save-button">Save</button>
+          <button className="save-button" onClick={handlecharges}>Save</button>
           <button className="delete-button">Delete</button>
         </div>
       </div>
