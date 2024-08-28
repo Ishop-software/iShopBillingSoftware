@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './login.css';
-import logoImage from '../../Images/logo.png';
-import backgroundImage from '../../Images/outer-bg.jpg'; 
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -59,43 +57,40 @@ const Login = () => {
     };
 
     return (
-        <div className="page-container">
-            <img src={logoImage} alt="Logo" className="logo" />
-            <div className="login-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
-                <form onSubmit={handleSubmit} className="login-form">
-                    <h2>Login</h2>
-                    {successMessage && <p className="success-message">{successMessage}</p>}
-                    {error && <p className="error-message">{error}</p>}
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter your email"
-                            required
-                        />
-                    </div>
-                    <div className="form-group password-group">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Enter your password"
-                            required
-                            maxLength={8}
-                        />
-                        <a href="/ForgetPassword" className="forgot-password-link">Forgot Password?</a>
-                    </div>
-                    <button className="login" type="submit">Login</button>
-                    <div className="register-link">
-                        <p>Don't have an account? <Link to="/register">Register here</Link></p>
-                    </div>
-                </form>
-            </div>
+        <div className="login-container">
+            <form onSubmit={handleSubmit} className="login-form">
+                <h2>Login</h2>
+                {successMessage && <p className="success-message">{successMessage}</p>}
+                {error && <p className="error-message">{error}</p>}
+                <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter your email"
+                        required
+                    />
+                </div>
+                <div className="form-group password-group">
+                    <label htmlFor="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter your password"
+                        required
+                        maxLength={8}
+                    />
+                    <a href="/ForgetPassword" className="forgot-password-link">Forgot Password?</a>
+                </div>
+                <button className="login" type="submit">Login</button>
+                <div className="register-link">
+                    <p>Don't have an account? <Link to="/register">Register here</Link></p>
+                </div>
+            </form>
         </div>
     );
 };
