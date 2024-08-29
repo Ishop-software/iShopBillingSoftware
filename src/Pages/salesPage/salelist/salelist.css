@@ -1,4 +1,71 @@
+.saleviewnavbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .left-section {
+    display: flex;
+    align-items: center;
+    color: #35affd;
+  }
+  
+  .back-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ced4da;
+    border-radius: 50%;
+    margin-right: 20px; 
+    cursor: pointer;
+  }
+  
+  .navbar-label {
+    margin-right: 40px;
+    margin-left: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #35affd;
+  }
+  
+  .right-section {
+    display: flex;
+    align-items: center;
+  }
+  
+  .settings-icon {
+    margin-right: 20px; 
+    font-size: 1.5rem; 
+    cursor: pointer;
+  }
+  
+  .dropdown-select {
+    margin-right: 20px; 
+    font-weight: bold;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 5px 10px; 
+    cursor: pointer;
+    height: 35px;
+    width: 80px; 
+  }
+  
+  .profile-icon {
+    cursor: pointer;
+    font-size: 1.5rem; 
+  }
 
+.saleviewcontainer{
+    margin-bottom: 580px;
+    background-color: #fff;
+}
 .salebuttons {
     display: flex;
     gap: 10px;
@@ -7,18 +74,18 @@
     height: 50px;
 }
 
-.saletick { width: 80px; background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer; }
-.salecharges { width: 280px; background-color: #35affd; padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer;}
-.saleaccount { width: 180px; background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer;}
-.salepuls { width: 140px; background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer; }
-.saleinput { width: 130px; background-color: #35affd; padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer;}
-.saleapply { width: 90px; background-color: #35affd; padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer;}
-.salecal { width: 100px; background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer; }
-.ro { width: 70px;  background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer;}
-.saletax { width:90px;  background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer;}
-.saleslab { width: 90px; background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer; }
-.salehsn { width: 100px;  background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer;}
-.saledelete { width: 100px;  background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer;}
+.saletick { width: 80px; height: 40px; background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer; }
+.salecharges { width: 280px; height: 40px; background-color: #35affd; padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer;}
+.saleaccount { width: 180px; height: 40px; background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer;}
+.salepuls { width: 140px; height: 40px; background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer; }
+.saleinput { width: 130px; height: 40px; background-color: #35affd; padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer;}
+.saleapply { width: 90px; height: 40px; background-color: #35affd; padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer;}
+.salecal { width: 100px; height: 40px; background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer; }
+.ro { width: 70px; height: 40px;  background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer;}
+.saletax { width:90px; height: 40px; background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer;}
+.saleslab { width: 90px; height: 40px; background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer; }
+.salehsn { width: 100px; height: 40px;  background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer;}
+.saledelete { width: 100px; height: 40px; background-color: #35affd;padding: 8px 16px;border: none;border-radius: 5px;font-size: 14px;cursor: pointer;}
 
 
 .saletexts {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaArrowLeft, FaCog, FaEdit, FaTrash, FaBook, FaInfoCircle } from 'react-icons/fa';
+import { FaArrowLeft, FaCog, FaEdit, FaTrash, FaBook, FaInfoCircle,FaUser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './ViewList.css';
 import ExportPage from './Export/ExportPage';
@@ -194,12 +194,38 @@ function Viewlist() {
       console.error('Error updating product item:', error);
     }
   };
-
+  const handleBackClick = () => {
+    console.log('Back button clicked');
+  };
   return (
-    <div className="container">
+    <div>
+    <div className="saleviewnavbar">
+      <div className="left-section">
+        <div className="back-icon" onClick={handleBackClick}>
+          <FaArrowLeft />
+        </div>
+        <label className="navbar-label">Account</label>
+        <label className="navbar-label">Sales</label>
+        <label className="navbar-label">Purchase</label>
+        <label className="navbar-label">POS</label>
+        <label className="navbar-label">Help</label>
+        <label className="navbar-label">Customize</label>
+      </div>
+      <div className="right-section">
+        <FaCog className="icon settings-icon" />
+        <select className="dropdown-select">
+    <option value="EN">EN</option>
+    <option value="Tamil">Tamil</option>
+    <option value="French">French</option>
+    <option value="Spanish">Spanish</option>
+  </select>
+        <FaUser className="icon profile-icon" />
+      </div>
+    </div>
+    <div className="itemcontainer">
       <div className="top-container">
         <h1 className='head'>List of items</h1>
-        <div className="header-buttons">
+        <div className="listclick-buttons">
           <button className="btn add-new" onClick={handleAddNewList}>Add New List</button>
           <button className="btn print">Print</button>
           <button className="btn app">App</button>
@@ -211,7 +237,7 @@ function Viewlist() {
           <button className="btn setting" onClick={() => setShowSettingModal(true)}>Settings</button>
         </div>
      
-      <div className="headbutton">
+      <div className="showbutton">
           <button className="tick">Tick</button>
           <button className="item">itemName</button>
           <button className="short">shortName</button>
@@ -341,6 +367,7 @@ function Viewlist() {
         onClose={handleCancelDelete}
         onDelete={handleDelete}
       />   
+    </div>
     </div>
     </div>
   );

@@ -1,12 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Charges from './charges/charges';
-import CashPage from './cashPage/cash'; // Import CashPage
+import CashPage from './cashPage/cash'; 
 import './sales.css';
 import { useNavigate } from 'react-router-dom';
 
 const Sales = () => {
   const [showCharges, setShowCharges] = useState(false);
-  const [showCashPage, setShowCashPage] = useState(false); // State to manage CashPage visibility
+  const [showCashPage, setShowCashPage] = useState(false); 
+  const [items, setItems] = useState([]); 
+  const [selectedItem, setSelectedItem] = useState(''); 
+  const [quantity, setQuantity] = useState(''); 
+  const [rate, setRate] = useState(''); 
+  const [basicAmt, setBasicAmt] = useState('');
+  const [discPercent, setDiscPercent] = useState(''); 
+  const [discAmt, setDiscAmt] = useState(''); 
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    
+    const fetchProductItems = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/productitems/getProductItem');
+        const data = await response.json();
+        setItems(data);
+      } catch (error) {
+        console.error('Error fetching product items:', error);
+      }
+    };
+
+    fetchProductItems();
+  }, []);
+
+  useEffect(() => {
+    
+    const fetchItemRate = async () => {
+      if (selectedItem) {
+        try {
+          const response = await fetch(`http://localhost:5000/api/productitems/getProductItem?itemName=${selectedItem}`);
+          const data = await response.json();
+          if (data && data.length > 0) {
+            setRate(data[0].salePrice || '');
+          } else {
+            setRate('');
+          }
+        } catch (error) {
+          console.error('Error fetching item rate:', error);
+        }
+      } else {
+        setRate('');
+      }
+    };
+
+    fetchItemRate();
+  }, [selectedItem]);
+
+  useEffect(() => {
+    const calculateBasicAmt = () => {
+      const qty = parseFloat(quantity) || 0;
+      const rateValue = parseFloat(rate) || 0;
+      const calculatedBasicAmt = qty * rateValue;
+      setBasicAmt(calculatedBasicAmt > 0 ? calculatedBasicAmt.toFixed(2) : '');
+    };
+
+    calculateBasicAmt();
+  }, [quantity, rate]);
+
+  useEffect(() => {
+    const calculateDiscAmt = () => {
+      const basic = parseFloat(basicAmt) || 0;
+      const percent = parseFloat(discPercent) || 0;
+      const calculatedDiscAmt = (basic * percent) / 100;
+      setDiscAmt(calculatedDiscAmt > 0 ? calculatedDiscAmt.toFixed(2) : '');
+    };
+
+    calculateDiscAmt();
+  }, [basicAmt, discPercent]);
 
   const handleAddCharges = () => {
     setShowCharges(true);
@@ -17,13 +85,30 @@ const Sales = () => {
   };
 
   const handleCashTenderedClick = () => {
-    setShowCashPage(true); // Show CashPage
+    setShowCashPage(true); 
   };
 
   const handleCloseCashPage = () => {
-    setShowCashPage(false); // Hide CashPage
+    setShowCashPage(false); 
   };
 
+  const handleItemChange = (event) => {
+    setSelectedItem(event.target.value);
+  };
+  const handleQuantityChange = (event) => {
+    setQuantity(event.target.value);
+  };
+
+  const handleDiscPercentChange = (event) => {
+    setDiscPercent(event.target.value);
+  };
+  const handlepartyname = () => {
+    navigate('/items'); 
+  };
+  const handleadditem = () => {
+    navigate('/items'); 
+  };
+  
   return (
     <div className="sales-container">
       <div className="sales-header">
@@ -62,7 +147,7 @@ const Sales = () => {
           </div>
         </div>
         <div className="party-buttons">
-          <button className="add-party-btn">+ Add New Party Name</button>
+          <button className="add-party-btn"  onClick={handlepartyname}>+ Add New Party Name</button>
           <button className="edit-party-btn">Edit</button>
         </div>
       </div>
@@ -72,20 +157,29 @@ const Sales = () => {
           <label className="section-title">ITEMS</label>
           <div className="item-name">
             <label>Item Name</label>
-            <input type="text" />
-            <button className="add-item-btn">+ Add New Item Name</button>
+            <select value={selectedItem} onChange={handleItemChange}>
+              <option value="">Select Item</option>
+              {items.map((item) => (
+                <option key={item.id} value={item.itemName}>
+                  {item.itemName}
+                </option>
+              ))}
+            </select>
+          
+            
+            <button className="add-item-btn" onClick={handleadditem}>+ Add New Item Name</button>
             <button className="edit-item-btn">Edit</button>
           </div>
           <div className="item-inputs">
-            <input type="text" placeholder="Qty" />
+            <input type="text" placeholder="Qty"  value={quantity} onChange={handleQuantityChange}  />
             <input type="text" placeholder="Alt Qty" />
             <input type="text" placeholder="Free" />
             <input type="text" placeholder="Per" />
-            <input type="text" placeholder="Rate" />
-            <input type="text" placeholder="Disc Amount" />
-            <input type="text" placeholder="Basic Amt" />
+            <input type="text" placeholder="Rate" value={rate} readOnly/>
+            <input type="text" placeholder="Disc Amount" value={discAmt} readOnly />
+            <input type="text" placeholder="Basic Amt" value={basicAmt} readOnly />
             <input type="text" placeholder="Tax Amount" />
-            <input type="text" placeholder="Disc %" />
+            <input type="text" placeholder="Disc %" value={discPercent} onChange={handleDiscPercentChange}/>
             <input type="text" placeholder="Net Value" />
           </div>
         </div>
@@ -156,7 +250,7 @@ const Sales = () => {
           </tbody>
         </table>
         
-        {/* New input fields section */}
+       
         <div className="additional-inputs">
           <input type="text" placeholder="Count" />
           <input type="text" placeholder="Qty" />
