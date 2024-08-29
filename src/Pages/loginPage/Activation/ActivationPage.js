@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './activation.css';
 import logo from '../../../Images/logo.png'; 
 
@@ -7,20 +7,27 @@ const ActivationPage = () => {
     const [activationCode, setActivationCode] = useState('');
     const [loading, setLoading] = useState(false);
     const [activationStatus, setActivationStatus] = useState('');
-    
+
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const hardcodedActivationKey = activationCode; 
+    const queryParams = new URLSearchParams(location.search);
+    const token = queryParams.get('token');
+    const hardcodedActivationKey = queryParams.get('key');
 
+   
     const handleSubmit = (event) => {
         event.preventDefault();
         setLoading(true);
         setActivationStatus('');
 
         setTimeout(() => {
+          
             if (activationCode === hardcodedActivationKey) {
-                navigate('/home');
+                
+                navigate(`/home?token=${token}`);
             } else {
+                
                 setActivationStatus('Invalid activation code. Please recheck the activation key sent by email.');
             }
             setLoading(false);
