@@ -14,6 +14,9 @@ const Login = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+   
+        setError(null);
+
         if (password.length > 8) {
             setError('Password must be at most 8 characters long');
             return;
@@ -38,16 +41,16 @@ const Login = () => {
             const data = await response.json();
 
             if (response.ok) {
-                setSuccessMessage(`Login successful! Activation Key: ${data.activationkey}`);
+               
                 localStorage.setItem('token', data.token);
+                localStorage.setItem('activationkey', data.activationkey);
+
+                setSuccessMessage(`Login successful! Activation Key: ${data.activationkey}&token=${data.token}`);
 
                 setPreviousPassword(password);
 
-                if (data.activationkey) {
-                    navigate(`/activation?key=${data.activationkey}`);
-                } else {
-                    navigate('/home');
-                }
+               
+                navigate(`/activation?token=${data.token}&key=${data.activationkey}`);
             } else {
                 setError(data.message || 'Login failed');
             }
