@@ -2,6 +2,8 @@
   padding: 20px;
   font-family: Arial, sans-serif;
   overflow-y: auto;
+  margin-top: 200px;
+ 
 }
 
 .sales-header, .party-info, .content-sections, .bottom-section {
@@ -306,3 +308,4 @@ input[type="text"].small-input, input[type="date"].small-input {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
