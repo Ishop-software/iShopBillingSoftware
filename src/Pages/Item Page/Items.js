@@ -1,16 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Button, Card, TextField, Typography, Grid, Checkbox, FormControlLabel, MenuItem, AppBar } from "@mui/material";
+import { Button, Card, TextField, Typography, Grid, MenuItem } from "@mui/material";
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../AppBar_Item/AppBar';
-
 import './Items.css';
 
-const btns = ["Save", "List", "QR Code"];
-const txtfld = ["item Name", "short Name", "HSN Code"];
+const btns = ["Save", "List"];
+const txtfld = ["itemName", "shortName", "HSNCode"];
 const dropdown = ["company", "group"];
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function Items() {
     const [showAlternateUnit, setShowAlternateUnit] = useState(false);
@@ -44,6 +41,7 @@ function Items() {
         boxRate: "",
         pricePerPiece: "",
     });
+
     const navigate = useNavigate();
     const inputRefs = useRef({});
 
@@ -60,74 +58,73 @@ function Items() {
         }
     };
 
-
     const handleUploadClick = () => {
         document.getElementById('fileInput').click();
     };
 
     const handleSave = async () => {
-
+      
         if (!itemData.itemName || !itemData.taxSlab) {
             alert('Please fill out all required fields.');
             return;
         }
 
         try {
+            console.log('Retrieved token:', token);
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Authentication token is missing.');
+                return;
+            }
+
+         
             const response = await fetch('http://localhost:5000/api/productitems/addProductItem', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': token 
                 },
                 body: JSON.stringify(itemData)
             });
 
-            const contentType = response.headers.get('content-type');
-            if (contentType && contentType.includes('application/json')) {
+            if (response.ok) {
                 const result = await response.json();
-                if (response.ok) {
-                    alert('Item saved successfully!');
-                    navigate('/View');
-                    console.log('Saved item:', result);
-
-                    setItemData({
-                        itemName: "",
-                        shortName: "",
-                        HSNCode: "",
-                        taxSlab: "",
-                        primaryUnit: "",
-                        company: "",
-                        uploadImage: "",
-                        maintainBatch: false,
-                        group: "",
-                        serialNoTracking: false,
-                        variation: "",
-                        color: "",
-                        size: "",
-                        expDate: "",
-                        mfgDate: "",
-                        purchase: "",
-                        salePrice: "",
-                        mrp: "",
-                        basicPrice: "",
-                        selfVal: "",
-                        minSalePrice: "",
-                        barcode: "",
-                        openingPck: "",
-                        openingValue: "",
-                        piecePerBox: "",
-                        boxRate: "",
-                        pricePerPiece: "",
-                    });
-
-                    setSelectedImage(null);
-                } else {
-                    alert('Failed to save item.');
-                    console.error('Save error:', result);
-                }
+                alert('Item saved successfully!');
+                navigate('/View'); 
+              
+                setItemData({
+                    itemName: "",
+                    shortName: "",
+                    HSNCode: "",
+                    taxSlab: "",
+                    primaryUnit: "",
+                    company: "",
+                    uploadImage: "",
+                    maintainBatch: false,
+                    group: "",
+                    serialNoTracking: false,
+                    variation: "",
+                    color: "",
+                    size: "",
+                    expDate: "",
+                    mfgDate: "",
+                    purchase: "",
+                    salePrice: "",
+                    mrp: "",
+                    basicPrice: "",
+                    selfVal: "",
+                    minSalePrice: "",
+                    barcode: "",
+                    openingPck: "",
+                    openingValue: "",
+                    piecePerBox: "",
+                    boxRate: "",
+                    pricePerPiece: "",
+                });
+                setSelectedImage(null);
             } else {
-                const text = await response.text();
-                console.error('Unexpected response format:', text);
-                alert('Unexpected response format.');
+                const error = await response.json();
+                alert('Failed to save item: ' + error.message);
             }
         } catch (error) {
             console.error('Request failed:', error);
@@ -159,9 +156,7 @@ function Items() {
     }, [itemData.piecePerBox, itemData.boxRate]);
 
     return (
-
         <div className="items-container">
-
             <NavBar />
             <div className="items-container">
                 <Card className="card-styles">
@@ -189,14 +184,14 @@ function Items() {
                     <div className="text-field-container">
                         {txtfld.map((field, idx) => (
                             <div key={field} className="text-field-wrapper">
-                                <Typography className="text-field-label">{field}</Typography>
+                                <Typography className="text-field-label">{field.replace(/([A-Z])/g, ' $1')}</Typography>
                                 <TextField
                                     size="small"
                                     className="text-field-input"
-                                    value={itemData[field.replace(/ /g, '')]}
-                                    onChange={(e) => handleInputChange(e, field.replace(/ /g, ''))}
-                                    onKeyDown={(e) => handleKeyDown(e, txtfld[idx + 1]?.replace(/ /g, ''))}
-                                    inputRef={(el) => inputRefs.current[field.replace(/ /g, '')] = el}
+                                    value={itemData[field]}
+                                    onChange={(e) => handleInputChange(e, field)}
+                                    onKeyDown={(e) => handleKeyDown(e, txtfld[idx + 1])}
+                                    inputRef={(el) => inputRefs.current[field] = el}
                                 />
                             </div>
                         ))}
@@ -225,12 +220,12 @@ function Items() {
                             </div>
                             {dropdown.map(index => (
                                 <div key={index} className="dropdown-wrapper">
-                                    <Typography className="dropdown-label">{index}</Typography>
+                                    <Typography className="dropdown-label">{index.replace(/([A-Z])/g, ' $1')}</Typography>
                                     <div className="dropdown-actions">
                                         <TextField
                                             size="small"
-                                            value={itemData[index.replace(/ /g, '')]}
-                                            onChange={(e) => handleInputChange(e, index.replace(/ /g, ''))}
+                                            value={itemData[index]}
+                                            onChange={(e) => handleInputChange(e, index)}
                                             className="dropdown-text-field"
                                             InputProps={{ style: { width: '420px' } }}
                                         />
@@ -263,90 +258,52 @@ function Items() {
                                         <ViewInArIcon style={{ color: "#35AFFD" }} />
                                     </Button>
                                 </div>
-                                {!showAlternateUnit ? (
-                                    <div className="image-upload-container">
-                                        <input
-                                            type="file"
-                                            id="fileInput"
-                                            accept="image/*"
-                                            style={{ display: "none" }}
-                                            onChange={handleImageUpload}
-                                        />
-                                        <Button variant="outlined" className="upload-image-button" onClick={handleUploadClick}>
-                                            <CloudUploadIcon /> Upload Image
-                                        </Button>
-                                        {selectedImage && (
-                                            <img src={selectedImage} alt="Selected" className="uploaded-image" />
-                                        )}
-                                    </div>
-                                ) : (
-                                    <div className="alternate-unit-container">
-                                        <TextField
-                                            size="small"
-                                            className="alternate-unit-field"
-                                            placeholder="Piece Per Box"
-                                            value={itemData.piecePerBox}
-                                            onChange={(e) => handleInputChange(e, 'piecePerBox')}
-                                        />
-                                        <TextField
-                                            size="small"
-                                            className="conversion-factor-field"
-                                            placeholder="Box Rate"
-                                            value={itemData.boxRate}
-                                            onChange={(e) => handleInputChange(e, 'boxRate')}
-                                        />
-                                        <TextField
-                                            size="small"
-                                            className="price-per-field"
-                                            placeholder="Price Per Piece"
-                                            value={itemData.pricePerPiece}
-                                            InputProps={{ readOnly: true }}
-                                        />
-                                    </div>
-                                )}
                             </div>
+                            {showAlternateUnit && (
+                                <div className="alternate-unit-container">
+                                    <Typography className="alternate-unit-title">Alternate Unit</Typography>
+                                    <div className="alternate-unit-actions">
+                                        <TextField
+                                            select
+                                            size="small"
+                                            value={itemData.alternateUnit}
+                                            onChange={(e) => handleInputChange(e, 'alternateUnit')}
+                                            className="alternate-unit-dropdown"
+                                            InputProps={{ style: { width: '100%' } }}
+                                        >
+                                            <MenuItem value="bag">Bag</MenuItem>
+                                            <MenuItem value="box">Box</MenuItem>
+                                            <MenuItem value="dozen">Dozen</MenuItem>
+                                            <MenuItem value="gm">Gms.</MenuItem>
+                                            <MenuItem value="kg">Kgs.</MenuItem>
+                                            <MenuItem value="ltr">Ltr.</MenuItem>
+                                            <MenuItem value="pcs">Pcs.</MenuItem>
+                                            <MenuItem value="qntl">Qntl</MenuItem>
+                                        </TextField>
+                                    </div>
+                                </div>
+                            )}
                         </Grid>
                         <Grid item xs={3}>
-                            <div className="checkboxcontainer">
-                                <FormControlLabel
-                                    control={<Checkbox checked={itemData.maintainBatch} onChange={(e) => handleInputChange(e, 'maintainBatch')} />}
-                                    label="Maintain Batch"
-                                />
-                                <FormControlLabel
-                                    control={<Checkbox checked={itemData.serialNoTracking} onChange={(e) => handleInputChange(e, 'serialNoTracking')} />}
-                                    label="Serial No. Tracking"
-                                />
+                            <div className="image-upload-container">
+                                <Typography className="image-upload-label">Upload Image</Typography>
+                                <div className="image-upload-actions">
+                                    <Button variant="contained" color="primary" onClick={handleUploadClick}>
+                                        Upload Image
+                                    </Button>
+                                    <input
+                                        id="fileInput"
+                                        type="file"
+                                        accept="image/*"
+                                        style={{ display: 'none' }}
+                                        onChange={handleImageUpload}
+                                    />
+                                    {selectedImage && <img src={selectedImage} alt="Selected" className="selected-image" />}
+                                </div>
                             </div>
                         </Grid>
                     </Grid>
                 </Card>
-                <div className="action-button-container">
-                    <button className="variation">Variation</button>
-                    <button className="color">Color</button>
-                    <button className="size">Size</button>
-                    <button className="exp">Exp.Dt</button>
-                    <button className="mfg">Mfg.Dt</button>
-                    <button className="purchase">Purchase</button>
-                    <button className="saleprice">Sale Price</button>
-                    <button className="mrp">MRP</button>
-                    <button className="basicprice">Basic Price</button>
-                    <button className="selfval">Self.Val</button>
-                    <button className="min">Min.Sale.Price</button>
-                    <button className="barcode">Barcode</button>
-                    <button className="openingpck">Opening Pck</button>
-                    <button className="openingvalue">Opening Value</button>
-                </div>
-                <div className="text-field-container">
-                    {[...Array(14)].map((_, index) => (
-                        <input
-                            key={index}
-                            type="text"
-                            className={`textbox${index + 1}`}
-                            onKeyDown={(e) => handleKeyDown(e, index + 1 < 14 ? `textbox${index + 2}` : null)}
-                            ref={(el) => inputRefs.current[`textbox${index + 1}`] = el}
-                        />
-                    ))}
-                </div>
             </div>
         </div>
     );
