@@ -105,6 +105,9 @@ const BottomDiv = () => {
     console.log('Navigating to /add-new with token:', token); // Debugging line
     navigate(`/add-new?token=${token}`);
   };
+  const navigateToAddNewAccount = () => {
+    navigate('/accountlist');
+  };
   const navigateToAddNewSale = () => {
     console.log('Navigating to /sale with token:', token); // Debugging line
     navigate(`/sale?token=${token}`);
@@ -184,7 +187,7 @@ const BottomDiv = () => {
                     <div className="view-list" onClick={navigateToViewList}>
                       <FaFileInvoice className="icon" /> View List
                     </div>
-                    <div className="add-newS" onClick={navigateToAddNew}>
+                    <div className="add-newS" onClick={navigateToAddNewAccount}>
                       <FaPlus className="icon" /> Add New
                     </div>
                   </>
