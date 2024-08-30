@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './login.css';
-
+import { setToken } from '../../token';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -14,7 +14,6 @@ const Login = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-   
         setError(null);
 
         if (password.length > 8) {
@@ -41,15 +40,15 @@ const Login = () => {
             const data = await response.json();
 
             if (response.ok) {
-               
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('activationkey', data.activationkey);
+
+                setToken(data.token);
 
                 setSuccessMessage(`Login successful! Activation Key: ${data.activationkey}&token=${data.token}`);
 
                 setPreviousPassword(password);
 
-               
                 navigate(`/activation?token=${data.token}&key=${data.activationkey}`);
             } else {
                 setError(data.message || 'Login failed');
