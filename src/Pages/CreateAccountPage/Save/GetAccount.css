@@ -1,0 +1,43 @@
+.get-account-container {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .gst-input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .gst-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    width: 300px;
+  }
+  
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    
+  }
+  
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  
+  .check-icon {
+    color: #35AFFD;;
+    font-size: 1.2rem;
+    margin-left: 5px;
+  }
+  
+  
+  
+  
