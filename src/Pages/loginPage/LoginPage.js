@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import './login.css';
 import { setToken } from '../../token';
+
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
     const [previousPassword, setPreviousPassword] = useState('');
+    const [userId, setUserId] = useState('');
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const userIdFromParams = params.get('userId');
+        if (userIdFromParams) {
+            setUserId(userIdFromParams);
+        } else {
+            console.warn('User ID not found in URL');
+        }
+    }, [location.search]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -42,14 +55,20 @@ const Login = () => {
             if (response.ok) {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('activationkey', data.activationkey);
-
                 setToken(data.token);
 
-                setSuccessMessage(`Login successful! Activation Key: ${data.activationkey}&token=${data.token}`);
+                setSuccessMessage('Login successful!');
 
                 setPreviousPassword(password);
 
-                navigate(`/activation?token=${data.token}&key=${data.activationkey}`);
+                
+                if (data.activationkey) {
+                    
+                    navigate(`/activation?token=${data.token}&key=${data.activationkey}`);
+                } else {
+                   
+                    navigate(`/home?token=${data.token}`);
+                }
             } else {
                 setError(data.message || 'Login failed');
             }
@@ -86,11 +105,11 @@ const Login = () => {
                         required
                         maxLength={8}
                     />
-                    <a href="/ForgetPassword" className="forgot-password-link">Forgot Password?</a>
+                    <Link to={`/ForgetPassword?userId=${userId}`} className="forgot-password-link">Forgot Password?</Link>
                 </div>
                 <button className="login" type="submit">Login</button>
                 <div className="register-link">
-                    <p>Don't have an account? <Link to="/register">Register here</Link></p>
+                    <p>Don't have an account? <Link to={`/register?userId=${userId}`}>Register here</Link></p>
                 </div>
             </form>
         </div>
