@@ -16,10 +16,8 @@ const ActivationPage = () => {
     const token = queryParams.get('token');
     const hardcodedActivationKey = queryParams.get('key');
 
-    
     const globalToken = getToken();
 
-    
     console.log('Activation Code:', activationCode);
     console.log('Hardcoded Activation Key:', hardcodedActivationKey);
     console.log('Global Token:', globalToken);
@@ -31,9 +29,11 @@ const ActivationPage = () => {
         setActivationStatus('');
 
         setTimeout(() => {
-            if (activationCode === hardcodedActivationKey) {
+            if (activationCode.trim() === hardcodedActivationKey.trim()) {
+                
                 navigate(`/home?token=${globalToken}`);
             } else {
+               
                 setActivationStatus('Invalid activation code. Please recheck the activation key sent by email.');
             }
             setLoading(false);
