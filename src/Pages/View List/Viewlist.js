@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaArrowLeft, FaCog, FaEdit, FaTrash, FaBook, FaInfoCircle,FaUser } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import './ViewList.css';
 import ExportPage from './Export/ExportPage';
 import ImportPage from './Import/ImportPage';
@@ -22,18 +22,23 @@ function Viewlist() {
   const [editingProductItem, setEditingProductItem] = useState(null); 
   const [searchCriteria, setSearchCriteria] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
- 
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get('token');
   const navigate = useNavigate();
 
   const fetchAllProductItems = async () => {
+    
     try {
+      console.log('Retrieved Token:', token);
       const response = await fetch('http://localhost:5000/api/productitems/getAllProductItems', {
-        method: 'POST', 
+        // method: 'GET', 
         headers: {
           'Content-Type': 'application/json',
+           'Authorization':  `Bearer ${token}`
         },
-        body: JSON.stringify({}) 
+        // body: JSON.stringify({}) 
       });
+      
       const result = await response.json();
       if (result.success) {
         setProductItems(result.message);

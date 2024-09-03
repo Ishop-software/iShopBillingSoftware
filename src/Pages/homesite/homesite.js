@@ -1,10 +1,18 @@
+// src/Pages/homesite.js
 import React from 'react';
 import { FaTachometerAlt, FaFileAlt, FaBook, FaMoneyBillWave, FaReceipt, FaJournalWhills, FaGavel, FaDollarSign, FaSearch, FaCog, FaChevronDown, FaFileInvoice, FaPlus } from 'react-icons/fa';
-import { useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios'; // Import axios for HTTP requests
+import { useNavigate , useLocation } from 'react-router-dom';
 import './homesite.css';
+import axios from 'axios';
+import { getToken } from '../../token';
+import Subscription from '../Subscription Page/Subscription';
+import { Navigate } from 'react-router-dom';
+
+
+
 
 const LeftDiv = () => {
+
   const navigate = useNavigate();
 
   return (
@@ -37,6 +45,7 @@ const LeftDiv = () => {
           </div>
           <div className="nav-item" onClick={() => navigate('/subscription')}>
             <FaDollarSign className="nav-icon" /> Subscriptions
+
           </div>
         </nav>
       </div>
@@ -70,54 +79,45 @@ const TopDiv = () => {
 const BottomDiv = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const token = getToken() || new URLSearchParams(location.search).get('token');
+  console.log('Token:', token);
 
-  // Extract token from URL query parameters
-  const queryParams = new URLSearchParams(location.search);
-  const token = queryParams.get('token');
-  console.log('Token:', token); // Debugging line to check token
-
-  // Helper function to include token in headers
   const getAuthHeaders = () => ({
     headers: {
-      Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
     },
-  });
+});
 
-  const handleApiRequest = async () => {
+const handleApiRequest = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/productitems/addProductItem', { /* your data here */ }, getAuthHeaders());
-      console.log(response.data);
+        const response = await axios.post('http://localhost:5000/api/productitems/addProductItem', { /* your data here */ }, getAuthHeaders());
+        console.log(response.data);
     } catch (error) {
-      console.error('API request error:', error);
+        console.error('API request error:', error);
     }
-  };
+};
 
-  // Navigation functions
   const navigateToViewList = () => {
-    console.log('Navigating to /view-list with token:', token); // Debugging line
     navigate(`/view-list?token=${token}`);
   };
   const navigateToViewListS = () => {
-    console.log('Navigating to /view with token:', token); // Debugging line
     navigate(`/view?token=${token}`);
   };
+
   const navigateToAddNew = () => {
-    console.log('Navigating to /add-new with token:', token); // Debugging line
     navigate(`/add-new?token=${token}`);
   };
   const navigateToAddNewAccount = () => {
-    navigate('/accountlist');
+    navigate(`/accountlist?token=${token}`);
   };
   const navigateToAddNewSale = () => {
-    console.log('Navigating to /sale with token:', token); // Debugging line
     navigate(`/sale?token=${token}`);
   };
   const navigateToAddNewS = () => {
-    console.log('Navigating to /items with token:', token); // Debugging line
     navigate(`/items?token=${token}`);
   };
+
   const navigateToEInvoices = () => {
-    console.log('Navigating to /e-invoices with token:', token); // Debugging line
     navigate(`/e-invoices?token=${token}`);
   };
 
@@ -125,7 +125,7 @@ const BottomDiv = () => {
     { imgSrc: "./assets/Group 136.png", name: "Account", hasIcons: true },
     { imgSrc: "./assets/Group 137.png", name: "Item", hasIcons: true },
     { imgSrc: "./assets/Group 138.png", name: "Outstanding" },
-    { imgSrc: "./assets/Group 139.png", name: "Sales", hasIcons: true },
+    { imgSrc: "./assets/Group 139.png", name: "Sales", hasIcons: true }, // 4th card with new icons
     { imgSrc: "./assets/Group 140.png", name: "Purchase", hasIcons: true },
     { imgSrc: "./assets/Group 141.png", name: "POS", hasIcons: true }
   ];
@@ -140,7 +140,7 @@ const BottomDiv = () => {
             <div className="card-name">{card.name}</div>
             {card.hasIcons && (
               <div className="card-icons">
-                {index === 3 && (
+                {index === 3 && ( // 4th card specific icons
                   <>
                     <div className="view-listT" onClick={navigateToViewList}>
                       <FaFileInvoice className="icon" /> Register
@@ -156,7 +156,7 @@ const BottomDiv = () => {
                     </div>
                   </>
                 )}
-                {index === 4 && (
+                {(index === 4) && ( // Icons for other cards
                   <>
                     <div className="view-list" onClick={navigateToViewList}>
                       <FaFileInvoice className="icon" /> Bills
@@ -169,7 +169,7 @@ const BottomDiv = () => {
                     </div>
                   </>
                 )}
-                {index === 5 && (
+                {(index === 5) && ( // Icons for other cards
                   <>
                     <div className="view-list" onClick={navigateToViewList}>
                       <FaFileInvoice className="icon" /> Bills
@@ -182,7 +182,7 @@ const BottomDiv = () => {
                     </div>
                   </>
                 )}
-                {index === 0 && (
+                {(index === 0) && ( // Icons for other cards
                   <>
                     <div className="view-list" onClick={navigateToViewList}>
                       <FaFileInvoice className="icon" /> View List
@@ -192,7 +192,7 @@ const BottomDiv = () => {
                     </div>
                   </>
                 )}
-                {index === 1 && (
+                {(index === 1) && ( // Icons for other cards
                   <>
                     <div className="view-list" onClick={navigateToViewListS}>
                       <FaFileInvoice className="icon" /> View List
