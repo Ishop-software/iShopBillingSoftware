@@ -557,7 +557,7 @@ import { Button, Card, TextField, Typography, Grid, MenuItem } from "@mui/materi
 import { useNavigate,useSearchParams } from 'react-router-dom';
 import NavBar from '../AppBar_Item/AppBar';
 import './Items.css';
-// import { getToken } from "../../token";
+
 
 const btns = ["Save", "List"];
 const txtfld = ["itemName", "shortName", "HSNCode"];
@@ -625,7 +625,6 @@ function Items() {
         }
 
         try {
-            // const token = getToken(); // Get the token using getToken
             console.log('Retrieved Token:', token);
             if (!token) {
                 alert('Authentication token is missing.');
@@ -636,7 +635,7 @@ function Items() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': token // Use the token here
+                    'Authorization': token 
                 },
                 body: JSON.stringify(itemData)
             });
