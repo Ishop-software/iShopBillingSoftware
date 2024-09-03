@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import './RegisterPage.css';
-import axios from 'axios'; 
-import logo from '../../../Images/logo.png'; 
+import axios from 'axios';
+import logo from '../../../Images/logo.png';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +15,7 @@ const RegisterPage = () => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -60,6 +62,8 @@ const RegisterPage = () => {
           password: "",
           mobileNo: "",
         });
+
+        
       } else {
         setErrorMessage(response.data.message);
       }
@@ -75,22 +79,23 @@ const RegisterPage = () => {
   };
 
   const handleCloseMessage = () => {
+    navigate(`/`);
     setShowSuccessMessage(false);
   };
 
   return (
     <div className="register-container">
-      
       {showSuccessMessage && (
-        <div className="success-message">
+        <div className="success-message" >
           Registration Successful
           <button onClick={handleCloseMessage} className="close-button">OK</button>
+          
         </div>
       )}
       {errorMessage && <div className="error-message">{errorMessage}</div>}
       {loading && <div className="loading-message">Loading...</div>}
 
-      <img src={logo} alt=" " className="logo" />
+      <img src={logo} alt="Logo" className="logo" />
 
       <div className="register-box">
         <div className="form-left">

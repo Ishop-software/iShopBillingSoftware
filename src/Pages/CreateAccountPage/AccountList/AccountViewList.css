@@ -1,0 +1,247 @@
+/* Existing styles for navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    height: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 30px;
+    margin-left: 80px;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.navbar-links a:hover {
+    text-decoration: underline;
+}
+
+.navbar-center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    height: 45px;
+}
+
+.search-bar {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 300px;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.icon:hover {
+    color: #007bff;
+}
+
+.language-dropdown {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* New styles for header-container */
+.header-container {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.header-container h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #35affd;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-left: auto; /* Push buttons to the right */
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Individual button styles */
+.header-buttons {
+    margin-left: 80px;
+    display: flex;
+    gap: 10px;
+}
+
+.add-new,
+.ok,
+.print,
+.birthday-remainders,
+.app,
+.sms-whatsapp,
+.export,
+.import,
+.search {
+    background-color: white;
+    color: #35affd;
+    border: 2px solid #35affd; /* Border color and width */
+    border-radius: 5px; /* Optional: for rounded corners */
+}
+
+.add-new { width: 120px; }
+.ok { width: 120px; }
+.print { width: 120px; }
+.birthday-remainders { width: 150px; white-space: nowrap; }
+.app { width: 100px; }
+.sms-whatsapp { width: 120px; }
+.export { width: 120px; }
+.import { width: 120px; }
+.search { width: 120px; }
+
+/* New styles for action-buttons */
+.action-buttons {
+    display: flex;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.action-buttons .btn {
+    flex-grow: 1;
+    background-color: #35affd;
+    color: white;
+    border-radius: 5px;
+}
+
+.text-boxes {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.text-boxes input {
+    margin-left: 2px;
+}
+
+.text-box1 {
+    width: 30px;
+    height: 30px;
+}
+
+.text-box2 {
+    flex-grow: 1;
+    border: 2px solid #35affd;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 2px;
+}
+
+.text-box3 {
+    flex-grow: 1;
+    border: 2px solid #35affd;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 2px;
+}
+
+.text-box4 {
+    flex-grow: 1;
+    border: 2px solid #35affd;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 2px;
+}
+
+.text-box5 {
+    flex-grow: 1;
+    border: 2px solid #35affd;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 2px;
+}
+
+.text-box6 {
+    flex-grow: 1;
+    border: 2px solid #35affd;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 2px;
+}
+
+.text-box7 {
+    flex-grow: 1;
+    border: 2px solid #35affd;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 2px;
+}
+
+.text-box8 {
+    flex-grow: 1;
+    border: 2px solid #35affd;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 2px;
+}
+
+.text-box9,
+.text-box10,
+.text-box11 {
+    margin-left: 2px;
+}
+
+.icon1,
+.icon2,
+.icon3 {
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.icon1:hover,
+.icon2:hover,
+.icon3:hover {
+    color: #007bff;
+}
