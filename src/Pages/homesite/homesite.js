@@ -1,8 +1,10 @@
 // src/Pages/homesite.js
 import React from 'react';
 import { FaTachometerAlt, FaFileAlt, FaBook, FaMoneyBillWave, FaReceipt, FaJournalWhills, FaGavel, FaDollarSign, FaSearch, FaCog, FaChevronDown, FaFileInvoice, FaPlus } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , useLocation } from 'react-router-dom';
 import './homesite.css';
+import axios from 'axios';
+import { getToken } from '../../token';
 import Subscription from '../Subscription Page/Subscription';
 import { Navigate } from 'react-router-dom';
 
@@ -76,29 +78,47 @@ const TopDiv = () => {
 
 const BottomDiv = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const token = getToken() || new URLSearchParams(location.search).get('token');
+  console.log('Token:', token);
+
+  const getAuthHeaders = () => ({
+    headers: {
+        Authorization: `Bearer ${token}`,
+    },
+});
+
+const handleApiRequest = async () => {
+    try {
+        const response = await axios.post('http://localhost:5000/api/productitems/addProductItem', { /* your data here */ }, getAuthHeaders());
+        console.log(response.data);
+    } catch (error) {
+        console.error('API request error:', error);
+    }
+};
 
   const navigateToViewList = () => {
-    navigate('/view-list');
+    navigate(`/view-list?token=${token}`);
   };
   const navigateToViewListS = () => {
-    navigate('/view');
+    navigate(`/view?token=${token}`);
   };
 
   const navigateToAddNew = () => {
-    navigate('/add-new');
+    navigate(`/add-new?token=${token}`);
   };
   const navigateToAddNewAccount = () => {
-    navigate('/accountlist');
+    navigate(`/accountlist?token=${token}`);
   };
   const navigateToAddNewSale = () => {
-    navigate('/sale');
+    navigate(`/sale?token=${token}`);
   };
   const navigateToAddNewS = () => {
-    navigate('/items');
+    navigate(`/items?token=${token}`);
   };
 
   const navigateToEInvoices = () => {
-    navigate('/e-invoices');
+    navigate(`/e-invoices?token=${token}`);
   };
 
   const cards = [

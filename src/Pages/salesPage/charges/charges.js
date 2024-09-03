@@ -9,13 +9,16 @@ const Charges = ({ onClose }) => {
   const handlecharges = () => {
     navigate('/salelist'); 
   };
+  const handleviewlist = () => {
+    navigate('/salelist'); 
+  };
   return (
     <div className="charges-modal">
       <div className="charges-container">
         <div className="charges-header">
           <h2>Other Charges</h2>
           <div className="header-buttons">
-            <button className="view-list-button">View List</button>
+            <button className="view-list-button" onClick={handleviewlist}>View List</button>
             <button className="close-button" onClick={onClose}>×</button>
           </div>
         </div>

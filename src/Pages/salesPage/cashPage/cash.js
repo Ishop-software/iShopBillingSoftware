@@ -9,7 +9,7 @@ const Cash = ({ onClose }) => {
       </span>
       <h2 className="title">PAYMENT OPTIONS</h2>
 
-      {/* Payment methods */}
+      
       <div className="payment-methods">
         <label>
           <input type="radio" name="paymentMethod" value="cash" /> Cash
@@ -31,7 +31,6 @@ const Cash = ({ onClose }) => {
         </label>
       </div>
 
-      {/* Payment details */}
       <div className="payment-details">
         <div className="form-row">
           <label>Credit Amt.1</label>
@@ -51,7 +50,7 @@ const Cash = ({ onClose }) => {
           <input type="text" placeholder="Transaction Ref. No." />
         </div>
 
-        {/* Additional rows */}
+        
         <div className="form-row">
           <label>Credit Amt.2</label>
           <input type="text" placeholder="Amount" />
@@ -124,7 +123,7 @@ const Cash = ({ onClose }) => {
         </div>
       </div>
 
-      {/* Available Points and OK button */}
+      
       <div className="form-row">
         <div className="available-points">Available Points: 100</div>
         <div className="submit-btn">

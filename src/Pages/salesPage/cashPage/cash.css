@@ -6,7 +6,7 @@
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* Added to allow scrolling if content exceeds height */
+  overflow-y: auto; 
   margin-top: 5px;
 }
 
@@ -20,11 +20,11 @@
 
 .payment-methods {
   display: flex;
-  flex-wrap: wrap; /* Allows wrapping of elements if they don't fit in one line */
+  flex-wrap: wrap; 
   align-items: center;
   justify-content: flex-start;
   margin-bottom: 20px;
-  gap: 20px; /* Adjusted gap for better spacing */
+  gap: 20px; 
 }
 
 .payment-methods label {
@@ -43,6 +43,7 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   outline: none;
+  margin-top: 80px;
 }
 
 .cash-amount input[type="text"] {
@@ -60,9 +61,9 @@
 
 .form-row {
   display: flex;
-  flex-wrap: wrap; /* Allows wrapping of elements if they don't fit in one line */
+  flex-wrap: wrap; 
   align-items: center;
-  margin-bottom: 10px; /* Minimized margin */
+  margin-bottom: 10px; 
 }
 
 .form-row label {
@@ -75,7 +76,7 @@
 .form-row input[type="date"] {
   flex: 1;
   padding: 8px;
-  margin: 5px 0; /* Adjusted margin to handle overflow */
+  margin: 5px 0; 
   border: 1px solid #ccc;
   border-radius: 5px;
   outline: none;
@@ -85,7 +86,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-top: 10px; /* Minimized margin */
+  margin-top: 10px; 
 }
 
 .btn-group {
@@ -137,17 +138,16 @@
 }
 
 .cheque {
-  margin-top: 10px; /* Minimized margin */
+  margin-top: 10px; 
   display: flex;
-  flex-wrap: wrap; /* Allows wrapping of elements if they don't fit in one line */
-  gap: 10px; /* Minimized gap */
+  flex-wrap: wrap; 
+  gap: 10px; 
 }
-
 .redeem {
-  margin-top: 10px; /* Minimized margin */
+  margin-top: 10px; 
   display: flex;
-  flex-wrap: wrap; /* Allows wrapping of elements if they don't fit in one line */
-  gap: 10px; /* Minimized gap */
+  flex-wrap: wrap; 
+  gap: 10px; 
   white-space: nowrap;
   justify-content: flex-start;
   align-items: center;
