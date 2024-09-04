@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { FaArrowLeft, FaCog, FaEdit, FaTrash, FaBook, FaInfoCircle } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import './ViewList.css';
 import ExportPage from './Export/ExportPage';
 import ImportPage from './Import/ImportPage';
@@ -8,52 +9,73 @@ import Setting from './Setting/Setting';
 import SearchPage from './Search/SearchPage';
 import ConfirmDeleteModal from './Delete/ConfirmDeleteModal';
 
-
 function Viewlist() {
- 
   const [showExportModal, setShowExportModal] = useState(false);
   const [showImportModal, setShowImportModal] = useState(false);
   const [showSettingModal, setShowSettingModal] = useState(false);
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [productItems, setProductItems] = useState([]);
-  const [productData, setProductData] = useState({}); 
-  const [showDeleteModal, setShowDeleteModal] = useState(false); 
-  const [deleteProductItemId, setDeleteProductItemId] = useState(null); 
-  const [editingProductItem, setEditingProductItem] = useState(null); 
+  const [productData, setProductData] = useState({});
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteProductItemId, setDeleteProductItemId] = useState(null);
+  const [editingProductItem, setEditingProductItem] = useState(null);
   const [searchCriteria, setSearchCriteria] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
- 
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get('token');
   const navigate = useNavigate();
+
 
   const fetchAllProductItems = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/productitems/getAllProductItems', {
-        method: 'POST', 
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({}) 
-      });
-      const result = await response.json();
-      if (result.success) {
-        setProductItems(result.message);
-      } else {
-        console.error(result.message);
-      }
+        const token = localStorage.getItem('token');
+        console.log('Retrieved Token:', token);
+        if (!token) {
+            console.warn('No token found. Authorization might be required.');
+            alert('No token found. Please log in.');
+            return;
+        }
+
+        const response = await fetch("http://localhost:5000/api/productitems/getAllProductItems", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        // Log the response details
+        console.log('Response Status:', response.status);
+        console.log('Response Headers:', response.headers);
+        console.log('response:',Response);
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`HTTP error! Status: ${response.status}, Details: ${errorText}`);
+        }
+        const data = await response.json();
+        // console.log('data:',data);
+        setProductItems(data);
     } catch (error) {
-      console.error('Error fetching product items:', error);
+        console.error("Error fetching product items:", error);
+        // alert("An error occurred while fetching product items.");
+        alert(`An error occurred while fetching product items: ${error.message}`);
     }
-  };
+};
 
   const fetchProductItem = async (productItemId) => {
     try {
       const response = await fetch('http://localhost:5000/api/productitems/getProductItem', {
-        method: 'POST', 
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ productItemId }),
       });
+
+
+      console.log('Response Status:', response.status);
+      console.log('Response Headers:', response.headers);
+      
       const result = await response.json();
       if (result.success) {
         setProductData(result.message);
@@ -69,7 +91,6 @@ function Viewlist() {
     fetchAllProductItems();
   }, []);
 
-
   const handleEdit = (index) => {
     const selectedProductItem = productItems[index];
     setEditingProductItem(selectedProductItem);
@@ -77,7 +98,7 @@ function Viewlist() {
 
   const handleDeleteIconClick = (productItemId) => {
     setDeleteProductItemId(productItemId);
-    setShowDeleteModal(true); 
+    setShowDeleteModal(true);
   };
 
   const handleDelete = async () => {
@@ -99,9 +120,8 @@ function Viewlist() {
     } catch (error) {
       console.error('Error deleting product item:', error);
     }
-    setShowDeleteModal(false); 
+    setShowDeleteModal(false);
   };
-
 
   const handleCancelDelete = () => {
     setShowDeleteModal(false);
@@ -141,10 +161,12 @@ function Viewlist() {
   const handleSearch = (criteria) => {
     setSearchCriteria(criteria);
   };
+
   const handleSearchButton = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
   };
+
   const filteredProductItems = productItems.filter(item => {
     const matchesSearchQuery = 
       item.itemName.toLowerCase().includes(searchQuery) || 
@@ -207,18 +229,16 @@ function Viewlist() {
           <button className="btn export" onClick={() => setShowExportModal(true)}>Export</button>
           <button className="btn import" onClick={() => setShowImportModal(true)}>Import</button>
           <button className="btn search" onClick={() => setShowSearchModal(true)}>Search</button>
-          
           <button className="btn setting" onClick={() => setShowSettingModal(true)}>Settings</button>
         </div>
-     
-      <div className="headbutton">
+        <div className="headbutton">
           <button className="tick">Tick</button>
           <button className="item">itemName</button>
           <button className="short">shortName</button>
           <button className="hsncode">HSN Code</button>
           <button className="tax">taxSlab</button>
           <button className="company">company</button>
-          <button className='group'>Grap 1</button>
+          <button className='group'>Group 1</button>
           <button className="pchase">Purchase</button>
           <button className="sales">SalesPrice</button>
           <button className='mr'>MRP</button>
@@ -228,120 +248,55 @@ function Viewlist() {
           <button className="Delete">Delete</button>
           <button className="Copy">Copy</button>
           <button className="Details">Details</button>
+        </div>
       </div>
-      </div>    
-      <div className="parent-container">                    
-      {filteredProductItems.map((element, index) => (
-        <div className="textboxes" key={index}>
-          <input type="checkbox" className="text1" />
-          <input
-            type="text"
-            className="textitem"
-            value={editingProductItem && editingProductItem.productItemId === element.productItemId ? editingProductItem.itemName : element.itemName || ''}
-            placeholder="Product Name"
-            onChange={(e) => setEditingProductItem({ ...editingProductItem, itemName: e.target.value })}
-          />
-          <input
-            type="text"
-            className="text3"
-            value={editingProductItem && editingProductItem.productItemId === element.productItemId ? editingProductItem.shortName : element.shortName || ''}
-            placeholder="Name"
-            onChange={(e) => setEditingProductItem({ ...editingProductItem, shortName: e.target.value })}
-          />
-          <input
-            type="text"
-            className="text4"
-            value={editingProductItem && editingProductItem.productItemId === element.productItemId ? editingProductItem.HSNCode : element.HSNCode || ''}
-            placeholder=""
-            onChange={(e) => setEditingProductItem({ ...editingProductItem, HSNCode: e.target.value })}
-          />
-          <input
-            type="text"
-            className="text5"
-            value={editingProductItem && editingProductItem.productItemId === element.productItemId ? editingProductItem.taxSlab : element.taxSlab || ''}
-            placeholder=""
-            onChange={(e) => setEditingProductItem({ ...editingProductItem, taxSlab: e.target.value })}
-          />
-           <input
-            type="text"
-            className="textCompany"
-            value={editingProductItem && editingProductItem.productItemId === element.productItemId ? editingProductItem.company : element.company || ''}
-            placeholder=""
-            onChange={(e) => setEditingProductItem({ ...editingProductItem, company: e.target.value })}
-          />
-           <input
-            type="text"
-            className="text7"
-            value={editingProductItem && editingProductItem.productItemId === element.productItemId ? editingProductItem.group : element.group || ''}
-            placeholder=""
-            onChange={(e) => setEditingProductItem({ ...editingProductItem, group: e.target.value })}
-          />
-          <input
-            type="text"
-            className="text8"
-            value={editingProductItem && editingProductItem.productItemId === element.productItemId ? editingProductItem.purchase : element.purchase || ''}
-            placeholder=""
-            onChange={(e) => setEditingProductItem({ ...editingProductItem, purchase: e.target.value })}
-          />
-          <input
-            type="text"
-            className="text12"
-            value={editingProductItem && editingProductItem.productItemId === element.productItemId ? editingProductItem.salePrice : element.salePrice || ''}
-            placeholder=""
-            onChange={(e) => setEditingProductItem({ ...editingProductItem, salePrice: e.target.value })}
-          />
-           <input
-            type="text"
-            className="text13"
-            value={editingProductItem && editingProductItem.productItemId === element.productItemId ? editingProductItem.mrp : element.mrp || ''}
-            placeholder=""
-            onChange={(e) => setEditingProductItem({ ...editingProductItem, mrp: e.target.value })}
-          />
-           <input
-            type="text"
-            className="text14"
-            value={editingProductItem && editingProductItem.productItemId === element.productItemId ? editingProductItem.openingPck : element.openingPck || ''}
-            placeholder=""
-            onChange={(e) => setEditingProductItem({ ...editingProductItem, openingPck: e.target.value })}
-          />
-           <input
-            type="text"
-            className="text15"
-            value={editingProductItem && editingProductItem.productItemId === element.productItemId ? editingProductItem.openingValue : element.openingValue || ''}
-            placeholder=""
-            onChange={(e) => setEditingProductItem({ ...editingProductItem, openingValue: e.target.value })}
-          />
-        
-          <div className="text9">
-            <FaEdit className="icon1" onClick={() => handleEdit(index)} />
+
+      <div className="list-container">
+        {filteredProductItems.map((item, index) => (
+          <div key={item.productItemId} className="list-item">
+            <div className="list-item-content">
+              <input type="checkbox" />
+              <span>{item.itemName}</span>
+              <span>{item.shortName}</span>
+              <span>{item.HSNCode}</span>
+              <span>{item.taxSlab}</span>
+              <span>{item.company}</span>
+              <span>{item.group}</span>
+              <span>{item.purchase}</span>
+              <span>{item.salesPrice}</span>
+              <span>{item.MRP}</span>
+              <span>{item.openingBalance}</span>
+              <span>{item.openingValue}</span>
+            </div>
+            <div className="action-buttons">
+              <button className="btn edit" onClick={() => handleEdit(index)}>
+                <FaEdit />
+              </button>
+              <button className="btn delete" onClick={() => handleDeleteIconClick(item.productItemId)}>
+                <FaTrash />
+              </button>
+              <button className="btn copy" onClick={() => handleCopy(index)}>
+                <FaBook />
+              </button>
+              <button className="btn details" onClick={() => handleDetails(index)}>
+                <FaInfoCircle />
+              </button>
+            </div>
           </div>
-          <div className="text10">
-            <FaTrash className="icon2" onClick={() => handleDeleteIconClick(element.productItemId)} />
-          </div>
-          <div className="text11">
-            <FaBook className="icon3" onClick={() => handleCopy(index)} />
-          </div>
-          <div className="text16">
-            <FaInfoCircle className="icon4" onClick={() => handleDetails(index)} />
-          </div>
-        </div>
-      ))}
-      {editingProductItem && (
-        <div className="save-changes-container">
-          <button className="btn save-changes" onClick={handleSaveChanges}>Save Changes</button>
-        </div>
+        ))}
+      </div>
+
+      {/* Modals */}
+      {showExportModal && <ExportPage onClose={() => setShowExportModal(false)} onExport={handleExport} />}
+      {showImportModal && <ImportPage onClose={() => setShowImportModal(false)} onImport={handleImport} />}
+      {showSettingModal && <Setting onClose={() => setShowSettingModal(false)} onSave={handleSaveSettings} />}
+      {showSearchModal && <SearchPage onClose={() => setShowSearchModal(false)} onSearch={handleSearch} />}
+      {showDeleteModal && (
+        <ConfirmDeleteModal
+          onConfirm={handleDelete}
+          onCancel={handleCancelDelete}
+        />
       )}
-      <ExportPage show={showExportModal} onClose={() => setShowExportModal(false)} onExport={handleExport} />
-      <ImportPage show={showImportModal} onClose={() => setShowImportModal(false)} onImport={handleImport} />
-      <Setting show={showSettingModal} onClose={() => setShowSettingModal(false)} onSaveSettings={handleSaveSettings} />
- 
-      <SearchPage show={showSearchModal} onClose={() => setShowSearchModal(false)} onSearch={handleSearch} />
-      <ConfirmDeleteModal
-        show={showDeleteModal}
-        onClose={handleCancelDelete}
-        onDelete={handleDelete}
-      />   
-    </div>
     </div>
   );
 }

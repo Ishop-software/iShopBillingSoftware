@@ -1,4 +1,67 @@
-
+.saleviewnavbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .left-section {
+    display: flex;
+    align-items: center;
+    color: #35affd;
+  }
+  
+  .back-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ced4da;
+    border-radius: 50%;
+    margin-right: 20px; 
+    cursor: pointer;
+  }
+  
+  .navbar-label {
+    margin-right: 40px; 
+    margin-left: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #35affd;
+  }
+  
+  .right-section {
+    display: flex;
+    align-items: center;
+  }
+  
+  .settings-icon {
+    margin-right: 20px; 
+    font-size: 1.5rem; 
+    cursor: pointer;
+  }
+  
+  .dropdown-select {
+    margin-right: 20px; 
+    font-weight: bold;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    height: 35px;
+    width: 80px; 
+  }
+  
+  .profile-icon {
+    cursor: pointer;
+    font-size: 1.5rem; 
+  }
+  
 .top-container {
     display: flex;
     align-items: center;
@@ -41,7 +104,7 @@
     color: white;
 }
 
-.header-buttons {
+.listclick-buttons {
     margin-left: 80px;
     display: flex;
     gap: 10px;
@@ -56,7 +119,7 @@
     min-width: 80px; 
 }
 
-.add-new { width: 120px; }
+.add-new { width: 120px; white-space: nowrap; }
 .ok { width: 120px; }
 .print { width: 120px; }
 .deletes { width: 150px; white-space: nowrap; }
@@ -65,12 +128,12 @@
 .export { width: 120px; }
 .import { width: 120px; }
 .search { width: 120px; }
-.setting { width: 80px; }
+.setting { width: 95px; }
 
-.headbutton {
+.showbutton {
     display: flex;
     margin-top: 120px;
-    margin-left: 0; 
+    margin-left: 20px; 
     position: absolute;
     left: 0; 
     gap: 1px; 
@@ -87,14 +150,14 @@
 
 .tick { width: 62px; }
 .item { width: 172px; }
-.short { width: 90px; }
-.tax { width: 89px; }
-.hsncode { width: 85px; }
+.short { width: 95px; }
+.tax { width: 92px; }
+.hsncode { width: 100px; white-space: nowrap; }
 .company { width: 170px; }
 .group { width: 86px; }
-.pchase { width: 120px; }
-.sales { width: 80px; }
-.mr, .opb, .opv { width: 60px; }
+.pchase { width: 110px; }
+.sales { width: 92px; }
+.mr, .opb, .opv { width: 64px; }
 .Edit, .Delete, .Copy, .Details { width: 80px; } 
 
 .parent-container {
