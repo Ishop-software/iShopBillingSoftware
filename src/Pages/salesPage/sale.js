@@ -1,58 +1,58 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Charges from './charges/charges';
-import CashPage from './cashPage/cash'; 
+import CashPage from './cashPage/cash';
 import './sales.css';
-import { useNavigate } from 'react-router-dom';
 
 const Sales = () => {
   const [showCharges, setShowCharges] = useState(false);
-  const [showCashPage, setShowCashPage] = useState(false); 
-  const [items, setItems] = useState([]); 
-  const [selectedItem, setSelectedItem] = useState(''); 
-  const [quantity, setQuantity] = useState(''); 
-  const [rate, setRate] = useState(''); 
+  const [showCashPage, setShowCashPage] = useState(false);
+  const [items, setItems] = useState([]);
+  const [selectedItem, setSelectedItem] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [rate, setRate] = useState('');
   const [basicAmt, setBasicAmt] = useState('');
-  const [discPercent, setDiscPercent] = useState(''); 
-  const [discAmt, setDiscAmt] = useState(''); 
+  const [discPercent, setDiscPercent] = useState('');
+  const [discAmt, setDiscAmt] = useState('');
 
   const navigate = useNavigate();
-  useEffect(() => {
-    
-    const fetchProductItems = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/productitems/getProductItem');
-        const data = await response.json();
-        setItems(data);
-      } catch (error) {
-        console.error('Error fetching product items:', error);
-      }
-    };
+  const [searchParams] = useSearchParams(); // Use searchParams from URL
 
-    fetchProductItems();
-  }, []);
+  // useEffect(() => {
+  //   const fetchProductItems = async () => {
+  //     try {
+  //       const response = await fetch('http://localhost:5000/api/productitems/getProductItem');
+  //       const data = await response.json();
+  //       setItems(data);
+  //     } catch (error) {
+  //       console.error('Error fetching product items:', error);
+  //     }
+  //   };
 
-  useEffect(() => {
-    
-    const fetchItemRate = async () => {
-      if (selectedItem) {
-        try {
-          const response = await fetch(`http://localhost:5000/api/productitems/getProductItem?itemName=${selectedItem}`);
-          const data = await response.json();
-          if (data && data.length > 0) {
-            setRate(data[0].salePrice || '');
-          } else {
-            setRate('');
-          }
-        } catch (error) {
-          console.error('Error fetching item rate:', error);
-        }
-      } else {
-        setRate('');
-      }
-    };
+  //   fetchProductItems();
+  // }, []);
 
-    fetchItemRate();
-  }, [selectedItem]);
+  // useEffect(() => {
+  //   const fetchItemRate = async () => {
+  //     if (selectedItem) {
+  //       try {
+  //         const response = await fetch(`http://localhost:5000/api/productitems/getProductItem?itemName=${selectedItem}`);
+  //         const data = await response.json();
+  //         if (data && data.length > 0) {
+  //           setRate(data[0].salePrice || '');
+  //         } else {
+  //           setRate('');
+  //         }
+  //       } catch (error) {
+  //         console.error('Error fetching item rate:', error);
+  //       }
+  //     } else {
+  //       setRate('');
+  //     }
+  //   };
+
+  //   fetchItemRate();
+  // }, [selectedItem]);
 
   useEffect(() => {
     const calculateBasicAmt = () => {
@@ -85,16 +85,17 @@ const Sales = () => {
   };
 
   const handleCashTenderedClick = () => {
-    setShowCashPage(true); 
+    setShowCashPage(true);
   };
 
   const handleCloseCashPage = () => {
-    setShowCashPage(false); 
+    setShowCashPage(false);
   };
 
   const handleItemChange = (event) => {
     setSelectedItem(event.target.value);
   };
+
   const handleQuantityChange = (event) => {
     setQuantity(event.target.value);
   };
@@ -102,13 +103,67 @@ const Sales = () => {
   const handleDiscPercentChange = (event) => {
     setDiscPercent(event.target.value);
   };
-  const handlepartyname = () => {
-    navigate('/items'); 
-  };
-  const handleadditem = () => {
-    navigate('/items'); 
-  };
+
+  const handleSave = async () => {
   
+    const token = localStorage.getItem('token');
+    console.log('Retrieved Token:', token); 
+    
+
+    if (!selectedItem || !quantity || !rate || !basicAmt) {
+      alert('Please fill out all required fields.');
+      return;
+    }
+  
+    if (!token) {
+      alert('Authentication token is missing.');
+      return;
+    }
+  
+    // Prepare the sales data to be sent to the backend
+    const saleData = {
+      itemName: selectedItem,
+      quantity: quantity,
+      rate: rate,
+      basicAmt: basicAmt,
+      discPercent: discPercent,
+      discAmt: discAmt,
+      // Include any other fields required by your backend here
+    };
+  
+    try {
+      // Make the API request to save the sales data
+      const response = await fetch('http://localhost:5000/api/usersales/addSalesRegister', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token // Token should be included here
+        },
+        body: JSON.stringify(saleData),
+      });
+  
+      if (!response.ok) {
+        const error = await response.json();
+        console.error('API Error:', error);
+        alert('Failed to save sales data: ' + error.message);
+      } else {
+        const error = await response.json();
+        alert('Failed to save sales data: ' + error.message);
+      }
+    } catch (error) {
+      console.error('Request failed:', error);
+      alert('Failed to save sales data.');
+    }
+  };
+
+  const handlepartyname = () => {
+    navigate('/items');
+  };
+
+  const handleadditem = () => {
+    navigate('/items');
+  };
+
   return (
     <div className="sales-container">
       <div className="sales-header">
@@ -123,7 +178,7 @@ const Sales = () => {
           </div>
         </div>
         <div className="sales-header-right">
-          <button className="save-btn">Save</button>
+          <button className="save-btn" onClick={handleSave}>Save</button>
           <button className="print-btn">Print</button>
           <button className="einvoice-btn">E-Invoice</button>
           <button className="details-btn">Delete</button>
@@ -147,7 +202,7 @@ const Sales = () => {
           </div>
         </div>
         <div className="party-buttons">
-          <button className="add-party-btn"  onClick={handlepartyname}>+ Add New Party Name</button>
+          <button className="add-party-btn" onClick={handlepartyname}>+ Add New Party Name</button>
           <button className="edit-party-btn">Edit</button>
         </div>
       </div>
@@ -165,21 +220,19 @@ const Sales = () => {
                 </option>
               ))}
             </select>
-          
-            
             <button className="add-item-btn" onClick={handleadditem}>+ Add New Item Name</button>
             <button className="edit-item-btn">Edit</button>
           </div>
           <div className="item-inputs">
-            <input type="text" placeholder="Qty"  value={quantity} onChange={handleQuantityChange}  />
+            <input type="text" placeholder="Qty" value={quantity} onChange={handleQuantityChange} />
             <input type="text" placeholder="Alt Qty" />
             <input type="text" placeholder="Free" />
             <input type="text" placeholder="Per" />
-            <input type="text" placeholder="Rate" value={rate} readOnly/>
+            <input type="text" placeholder="Rate" value={rate} readOnly />
             <input type="text" placeholder="Disc Amount" value={discAmt} readOnly />
             <input type="text" placeholder="Basic Amt" value={basicAmt} readOnly />
             <input type="text" placeholder="Tax Amount" />
-            <input type="text" placeholder="Disc %" value={discPercent} onChange={handleDiscPercentChange}/>
+            <input type="text" placeholder="Disc %" value={discPercent} onChange={handleDiscPercentChange} />
             <input type="text" placeholder="Net Value" />
           </div>
         </div>
@@ -209,77 +262,38 @@ const Sales = () => {
               <th>Tick</th>
               <th>Item</th>
               <th>M.Qty</th>
-              <th>A.Qty</th>
-              <th>Free</th>
+              <th>Qty</th>
               <th>Rate</th>
-              <th>Per</th>
+              <th>Disc%</th>
+              <th>Disc Amt</th>
               <th>Basic Amt</th>
-              <th>D.%</th>
-              <th>D. Amt</th>
-              <th>T.%</th>
-              <th>T. Amt</th>
-              <th>Sale Amount</th>
-              <th>Charges Heading</th>
-              <th>On Value</th>
-              <th>@</th>
-              <th>+ / -</th>
-              <th>Charges Amount</th>
+              <th>Tax Amt</th>
+              <th>Net Value</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><input type="checkbox" /></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{selectedItem}</td>
+              <td>{quantity}</td>
+              <td>{quantity}</td>
+              <td>{rate}</td>
+              <td>{discPercent}</td>
+              <td>{discAmt}</td>
+              <td>{basicAmt}</td>
+              <td>0</td>
+              <td>{basicAmt}</td>
             </tr>
           </tbody>
         </table>
-        
-        
-       
-        <div className="additional-inputs">
-          <input type="text" placeholder="Count" />
-          <input type="text" placeholder="Qty" />
-          <input type="text" placeholder="Alt" />
-          <input type="text" placeholder="Free" />
-          <input type="text" placeholder="Basic Amt" />
-          <input type="text" placeholder="Discount" />
-          <input type="text" placeholder="Ad.Disc" />
-          <input type="text" placeholder="Taxable" />
-          <input type="text" placeholder="Tax Amt" />
-          <input type="text" placeholder="Net Value" />
-          <input type="text" placeholder="Chares" />
-          <input type="text" placeholder="R.O" />
-          <input type="text" placeholder="Net Bill Amt" />
-          <input
-            type="text"
-            placeholder="Cash Tendered +"
-            onClick={handleCashTenderedClick}
-          />
-          <input type="text" placeholder="change" />
-        </div>
       </div>
 
-      {showCharges && <Charges onClose={handleCloseCharges} />}
+      {showCharges && (
+        <Charges onClose={handleCloseCharges} />
+      )}
+
       {showCashPage && (
-        <div className="cash-page-overlay">
-          <CashPage onClose={handleCloseCashPage} />
-        </div>
+        <CashPage onClose={handleCloseCashPage} />
       )}
     </div>
   );
