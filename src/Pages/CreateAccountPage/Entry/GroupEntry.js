@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { FaTimes } from 'react-icons/fa';
+
 import './GroupEntry.css';
 
 const GroupEntry = ({ onClose }) => {
   const [group, setGroup] = useState('');
   const [underGroup, setUnderGroup] = useState('');
   const [isPrimaryGroup, setIsPrimaryGroup] = useState(false);
-  const [groupsList, setGroupsList] = useState([
+  const [groupsList] = useState([
     { groupName: 'Bank Accounts' },
     { groupName: 'Bank O/D Account' },
     { groupName: 'Broker' },
@@ -39,38 +41,37 @@ const GroupEntry = ({ onClose }) => {
     { groupName: 'SUPPLIERS' },
     { groupName: 'SUspense Account' },
     { groupName: 'Unsecured Loans' },
-
-    
   ]);
   const [tableData, setTableData] = useState([]);
 
   const handleSave = () => {
-    
     const newRow = {
       group,
       underGroup,
-      primary: isPrimaryGroup ? 'Yes' : 'No'
+      primary: isPrimaryGroup ? 'Yes' : 'No',
     };
 
     setTableData([...tableData, newRow]);
 
-    
+    // Reset form fields after saving
     setGroup('');
     setUnderGroup('');
     setIsPrimaryGroup(false);
   };
 
   const handleDelete = () => {
-    
+    // Remove the last added row from the table
     setTableData(tableData.slice(0, -1));
   };
 
   return (
     <div className="group-entry-overlay" onClick={onClose}>
-      <div className="group-entry-modal" onClick={e => e.stopPropagation()}>
+      <div className="group-entry-modal" onClick={(e) => e.stopPropagation()}>
         <div className="header-container">
           <h2>ACCOUNT GROUP ENTRY</h2>
-          <input type="text" placeholder="Search" className="search-bar" />
+          <button className="close-button" onClick={onClose}>
+            <FaTimes />
+          </button>
         </div>
         <div className="form-item">
           <label htmlFor="group">Group</label>
@@ -98,7 +99,11 @@ const GroupEntry = ({ onClose }) => {
           </select>
         </div>
         <label className="primary-group">
-          <input type="checkbox" checked={isPrimaryGroup} onChange={() => setIsPrimaryGroup(!isPrimaryGroup)} />
+          <input
+            type="checkbox"
+            checked={isPrimaryGroup}
+            onChange={() => setIsPrimaryGroup(!isPrimaryGroup)}
+          />
           This is a Primary Group
         </label>
         <div className="form-actions">

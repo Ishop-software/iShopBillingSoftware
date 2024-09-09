@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaCog, FaUser, FaEye, FaPlus, FaEdit } from 'react-icons/fa';
 import './AccountList.css';
@@ -11,6 +11,7 @@ function AccountList() {
   const [showSettingModal, setShowSettingModal] = useState(false);
   const [showGroupEntry, setShowGroupEntry] = useState(false);
   const [showGetAccount, setShowGetAccount] = useState(false);
+  const [token, setToken] = useState(null); 
 
   const navigate = useNavigate();
 
@@ -21,32 +22,51 @@ function AccountList() {
     printAs: "",
     group: "",
     openingBal: "",
-    drCr: "dr",
+    DR_CR: "dr",
     taxNo: "",
-    addressLine1: "",
-    addressLine2: "",
+    Address1: "",
+    Address2: "",
     city: "",
     pincode: "",
     state: "",
-    statePincode: "",
+    stateCode: "",
     mobileNo: "",
     phone: "",
     email: "",
     contactPerson: "",
-    panCard: ""
+    panCardNo: ""
   });
+
+  // Retrieving token from localStorage and redirecting to login if not found
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    setToken(storedToken);
+    console.log("Retrieved Token:", storedToken);  
+
+    if (!storedToken) {
+      alert('No token found, redirecting to login');
+      navigate('/login');  
+    }
+  }, [navigate]);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
   };
 
+  // Handling save with token authorization
   const handleSave = async () => {
+    if (!token) {
+      alert('No token found. Please log in again.');
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:5000/api/users/createAccount', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': token  
         },
         body: JSON.stringify(formData),
       });
@@ -89,7 +109,8 @@ function AccountList() {
   };
 
   const goToViewList = () => {
-    navigate('/accountviewlist');
+    console.log("Navigating with token:", token); 
+     navigate(`/accountviewlist?token=${token}`);
   };
 
   return (
@@ -123,7 +144,6 @@ function AccountList() {
         </div>
       </div>
 
-    
       <div className="header-container">
         <h1>CREATE ACCOUNT</h1>
         <div className="header-buttons">
@@ -134,8 +154,8 @@ function AccountList() {
         </div>
       </div>
 
-   
       <div className="form-container">
+        {/* Form fields */}
         <div className="form-item">
           <label htmlFor="name"></label>
           <input id="name" type="text" placeholder="Name" value={formData.name} onChange={handleInputChange} />
@@ -185,13 +205,15 @@ function AccountList() {
             </div>
           </div>
         </div>
+
+       
         <div className="form-item">
           <label htmlFor="addressLine1"></label>
-          <input id="addressLine1" type="text" placeholder="Address Line 1" value={formData.addressLine1} onChange={handleInputChange} />
+          <input id="Address1" type="text" placeholder="Address Line 1" value={formData.addressLine1} onChange={handleInputChange} />
         </div>
         <div className="form-item">
           <label htmlFor="addressLine2"></label>
-          <input id="addressLine2" type="text" placeholder="Address Line 2" value={formData.addressLine2} onChange={handleInputChange} />
+          <input id="Address2" type="text" placeholder="Address Line 2" value={formData.addressLine2} onChange={handleInputChange} />
         </div>
         <div className="form-row">
           <div className="form-item city-item">
@@ -206,13 +228,13 @@ function AccountList() {
             <label htmlFor="state"></label>
             <input id="state" type="text" placeholder="State" value={formData.state} onChange={handleInputChange} />
           </div>
-          <div className="form-item state-pincode-item">
-            <label htmlFor="statePincode"></label>
-            <input id="statePincode" type="text" placeholder="State Pin Code" value={formData.statePincode} onChange={handleInputChange} />
+          <div className="form-item state-code-item">
+            <label htmlFor="stateCode"></label>
+            <input id="stateCode" type="text" placeholder="State Code" value={formData.stateCode} onChange={handleInputChange} />
           </div>
         </div>
         <div className="form-row">
-          <div className="form-item mobile-No-item">
+          <div className="form-item mobile-no-item">
             <label htmlFor="mobileNo"></label>
             <input id="mobileNo" type="text" placeholder="Mobile No" value={formData.mobileNo} onChange={handleInputChange} />
           </div>
@@ -222,27 +244,28 @@ function AccountList() {
           </div>
           <div className="form-item email-item">
             <label htmlFor="email"></label>
-            <input id="email" type="email" placeholder="E-mail" value={formData.email} onChange={handleInputChange} />
+            <input id="email" type="email" placeholder="Email" value={formData.email} onChange={handleInputChange} />
           </div>
+        </div>
+        <div className="form-row">
           <div className="form-item contact-person-item">
             <label htmlFor="contactPerson"></label>
             <input id="contactPerson" type="text" placeholder="Contact Person" value={formData.contactPerson} onChange={handleInputChange} />
           </div>
-          <div className="form-item pan-card-item">
-            <label htmlFor="panCard"></label>
-            <input id="panCard" type="text" placeholder="PanCard No" value={formData.panCard} onChange={handleInputChange} />
+          <div className="form-item pan-card-no-item">
+            <label htmlFor="panCardNo"></label>
+            <input id="panCardNo" type="text" placeholder="PAN Card No" value={formData.panCardNo} onChange={handleInputChange} />
           </div>
         </div>
       </div>
 
-      <div className="footer">
+      <div className="form-actions">
         <button className="btn save" onClick={handleSave}>Save</button>
-        <button className="btn delete">Delete</button>
       </div>
 
-      {showSettingModal && <CreateSetting onClose={closeModal} />}
-      {showGroupEntry && <GroupEntry onClose={closeGroupEntry} />}
-      {showGetAccount && <GetAccount />}
+      {showSettingModal && <CreateSetting closeModal={closeModal} />}
+      {showGroupEntry && <GroupEntry closeGroupEntry={closeGroupEntry} />}
+      {showGetAccount && <GetAccount toggleGetAccount={toggleGetAccount} />}
     </div>
   );
 }

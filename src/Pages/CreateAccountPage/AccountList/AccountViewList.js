@@ -7,39 +7,56 @@ import AccountImportPage from './AccountImport/AccountImportPage';
 
 function AccountViewList() {
   const [selectedLanguage, setSelectedLanguage] = useState('English');
-  const [accountDetails, setAccountDetails] = useState([]); 
-  const [loading, setLoading] = useState(true); 
-  const [error, setError] = useState(null); 
-  const [editingAccountDetails, setEditingAccountDetails] = useState(null); 
+  const [accountDetails, setAccountDetails] = useState([]);
+  const [allAccountDetails, setAllAccountDetails] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [editingAccountDetails, setEditingAccountDetails] = useState(null);
   const [showExportModal, setShowExportModal] = useState(false);
   const [showImportModal, setShowImportModal] = useState(false);
+  const [token, setToken] = useState(null);
 
   const navigate = useNavigate();
 
-  
-  const fetchAllAccountDetails = async () => {
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (!storedToken) {
+      alert('No token found. Please log in again.');
+      navigate('/login');
+      return;
+    }
+    setToken(storedToken);
+    fetchAllAccountDetails(storedToken);
+  }, [navigate]);
+
+  const fetchAccountDetails = async (accountId, token) => {
     try {
-      const response = await fetch('http://localhost:5000/api/users/getAllAccountDetails', {
+      const response = await fetch('http://localhost:5000/api/users/getAccountDetails', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': token
         },
+        body: JSON.stringify({ accountId }),
       });
-      
+
+      console.log('Retrieved Token:', token);
+      console.log('Fetching Account Details for ID:', accountId);
+
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        const errorText = await response.text();
+        throw new Error(`Error ${response.status}: ${response.statusText} - ${errorText}`);
       }
-      
+
       const result = await response.json();
-      console.log('Fetched result:', result);
-      
-      const { data } = result;
-      
-      if (Array.isArray(data)) {
-        setAccountDetails(data);
+      console.log('Fetch Account Details Response:', result);
+
+      // Check if the result has success true and data is an object
+      if (result.success && typeof result.data === 'object' && result.data !== null) {
+        setAccountDetails([result.data]);  // Wrap the object in an array
       } else {
-        console.error('Data is not an array:', data);
-        setError('Data is not in the expected format');
+        console.error('Unexpected result format:', result);
+        throw new Error('Data is not in the expected format');
       }
     } catch (error) {
       setError(error.message);
@@ -49,9 +66,41 @@ function AccountViewList() {
     }
   };
 
-  useEffect(() => {
-    fetchAllAccountDetails();
-  }, []);
+  const fetchAllAccountDetails = async (token) => {
+    try {
+      const response = await fetch('http://localhost:5000/api/users/getAllAccountDetails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token
+        },
+      });
+
+      console.log('Fetching All Account Details');
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Error ${response.status}: ${response.statusText} - ${errorText}`);
+      }
+
+      const result = await response.json();
+      console.log('Fetch All Account Details Response:', result);
+
+      // Check if the result has success true and data is an array
+      if (result.success && Array.isArray(result.data)) {
+        setAllAccountDetails(result.data);
+        // Fetch details for the first account as an example, adjust as needed
+        if (result.data.length > 0) {
+          fetchAccountDetails(result.data[0].accountId, token);
+        }
+      } else {
+        throw new Error('Data is not in the expected format');
+      }
+    } catch (error) {
+      setError(error.message);
+      console.error('Error fetching all account details:', error);
+    }
+  };
 
   const handleLanguageChange = (e) => {
     setSelectedLanguage(e.target.value);
@@ -59,78 +108,98 @@ function AccountViewList() {
 
   const handleEdit = (index) => {
     setEditingAccountDetails(accountDetails[index]);
-    console.log('Edit clicked for account at index ${index}');
   };
 
   const handleDelete = async (index) => {
     const accountId = accountDetails[index].accountId;
     try {
-      const response = await fetch('http://localhost:5000/api/deleteAccountDetails', {
-        method: 'DELETE',
+      const response = await fetch('http://localhost:5000/api/users/deleteAccountDetails', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': token
         },
         body: JSON.stringify({ accountId }),
       });
 
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Error ${response.status}: ${response.statusText} - ${errorText}`);
+      }
+
       const result = await response.json();
       if (result.success) {
-      
         setAccountDetails(prevDetails => prevDetails.filter((_, i) => i !== index));
-        console.log('Account deleted successfully');
       } else {
-        console.error(result.message);
+        throw new Error(result.message);
       }
     } catch (error) {
+      setError(error.message);
       console.error('Error deleting account details:', error);
     }
   };
 
   const handleLedger = (index) => {
-    console.log('Ledger clicked for account at index ${index}');
-   
+    console.log(`Ledger clicked for account at index ${index}`);
   };
 
   const handleExport = () => {
-    console.log('Export button clicked');
     setShowExportModal(true);
   };
 
   const handleImport = () => {
-    console.log('Import button clicked');
     setShowImportModal(true);
   };
 
   const handleSaveChanges = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/updateAccountDetails', {
+      if (!editingAccountDetails) return;
+
+      const response = await fetch('http://localhost:5000/api/users/updateAccountDetails', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': token
         },
         body: JSON.stringify(editingAccountDetails),
       });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Error ${response.status}: ${response.statusText} - ${errorText}`);
+      }
+
       const result = await response.json();
       if (result.success) {
         setAccountDetails(prevDetails => prevDetails.map(account =>
           account.accountId === editingAccountDetails.accountId ? editingAccountDetails : account
         ));
         setEditingAccountDetails(null);
-        console.log('Account details updated successfully');
       } else {
-        console.error(result.message);
+        throw new Error(result.message);
       }
     } catch (error) {
+      setError(error.message);
       console.error('Error updating account details:', error);
     }
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEditingAccountDetails(prevDetails => ({ ...prevDetails, [name]: value }));
+  };
+
+  // Function to navigate to the AccountList page
+  const handleAddNew = () => {
+    navigate('/accountlist'); // Adjust the path to match your routing
+  };
+
   if (loading) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>Error: {error}</div>; 
+    return <div>Error: {error}</div>;
   }
 
   return (
@@ -168,14 +237,14 @@ function AccountViewList() {
       <div className="header-container">
         <h1>ADDRESS BOOK</h1>
         <div className="header-buttons">
-          <button className="btn add-new">Add New</button>
+          <button className="btn add-new" onClick={handleAddNew}>Add New</button>
           <button className="btn ok" onClick={handleSaveChanges}>Ok</button>
           <button className="btn print">Print</button>
           <button className="btn birthday-remainders">Birthday Reminders</button>
           <button className="btn app">App</button>
           <button className="btn sms-whatsapp">SMS/WhatsApp</button>
-          <button className="btn export" onClick={() => setShowExportModal(true)}>Export</button>
-          <button className="btn import" onClick={() => setShowImportModal(true)}>Import</button>
+          <button className="btn export" onClick={handleExport}>Export</button>
+          <button className="btn import" onClick={handleImport}>Import</button>
           <button className="btn search">Search</button>
         </div>
       </div>
@@ -197,117 +266,80 @@ function AccountViewList() {
           <input type="checkbox" className="text-box1" />
           <input
             type="text"
-            className="text-box2"
-            placeholder="Product Name"
+            name="accountName"
             value={account.accountName}
             readOnly={!editingAccountDetails || editingAccountDetails.accountId !== account.accountId}
-            onChange={(e) =>
-              setEditingAccountDetails({
-                ...editingAccountDetails,
-                accountName: e.target.value,
-              })
-            }
+            onChange={handleChange}
           />
           <input
             type="text"
-            className="text-box3"
-            placeholder="Name"
+            name="group"
             value={account.group}
             readOnly={!editingAccountDetails || editingAccountDetails.accountId !== account.accountId}
-            onChange={(e) =>
-              setEditingAccountDetails({
-                ...editingAccountDetails,
-                group: e.target.value,
-              })
-            }
+            onChange={handleChange}
           />
           <input
             type="text"
-            className="text-box4"
-            placeholder="City"
+            name="city"
             value={account.city}
             readOnly={!editingAccountDetails || editingAccountDetails.accountId !== account.accountId}
-            onChange={(e) =>
-              setEditingAccountDetails({
-                ...editingAccountDetails,
-                city: e.target.value,
-              })
-            }
+            onChange={handleChange}
           />
           <input
             type="text"
-            className="text-box5"
-            placeholder="Mobile"
+            name="mobile"
             value={account.mobile}
             readOnly={!editingAccountDetails || editingAccountDetails.accountId !== account.accountId}
-            onChange={(e) =>
-              setEditingAccountDetails({
-                ...editingAccountDetails,
-                mobile: e.target.value,
-              })
-            }
+            onChange={handleChange}
           />
           <input
             type="text"
-            className="text-box6"
-            placeholder="Tax No"
+            name="taxNo"
             value={account.taxNo}
             readOnly={!editingAccountDetails || editingAccountDetails.accountId !== account.accountId}
-            onChange={(e) =>
-              setEditingAccountDetails({
-                ...editingAccountDetails,
-                taxNo: e.target.value,
-              })
-            }
+            onChange={handleChange}
           />
           <input
             type="text"
-            className="text-box7"
-            placeholder="Op.Bal"
+            name="opBal"
             value={account.opBal}
             readOnly={!editingAccountDetails || editingAccountDetails.accountId !== account.accountId}
-            onChange={(e) =>
-              setEditingAccountDetails({
-                ...editingAccountDetails,
-                opBal: e.target.value,
-              })
-            }
+            onChange={handleChange}
           />
           <input
             type="text"
-            className="text-box8"
-            placeholder="DC"
+            name="dc"
             value={account.dc}
             readOnly={!editingAccountDetails || editingAccountDetails.accountId !== account.accountId}
-            onChange={(e) =>
-              setEditingAccountDetails({
-                ...editingAccountDetails,
-                dc: e.target.value,
-              })
-            }
+            onChange={handleChange}
           />
-          <button
-            className="btn edit"
-            onClick={() => handleEdit(index)}
-          >
-            <FaEdit /> Edit
+          <button className="btn edit" onClick={() => handleEdit(index)}>
+            <FaEdit />
           </button>
-          <button
-            className="btn delete"
-            onClick={() => handleDelete(index)}
-          >
-            <FaTrash /> Delete
+          <button className="btn delete" onClick={() => handleDelete(index)}>
+            <FaTrash />
           </button>
-          <button
-            className="btn ledger"
-            onClick={() => handleLedger(index)}
-          >
-            <FaBook /> Ledger
+          <button className="btn ledger" onClick={() => handleLedger(index)}>
+            <FaBook />
           </button>
         </div>
       ))}
-     <AccountExportPage show={showExportModal} onClose={() => setShowExportModal(false)} onExport={handleExport} />
-     <AccountImportPage show={showImportModal} onClose={() => setShowImportModal(false)} onImport={handleImport} />
+      {showExportModal && 
+      <AccountExportPage
+      show={showExportModal}
+          onClose={() => setShowExportModal(false)}
+          onExport={() => setShowExportModal(false)}
+       />}
+      {showImportModal && (
+        <AccountImportPage
+          show={showImportModal}
+          onClose={() => setShowImportModal(false)}
+          onImport={() => {
+            setShowImportModal(false);
+            fetchAllAccountDetails(token);
+          }}
+        />
+      )}
     </div>
   );
 }

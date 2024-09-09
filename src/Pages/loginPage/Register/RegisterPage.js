@@ -15,6 +15,7 @@ const RegisterPage = () => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [userId, setUserId] = useState(''); // Added userId state
   const navigate = useNavigate(); 
 
   const handleChange = (e) => {
@@ -63,6 +64,11 @@ const RegisterPage = () => {
           mobileNo: "",
         });
 
+        // Store the userId from the response (assuming response contains userId)
+        setUserId(response.data.userId); 
+
+        // Redirect to login page with userId
+        navigate(`/?userId=${response.data.userId}`);
         
       } else {
         setErrorMessage(response.data.message);
@@ -86,10 +92,9 @@ const RegisterPage = () => {
   return (
     <div className="register-container">
       {showSuccessMessage && (
-        <div className="success-message" >
+        <div className="success-message">
           Registration Successful
           <button onClick={handleCloseMessage} className="close-button">OK</button>
-          
         </div>
       )}
       {errorMessage && <div className="error-message">{errorMessage}</div>}
