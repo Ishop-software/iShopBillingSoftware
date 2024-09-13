@@ -1,3 +1,9 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .sales-container {
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -7,16 +13,13 @@
   height: 100vh; /* Full viewport height */
 }
 
-.sales-header, .party-info, .content-sections, .bottom-section {
-  margin-top: 2px;
-}
-
 .sales-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   background: #f8f8f8;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .sales-header-left, .sales-header-right {
@@ -44,7 +47,7 @@ input[type="text"], input[type="date"] {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 input[type="text"].small-input, input[type="date"].small-input {
@@ -161,6 +164,7 @@ input[type="text"].small-input, input[type="date"].small-input {
 .content-sections {
   display: flex;
   flex: 1; 
+  overflow: hidden; 
   overflow: hidden;
   height: 50px;
 }
@@ -171,7 +175,8 @@ input[type="text"].small-input, input[type="date"].small-input {
   border-radius: 5px;
   padding: 20px;
   margin-right: 20px;
-  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: calc(100vh - 200px);  
+  overflow-y: auto; 
 }
 
 .items-section:last-child, .charges-section:last-child {
@@ -194,10 +199,11 @@ input[type="text"].small-input, input[type="date"].small-input {
 }
 
 .bottom-section {
-  margin-top: 5px;
   padding: 10px;
   background: #f8f8f8;
   border-top: 1px solid #ddd;
+  flex-shrink: 0; /* Prevent shrinking */
+  overflow: auto; /* Ensure the bottom section can scroll if needed */
 }
 
 .summary-table {
