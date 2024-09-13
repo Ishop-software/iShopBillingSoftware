@@ -1,80 +1,164 @@
-.saleviewnavbar {
+/* Ensure the entire view container takes up the full height */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.itemview-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 30px;
-  background-color: #fff;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
   border-bottom: 1px solid #ddd;
   border-radius: 6px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.left-section {
-  display: flex;
-  align-items: center;
   color: #35affd;
+  position: fixed;
+  width: 100%; /* Full width of the viewport */
+  top: 0;
+  left: 0; /* Align to the left edge */
+  z-index: 1000;
+  height: 60px; /* Adjust this height as needed */
 }
 
-.back-icon {
+.itemview-left {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid #ced4da;
+}
+
+.back-arrow {
+  font-size: 30px;
+  border: 2px solid #333;
   border-radius: 50%;
-  margin-right: 20px;
+  padding: 5px;
+  margin-right: 30px;
   cursor: pointer;
 }
 
-.navbar-label {
-  margin-right: 100px;
-  margin-left: 0px;
-  margin-top: 100px;
-  font-weight: bold;
-  cursor: pointer;
-  color: #35affd;
+.nav-labels {
+  display: flex;
+  gap: 20px;
 }
 
-.right-section {
+.nav-label {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.search-bar input {
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.search-icon {
+  font-size: 18px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.itemview-right {
   display: flex;
   align-items: center;
 }
 
-.settings-icon {
-  margin-right: 20px;
-  font-size: 1.5rem;
+.setting-icon {
+  font-size: 24px;
+  margin-right: 10px;
   cursor: pointer;
 }
 
-.dropdown-select {
-  margin-right: 20px;
-  font-weight: bold;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-  padding: 5px 10px;
+.language-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.dropdown-label {
+  font-size: 16px;
   cursor: pointer;
-  height: 35px;
-  width: 80px;
+}
+
+.dropdown-icon {
+  font-size: 16px;
+  margin-left: 5px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.language-dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-content div:hover {
+  background-color: #f0f0f0;
 }
 
 .profile-icon {
+  font-size: 24px;
   cursor: pointer;
-  font-size: 1.5rem;
+}
+
+/* Spacer to ensure content is not hidden behind the fixed header */
+.content-spacer {
+  height: 60px; /* Adjust this to match the height of .itemview-nav */
+}
+
+.itemcontainer {
+  position: fixed;
+  top: 70px; /* Adjust this to place the item container below the navbar */
+  left: 10px;
+  right: 10px;
+  bottom: 10px; /* Adjust if you need more or less space at the bottom */
+  margin-bottom: 0; /* Remove bottom margin if container is fixed */
+  overflow: auto; /* Allow scrolling if the content overflows */
+  background-color: #fff; /* Ensure background color if necessary */
+  z-index: 900; /* Ensure it's below the navbar */
 }
 
 .top-container {
   display: flex;
   align-items: center;
-  margin-top: 20px;
-  margin-bottom: 600px;
+  margin: 10px 10px 10px 10px;
   flex-wrap: wrap;
+  margin-top: 80px; /* Adjust for spacing below the fixed header */
 }
 
-.head {
-  font-size: small;
-  white-space: nowrap;
+.itemhead {
+  white-space: nowrap; /* Prevent wrapping */
   margin-left: 40px;
+  color: #35affd;
+  display: flex; /* Ensure items are aligned horizontally */
+  align-items: center;
 }
 
 .top-container h1 {
@@ -83,10 +167,12 @@
   color: #35affd;
 }
 
-.buttons {
+.listclick-buttons {
+  margin-left: 80px;
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  white-space: nowrap; /* Prevent wrapping */
 }
 
 .btn {
@@ -103,14 +189,7 @@
   color: white;
 }
 
-.listclick-buttons {
-  margin-left: 80px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.add-new, .ok, .print, .deletes, .app, .sms-whatsapp, .export, .import, .search, .setting {
+.add-new, .ok, .print, .deletes, .app, .sms-whatsapp, .export, .import, .search, .Settings {
   background-color: white;
   color: #35affd;
   border: 2px solid #35affd;
@@ -127,7 +206,37 @@
 .export { width: 120px; }
 .import { width: 120px; }
 .search { width: 120px; }
-.setting { width: 95px; }
+.Settings { width: 95px; }
+
+.table-container {
+  margin: 10px;
+  margin-top: 20px;
+}
+
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border: 1px solid #ddd;
+}
+
+.items-table thead {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #f9f9f9;
+  z-index: 1;
+}
+
+.items-table th, .items-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.items-table th {
+  background-color: #35affd;
+  color: white;
+}
 
 .showbutton {
   display: flex;
@@ -163,9 +272,9 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 200px;
+  margin-top: 20px;
   justify-content: flex-start;
-  position: absolute;
+  position: relative;
 }
 
 .textboxes {

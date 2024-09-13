@@ -278,40 +278,7 @@
   margin-top: 10px;
  
 }
-.variation{background-color: #35AFFD;border-color: #35AFFD;width: 100px;height: 35px;color: white;}
-.color{background-color: #35AFFD;border-color: #35AFFD;width: 100px;height: 35px; color: white;}
-.size{background-color: #35AFFD;border-color: #35AFFD;width: 100px;height: 35px;color: white;}
-.exp{background-color: #35AFFD;border-color: #35AFFD; width: 100px; height: 35px; color: white;}
-.mfg{ background-color: #35AFFD; border-color: #35AFFD; width: 100px; height: 35px; color: white;}
-.purchase{ background-color: #35AFFD; border-color: #35AFFD; width:130px; height: 35px; color: white;}
-.saleprice{background-color: #35AFFD;border-color: #35AFFD;width: 120px; height: 35px; color: white;}
-.mrp{ background-color: #35AFFD; border-color: #35AFFD; width: 100px; height: 35px; color: white;}
-.basicprice{ background-color: #35AFFD; border-color: #35AFFD; width: 120px; height: 35px; color: white;}
-.selfval{ background-color: #35AFFD; border-color: #35AFFD; width: 100px; height: 35px; color: white;}
-.min{ background-color: #35AFFD; border-color: #35AFFD; width: 100px; height: 35px; color: white;}
-.barcode{background-color: #35AFFD;border-color: #35AFFD;width: 100px;height: 35px; color: white;}
-.openingpck{ background-color: #35AFFD; border-color: #35AFFD; width: 130px; height: 35px; color: white;}
-.openingvalue{background-color: #35AFFD; border-color: #35AFFD;  width: 130px;height: 35px;  color: white;}
 
-.textfield {
-  display: flex;
-  margin-top: 5px;
-}
-
-.textbox1 { width: 80px; padding: 8px; border: 1px solid #ccc; }
-.textbox2 { width: 82px; padding: 8px; border: 1px solid #ccc; }
-.textbox3 { width: 80px; padding: 8px; border: 1px solid #ccc; }
-.textbox4 { width: 85px; padding: 8px; border: 1px solid #ccc; }
-.textbox5 { width: 82px; padding: 8px; border: 1px solid #ccc; }
-.textbox6 { width: 114px; padding: 8px; border: 1px solid #ccc; }
-.textbox7 { width: 100px; padding: 8px; border: 1px solid #ccc; }
-.textbox8 { width: 85px; padding: 8px; border: 1px solid #ccc; }
-.textbox9 { width: 103px; padding: 8px; border: 1px solid #ccc; }
-.textbox10 { width: 82px; padding: 8px; border: 1px solid #ccc; }
-.textbox11 { width: 83px; padding: 8px; border: 1px solid #ccc; }
-.textbox12 { width: 83px; padding: 8px; border: 1px solid #ccc; }
-.textbox13 { width: 112px; padding: 8px; border: 1px solid #ccc; }
-.textbox14 { width: 112px; padding: 8px; border: 1px solid #ccc; }
 
 .primary-unit-dropdown {
   width: 450px; 
