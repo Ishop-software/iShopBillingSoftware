@@ -82,7 +82,7 @@
 //                 method: 'POST',
 //                 headers: {
 //                     'Content-Type': 'application/json',
-//                     'Authorization': `Bearer ${token}`
+//                     'Authorization': Bearer ${token}
 //                 },
 //                 body: JSON.stringify(itemData)
 //             });
@@ -278,9 +278,8 @@
 
 
 import React, { useState, useEffect, useRef } from "react";
-import { Button, Card, TextField, Typography, Grid, MenuItem, IconButton, Menu } from "@mui/material";
+import { Button, Card, TextField, Typography, Grid, MenuItem } from "@mui/material";
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import './Items.css';
 
 const btns = ["Save", "List"];
@@ -441,112 +440,102 @@ function Items() {
     ];
 
     return (
-        <div className="card-container">
-            <Card className="card-styles">
-                <div className="card-header">
-                    <Typography className="header-title">Add New Item</Typography>
-                    <div className="header-buttons">
-                        {btns.map(index => (
-                            <Button
-                                variant="contained"
-                                key={index}
-                                className="button"
-                                onClick={() => {
-                                    if (index === "Save") {
-                                        handleSave();
-                                    } else if (index === "List") {
-                                        handleList();
-                                    }
-                                }}
-                            >
-                                {index}
-                            </Button>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="text-field-container">
-                    {txtfld.map((field, idx) => (
-                        <div key={field} className="text-field-wrapper">
-                            <Typography className="text-field-label">{field.replace(/([A-Z])/g, ' $1')}</Typography>
-                            <TextField
-                                size="small"
-                                className="text-field-input"
-                                value={itemData[field]}
-                                onChange={(e) => handleInputChange(e, field)}
-                                onKeyDown={(e) => handleKeyDown(e, txtfld[idx + 1])}
-                                inputRef={(el) => inputRefs.current[field] = el}
-                            />
-                        </div>
-                    ))}
-                </div>
-
-                <Grid container spacing={3} className="dropdown-container">
-                    <Grid item xs={5}>
-                        <div className="dropdown-wrapper">
-                            <Typography className="dropdown-label">Tax Slab</Typography>
-                            <div className="dropdown-actions">
-                                <TextField
-                                    select
-                                    size="small"
-                                    value={itemData.taxSlab}
-                                    onChange={(e) => handleInputChange(e, 'taxSlab')}
-                                    className="tax-slab-dropdown"
-                                    InputProps={{ style: { width: '420px' } }}
-                                >
-                                    <MenuItem value="5">05% GST</MenuItem>
-                                    <MenuItem value="12">12% GST</MenuItem>
-                                    <MenuItem value="18">18% GST</MenuItem>
-                                    <MenuItem value="28">28% GST</MenuItem>
-                                    <MenuItem value="0">Tax Free</MenuItem>
-                                </TextField>
-                            </div>
-                        </div>
-                        {dropdown.map(index => (
-                            <div key={index} className="dropdown-wrapper">
-                                <Typography className="dropdown-label">{index.replace(/([A-Z])/g, ' $1')}</Typography>
-                                <div className="dropdown-actions">
-                                    <TextField
-                                        size="small"
-                                        value={itemData[index]}
-                                        onChange={(e) => handleInputChange(e, index)}
-                                        className="dropdown-text-field"
-                                        InputProps={{ style: { width: '420px' } }}
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                    </Grid>
-                    <Grid item xs={4}>
-                        <div className="primary-unit-container">
-                            <div className="primary-unit-label">
-                                <Typography>Primary Unit</Typography>
-                                <IconButton className="primary-unit-icon">
-                                    <ArrowDropDownIcon />
-                                </IconButton>
-                            </div>
-                            <TextField
-                                select
-                                size="small"
-                                value={itemData.primaryUnit}
-                                onChange={(e) => handleInputChange(e, 'primaryUnit')}
-                                className="primary-unit-dropdown"
-                            >
-                                <MenuItem value="Box">Box</MenuItem>
-                                <MenuItem value="Bag">Bag</MenuItem>
-                                <MenuItem value="Dozen">Dozen</MenuItem>
-                                <MenuItem value="Gms.">Gms.</MenuItem>
-                                <MenuItem value="Kgs.">Kgs.</MenuItem>
-                            </TextField>
-                        </div>
-
-                        <div className="upload-image-container">
-                            <div className="upload-image-section">
+        <div className="items-container">
+            <div className="items-container">
+                <Card className="card-styles">
+                    <div className="card-header">
+                        <Typography className="header-title">Add New Item</Typography>
+                        <div className="header-buttons">
+                            {btns.map(index => (
                                 <Button
                                     variant="contained"
-                                    onClick={handleUploadClick}
-                                    className="upload-image-button"
+                                    key={index}
+                                    className="button"
+                                    onClick={() => {
+                                        if (index === "Save") {
+                                            handleSave();
+                                        } else if (index === "List") {
+                                            handleList();
+                                        }
+                                    }}
                                 >
+                                    {index}
+                                </Button>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="text-field-container">
+                        {txtfld.map((field, idx) => (
+                            <div key={field} className="text-field-wrapper">
+                                <Typography className="text-field-label">{field.replace(/([A-Z])/g, ' $1')}</Typography>
+                                <TextField
+                                    size="small"
+                                    className="text-field-input"
+                                    value={itemData[field]}
+                                    onChange={(e) => handleInputChange(e, field)}
+                                    onKeyDown={(e) => handleKeyDown(e, txtfld[idx + 1])}
+                                    inputRef={(el) => inputRefs.current[field] = el}
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    <Grid container spacing={3} className="dropdown-container">
+                        <Grid item xs={5}>
+                            <div className="dropdown-wrapper">
+                                <Typography className="dropdown-label">Tax Slab</Typography>
+                                <div className="dropdown-actions">
+                                    <TextField
+                                        select
+                                        size="small"
+                                        value={itemData.taxSlab}
+                                        onChange={(e) => handleInputChange(e, 'taxSlab')}
+                                        className="tax-slab-dropdown"
+                                        InputProps={{ style: { width: '420px' } }}
+                                    >
+                                        <MenuItem value="5">05% GST</MenuItem>
+                                        <MenuItem value="12">12% GST</MenuItem>
+                                        <MenuItem value="18">18% GST</MenuItem>
+                                        <MenuItem value="28">28% GST</MenuItem>
+                                        <MenuItem value="0">Tax Free</MenuItem>
+                                    </TextField>
+                                </div>
+                            </div>
+                            {dropdown.map(index => (
+                                <div key={index} className="dropdown-wrapper">
+                                    <Typography className="dropdown-label">{index.replace(/([A-Z])/g, ' $1')}</Typography>
+                                    <div className="dropdown-actions">
+                                        <TextField
+                                            size="small"
+                                            value={itemData[index]}
+                                            onChange={(e) => handleInputChange(e, index)}
+                                            className="dropdown-text-field"
+                                            InputProps={{ style: { width: '420px' } }}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </Grid>
+                        <Grid item xs={4}>
+                            <div className="primary-unit-container">
+                                <Typography className="primary-unit-label">Primary Unit</Typography>
+                                <div className="primary-unit-actions">
+                                    <TextField
+                                        select
+                                        size="small"
+                                        value={itemData.primaryUnit}
+                                        onChange={(e) => handleInputChange(e, 'primaryUnit')}
+                                    >
+                                        <MenuItem value="Box">Box</MenuItem>
+                                        <MenuItem value="Bag">Bag</MenuItem>
+                                        <MenuItem value="Dozen">Dozen</MenuItem>
+                                        <MenuItem value="Gms.">Gms.</MenuItem>
+                                        <MenuItem value="Kgs.">Kgs.</MenuItem>
+                                    </TextField>
+                                </div>
+                            </div>
+                            <div className="image-upload">
+                                <Button variant="contained" onClick={handleUploadClick}>
                                     Upload Image
                                 </Button>
                                 <input
@@ -556,37 +545,67 @@ function Items() {
                                     onChange={handleImageUpload}
                                     style={{ display: 'none' }}
                                 />
-                                {selectedImage && (
-                                    <div className="upload-image-content">
-                                        <img src={selectedImage} alt="Preview" className="image-preview-img" />
-                                    </div>
-                                )}
+                                {selectedImage && <img src={selectedImage} alt="Uploaded Preview" className="uploaded-image-preview" />}
+                            </div>
+                        </Grid>
+                    </Grid>
+                    {showAlternateUnit && (
+                        <div className="alternate-unit-container">
+                            <div>
+                                <Typography className="alternate-unit-label">Alternate Unit</Typography>
+                                <TextField
+                                    size="small"
+                                    className="text-field-input"
+                                    value={itemData.piecePerBox}
+                                    onChange={(e) => handleInputChange(e, 'piecePerBox')}
+                                />
+                            </div>
+                            <div style={{ marginLeft: '1rem' }}>
+                                <Typography className="conversion-factor-label">Conversion Factor</Typography>
+                                <TextField
+                                    size="small"
+                                    className="text-field-input"
+                                    value={itemData.boxRate}
+                                    onChange={(e) => handleInputChange(e, 'boxRate')}
+                                />
+                            </div>
+                            <div>
+                                <Typography className="price-per-piece-label">Price Per Piece</Typography>
+                                <TextField
+                                    size="small"
+                                    className="text-field-input"
+                                    value={itemData.pricePerPiece}
+                                    onChange={(e) => handleInputChange(e, 'pricePerPiece')}
+                                    disabled
+                                />
                             </div>
                         </div>
-                    </Grid>
-                </Grid>
+                    )}
+                    <Button onClick={toggleAlternateUnit} className="toggle-button">
+                        {showAlternateUnit ? 'Hide Alternate Unit' : 'Show Alternate Unit'}
+                    </Button>
+                </Card>
 
-                {showAlternateUnit && (
-                    <div className="alternate-unit-container">
-                        {buttonTextFields.map(field => (
-                            <div key={field} className="alternate-unit-row">
-                                <div className="alternate-unit-column">
-                                    <Typography className="alternate-unit-label">{field.replace(/([A-Z])/g, ' $1')}</Typography>
-                                    <TextField
-                                        size="small"
-                                        value={itemData[field]}
-                                        onChange={(e) => handleInputChange(e, field)}
-                                        className="alternate-unit-field"
-                                    />
-                                </div>
+                <div className="additional-fields-container">
+                    <div className="text-field-container">
+                        {buttonTextFields.map((field, index) => (
+                            <div key={index} className="text-field-wrapper">
+                                <Typography className="text-field-label">{field.replace(/([A-Z])/g, ' $1')}</Typography>
+                                <TextField
+                                    size="small"
+                                    className="text-field-input"
+                                    value={itemData[field]}
+                                    onChange={(e) => handleInputChange(e, field)}
+                                    onKeyDown={(e) => handleKeyDown(e, buttonTextFields[index + 1])}
+                                    inputRef={(el) => inputRefs.current[field] = el}
+                                />
                             </div>
                         ))}
                     </div>
-                )}
-            </Card>
+                </div>
+            </div>
         </div>
     );
 }
 
 export default Items;
-
