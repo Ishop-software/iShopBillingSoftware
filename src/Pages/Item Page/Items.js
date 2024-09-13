@@ -411,7 +411,7 @@ function Items() {
     };
 
     const handleList = () => {
-        navigate('/View');
+        navigate(`/view?token=${token}`);
     };
 
     const handleInputChange = (e, field) => {
@@ -437,7 +437,7 @@ function Items() {
     const buttonTextFields = [
         "variation", "color", "size", "expDate", "mfgDate", 
         "purchase", "salePrice", "mrp", "basicPrice", 
-        "selfVal", "minSalePrice", "barcode", "openingPck", "openingValue"
+        "selfVal", "minPrice", "barcode", "openingPck", "openingVal"
     ];
 
     return (

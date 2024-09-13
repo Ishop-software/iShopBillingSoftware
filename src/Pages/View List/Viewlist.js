@@ -133,10 +133,16 @@ function Viewlist() {
     navigate(`/details/Details/${index}`);
   };
 
-  const handleExport = () => {
-    console.log('Export button clicked');
+  // const handleExport = () => {
+  //   console.log('Export button clicked');
+  //   setShowExportModal(false);
+  // };
+  const handleExport = (token) => {
+    console.log('Export button clicked with token:', token);
+ 
     setShowExportModal(false);
   };
+  
 
   const handleImport = () => {
     console.log('Import button clicked');
@@ -443,6 +449,13 @@ function Viewlist() {
             </div>
           )}
           <ExportPage show={showExportModal} onClose={() => setShowExportModal(false)} onExport={handleExport} />
+          {/* <ExportPage show={showExportModal} onClose={() => setShowExportModal(false)} onExport={handleExport} /> */}
+          <ExportPage 
+  show={showExportModal} 
+  onClose={() => setShowExportModal(false)} 
+  onExport={() => handleExport(token)} 
+  token={token} 
+/>
           <ImportPage show={showImportModal} onClose={() => setShowImportModal(false)} onImport={handleImport} />
           <Setting show={showSettingModal} onClose={() => setShowSettingModal(false)} onSaveSettings={handleSaveSettings} />
           <SearchPage show={showSearchModal} onClose={() => setShowSearchModal(false)} onSearch={handleSearch} />
