@@ -12,7 +12,6 @@ const ForgetPassword = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        
         const params = new URLSearchParams(window.location.search);
         const userIdFromParams = params.get('userId');
         if (userIdFromParams) {
@@ -26,7 +25,6 @@ const ForgetPassword = () => {
         setError(null);
         setSuccessMessage('');
 
-     
         if (newPassword.length > 8) {
             setError('Password must be at most 8 characters long');
             return;
@@ -70,16 +68,13 @@ const ForgetPassword = () => {
             <img src={logo} alt="Logo" className="logo" /> 
             <h2>Reset Password</h2>
             <form onSubmit={handleSubmit} className="forget-password-form">
-               
                 <input
                     type="text"
                     name="username"
                     value={userId}
                     readOnly
                     hidden
-                    autoComplete="username"
                 />
-
                 {successMessage && <p className="success-message">{successMessage}</p>}
                 {error && <p className="error-message">{error}</p>}
                 <div className="form-group">

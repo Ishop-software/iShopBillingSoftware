@@ -1,396 +1,488 @@
+AccountList.css
+
 
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #dee2e6;
-    height: 50px;
-    margin: 20px;
-    border-radius: 5px;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  height: 50px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20%;
+  margin-left: 10px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.navbar-links a:hover {
+  text-decoration: underline;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: #007bff;
+}
+
+.language-dropdown {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0; 
+  width: 100vw; 
+  padding: 0; 
+  box-sizing: border-box;
+}
+
+
+.header-container {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.header-container h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: rgb(117, 183, 230);
+}
+
+
+.header-buttons {
+  display: flex;
+  align-items: center;
+  margin-right: 200px;
+  gap: 30px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn:hover {
+  background-color: #35affd;
+  color: white;
+}
+
+.setting,
+.delete,
+.list,
+.get {
+  background-color: white;
+  color: skyblue;
+  border: 1px solid #35affd;
+  border-radius: 5px;
+}
+
+.setting,
+.delete,
+.list {
+  width: 140px;
+  height: 40px;
+}
+
+.get {
+  width: 500px;
+  height: 50px;
+  white-space: nowrap;
+}
+
+
+.form-container {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+ 
+}
+
+.form-item {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-item label {
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.form-item input,
+.form-item select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  width: 80%;
+}
+
+
+.group-item {
+  width: 50%;
+  position: relative;
+}
+
+.group-container {
+  display: flex;
+  align-items: center;
+}
+
+.group-container select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  gap: 5px;
+  margin-left: 10px;
+}
+
+.action-btn {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.plus-btn {
+  background-color: #35affd;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 20px 0;
+}
+
+.plus-btn:hover {
+  background-color: #0056b3;
+}
+
+.edit-btn {
+  background-color: #35affd;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 20px 0;
+}
+
+
+.tax-no-item {
+  width: 250px;
+}
+
+.tax-no-container {
+  display: flex;
+  align-items: center;
+}
+
+.tax-no-item input {
+  width: 100%;
+}
+
+.eye-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.eye-icon {
+  cursor: pointer;
+  color: #007bff;
+}
+
+.eye-icon:hover {
+  color: #0056b3;
+}
+
+
+.group-entry-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.group-entry-container {
+  background: white;
+  padding: 20px;
+  width: 50%;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.group-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.group-entry-header h2 {
+  margin: 0;
+  color: #75b7e6;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.group-entry-body {
+  margin-bottom: 20px;
+}
+
+.group-entry-body input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-container input {
+  margin-right: 10px;
+}
+
+
+.group-entry-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.group-entry-footer .btn {
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+
+.group-entry-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.group-entry-table th,
+.group-entry-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.group-entry-table th {
+  background-color: #f1f1f1;
+}
+
+
+.city-item {
+  width: 25%;
+}
+
+.pincode-item {
+  width: 20%;
+}
+
+.state-item {
+  width: 25%;
+}
+
+.state-pincode-item {
+  width: 25%;
+}
+
+.mobile-item {
+  width: 20%;
+}
+
+.phone-item {
+  width: 30%;
+}
+
+.email-item {
+  width: 30%;
+}
+
+.contact-person-item {
+  width: 20%;
+}
+
+.pan-card-item {
+  width: 20%;
+}
+
+.save-item {
+  width: 500px;
+}
+
+.btn.save {
+  margin-left: 1000px;
+  width: 100%;
+  height: 40px;
+  background-color: #007bff;
+  color: white;
+  align-items: center;
   
-  .navbar-left {
-    display: flex;
-    align-items: center;
-  }
-  
-  .navbar-links {
-    display: flex;
-    gap: 20%;
-    margin-left: 10px;
-  }
-  
-  .navbar-links a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-  }
-  
-  .navbar-links a:hover {
-    text-decoration: underline;
-  }
-  
-  .navbar-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .icon {
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-  
-  .icon:hover {
-    color: #007bff;
-  }
-  
-  .language-dropdown {
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  .header-container {
-    display: flex;
-    align-items: center;
-    margin: 20px;
-  }
-  
-  .header-container h1 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: rgb(117, 183, 230);
-  }
-  
+}
+
+
+@media screen and (max-width: 1200px) {
   .header-buttons {
-    display: flex;
-    align-items: center;
-    margin-left: 400px;
-    gap: 30px;
+      margin-left: 200px;
+      gap: 20px;
   }
-  
-  .btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+
+  .btn.save {
+      margin-left: 0;
+      width: 100%;
   }
-  
-  .btn:hover {
-    background-color: #35affd;
-    color: white;
+
+  .container {
+      flex-direction: row;
+      align-items: flex-start;
   }
-  
-  .setting,
-  .delete,
-  .list,
-  .get {
-    background-color: white;
-    color: skyblue;
-    border: 1px solid #35affd;
-    border-radius: 5px;
+}
+
+@media screen and (max-width: 992px) {
+  .header-buttons {
+      margin-left: 100px;
+      gap: 15px;
   }
-  
-  .setting,
-  .delete,
-  .list {
-    width: 140px;
-  }
-  
-  .get {
-    width: 300px;
-    white-space: nowrap;
-  }
-  
-  .form-container {
-    margin: 20px;
-  }
-  
-  .form-row {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .form-item {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-item label {
-    margin-bottom: 5px;
-    font-size: 0.9rem;
-    color: #333;
-  }
-  
+
   .form-item input,
   .form-item select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    width: 80%;
+      width: 100%;
   }
-  
+
   .group-item {
-    width: 50%;
-    position: relative;
+      width: 100%;
   }
-  
-  .group-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .group-container select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    width: 100%;
-  }
-  
-  .form-actions {
-    display: flex;
-    gap: 5px;
-    margin-left: 10px;
-  }
-  
-  .action-btn {
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .plus-btn {
-    background-color: #35affd;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin: 20px 0;
-  }
-  
-  .plus-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  .edit-btn {
-    background-color: #35affd;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin: 20px 0;
-  }
-  
-  .opening-bal-item {
-    width: 700px;
-  }
-  
-  .dr-cr-item {
-    width: 500px;
-  }
-  
-  .tax-no-item {
-    width: 500px;
-  }
-  
-  .tax-no-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .tax-no-item input {
-    width: 100%;
-  }
-  
-  .eye-icon-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-left: 10px;
-  }
-  
-  .eye-icon {
-    cursor: pointer;
-    color: #007bff;
-  }
-  
-  .eye-icon:hover {
-    color: #0056b3;
-  }
-  
-  
-  .group-entry-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
+
   .group-entry-container {
-    background: white;
-    padding: 20px;
-    width: 50%;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
+      width: 80%;
   }
-  
-  .group-entry-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .group-entry-header h2 {
-    margin: 0;
-    color: #75b7e6;
-  }
-  
-  .close-btn {
-    background: transparent;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-  }
-  
-  .group-entry-body {
-    margin-bottom: 20px;
-  }
-  
-  .group-entry-body input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .checkbox-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .checkbox-container input {
-    margin-right: 10px;
-  }
-  
-  .group-entry-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-  }
-  
-  .group-entry-footer .btn {
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .save-btn {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .delete-btn {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .group-entry-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .group-entry-table th,
-  .group-entry-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
-  }
-  
-  .group-entry-table th {
-    background-color: #f1f1f1;
-  }
-  
-  
-  .city-item {
-    width: 25%;
-  }
-  
-  .pincode-item {
-    width: 25%;
-  }
-  
-  .state-item {
-    width: 25%;
-  }
-  
-  .state-pincode-item {
-    width: 25%;
-  }
-  
-  
-  .mobile-item {
-    width: 30%;
-  }
-  
-  .phone-item {
-    width: 30%;
-  }
-  
-  .email-item {
-    width: 30%;
-  }
-  
-  .contact-person-item {
-    width: 30%;
-  }
-  
-  .pan-card-item {
-    width: 30%;
-  }
-  
-  .save-item {
-    width: 500px;
-  }
-  
+
   .btn.save {
-    margin-left: 1000px;
-    width: 200px;
-    height: 40px;
-    background-color: #007bff;
-    color: white;
-    align-items: center;
+      width: 100%;
   }
-  
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-links {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .navbar-left {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+  }
+
+  .navbar-right {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+  }
+
+  .header-buttons {
+      flex-direction: column;
+      gap: 10px;
+      margin-left: 0;
+  }
+
+  .group-entry-container {
+      width: 90%;
+  }
+
+  .plus-btn {
+      width: 100%;
+  }
+}

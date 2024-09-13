@@ -98,7 +98,7 @@ const handleApiRequest = async () => {
 };
 
   const navigateToViewList = () => {
-    navigate(`/view-list?token=${token}`);
+    navigate(`/accountviewlist?token=${token}`);
   };
   const navigateToViewListS = () => {
     navigate(`/view?token=${token}`);
