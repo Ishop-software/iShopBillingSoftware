@@ -99,6 +99,7 @@ function Viewlist() {
   
       const result = await response.json();
       if (result.success) {
+        // Update the UI to reflect the deleted product item
         setProductItems(productItems.filter(item => item.productItemId !== deleteProductItemId));
         console.log('Product deleted successfully');
       } else {
@@ -189,28 +190,61 @@ function Viewlist() {
     navigate(`/items?token=${token}`);
   };
 
+  // const handleSaveChanges = async () => {
+  //   try {
+  //     const response = await fetch('http://localhost:5000/api/productitems/updateProductItem', {
+  //       method: 'PUT',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(editingProductItem),
+  //     });
+  //     const result = await response.json();
+  //     if (result.success) {
+  //       setProductItems(productItems.map(item =>
+  //         item.productItemId === editingProductItem.productItemId ? editingProductItem : item
+  //       ));
+  //       setEditingProductItem(null);
+  //     } else {
+  //       console.error(result.message);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error updating product item:', error);
+  //   }
+  // };
   const handleSaveChanges = async () => {
     try {
+      console.log('Updating product item:', editingProductItem); // Log the payload
+      
       const response = await fetch('http://localhost:5000/api/productitems/updateProductItem', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': token // Ensure the token is included if required
         },
         body: JSON.stringify(editingProductItem),
       });
+  
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        console.error('Server responded with error:', errorResponse);
+        throw new Error('Failed to update product item');
+      }
+  
       const result = await response.json();
       if (result.success) {
         setProductItems(productItems.map(item =>
           item.productItemId === editingProductItem.productItemId ? editingProductItem : item
         ));
-        setEditingProductItem(null);
+        setEditingProductItem(null); // Hide Save Changes button
       } else {
-        console.error(result.message);
+        console.error('Update failed:', result.message);
       }
     } catch (error) {
       console.error('Error updating product item:', error);
     }
   };
+  
 
   const handleBackClick = () => {
     console.log('Back button clicked');
@@ -414,6 +448,7 @@ function Viewlist() {
               <button className="btn save-changes" onClick={handleSaveChanges}>Save Changes</button>
             </div>
           )}
+          <ExportPage show={showExportModal} onClose={() => setShowExportModal(false)} onExport={handleExport} />
           {/* <ExportPage show={showExportModal} onClose={() => setShowExportModal(false)} onExport={handleExport} /> */}
           <ExportPage 
   show={showExportModal} 
