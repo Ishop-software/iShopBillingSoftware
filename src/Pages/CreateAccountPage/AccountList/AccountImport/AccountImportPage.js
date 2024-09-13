@@ -446,7 +446,7 @@ const AccountImportPage = ({ show, onClose, onImport, token }) => {
       const response = await axios.post('http://localhost:5000/api/importExcelDataInAccount', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'Authorization': token // Pass the token in the Authorization header
+          'Authorization': token 
         },
       });
 
@@ -455,8 +455,8 @@ const AccountImportPage = ({ show, onClose, onImport, token }) => {
       if (response.data.success) {
         setSuccessMessage(response.data.message || 'Data imported successfully.');
         console.log('Import successful:', response.data.message);
-        onImport(); // Notify parent to refresh data
-        fetchAllAccountDetails(); // Fetch updated account details
+        onImport(); 
+        fetchAllAccountDetails(); 
       } else {
         setError(response.data.message || 'Import failed. Please try again.');
         console.error('Import failed:', response.data.message);

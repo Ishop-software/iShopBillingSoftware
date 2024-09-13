@@ -1,6 +1,6 @@
 AccountList.css
 
-/* General styles */
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -58,18 +58,18 @@ AccountList.css
   cursor: pointer;
 }
 
-/* Container Flex Layout */
+
 .container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 0; /* Removed margin to allow full width */
-  width: 100vw; /* Full width of the viewport */
-  padding: 0; /* Removed padding to eliminate space */
+  margin: 0; 
+  width: 100vw; 
+  padding: 0; 
   box-sizing: border-box;
 }
 
-/* Header Container */
+
 .header-container {
   display: flex;
   align-items: center;
@@ -82,7 +82,7 @@ AccountList.css
   color: rgb(117, 183, 230);
 }
 
-/* Header Buttons */
+
 .header-buttons {
   display: flex;
   align-items: center;
@@ -127,7 +127,7 @@ AccountList.css
   white-space: nowrap;
 }
 
-/* Form Container */
+
 .form-container {
   margin-left: 20px;
   display: flex;
@@ -161,7 +161,7 @@ AccountList.css
   width: 80%;
 }
 
-/* Group Item */
+
 .group-item {
   width: 50%;
   position: relative;
@@ -221,7 +221,7 @@ AccountList.css
   margin: 20px 0;
 }
 
-/* Tax Number and Eye Icon */
+
 .tax-no-item {
   width: 250px;
 }
@@ -256,7 +256,7 @@ AccountList.css
   color: #0056b3;
 }
 
-/* Group Entry Overlay and Container */
+
 .group-entry-overlay {
   position: fixed;
   top: 0;
@@ -310,7 +310,7 @@ AccountList.css
   border-radius: 5px;
 }
 
-/* Checkbox Container */
+
 .checkbox-container {
   display: flex;
   align-items: center;
@@ -320,7 +320,7 @@ AccountList.css
   margin-right: 10px;
 }
 
-/* Group Entry Footer */
+
 .group-entry-footer {
   display: flex;
   justify-content: flex-end;
@@ -343,7 +343,7 @@ AccountList.css
   color: white;
 }
 
-/* Group Entry Table */
+
 .group-entry-table {
   width: 100%;
   border-collapse: collapse;
@@ -361,7 +361,7 @@ AccountList.css
   background-color: #f1f1f1;
 }
 
-/* Other Items */
+
 .city-item {
   width: 25%;
 }
@@ -412,7 +412,7 @@ AccountList.css
   
 }
 
-/* Responsive Styles */
+
 @media screen and (max-width: 1200px) {
   .header-buttons {
       margin-left: 200px;

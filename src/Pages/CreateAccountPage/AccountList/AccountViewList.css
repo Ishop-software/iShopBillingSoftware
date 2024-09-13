@@ -1,4 +1,4 @@
-/* Existing styles for navbar */
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -71,7 +71,7 @@
     cursor: pointer;
 }
 
-/* New styles for header-container */
+
 .header-container {
     display: flex;
     align-items: center;
@@ -90,7 +90,7 @@
     margin-left: 80px;
     display: flex;
     gap: 10px;
-    margin-bottom: 20px; /* Added margin-bottom for spacing */
+    margin-bottom: 20px; 
 }
 
 .add-new,
@@ -104,8 +104,8 @@
 .search {
     background-color: white;
     color: #35affd;
-    border: 2px solid #35affd; /* Border color and width */
-    border-radius: 5px; /* Optional: for rounded corners */
+    border: 2px solid #35affd; 
+    border-radius: 5px; 
 }
 
 .add-new { width: 120px; }
@@ -118,7 +118,7 @@
 .import { width: 120px; }
 .search { width: 120px; }
 
-/* New styles for table-container */
+
 .table-container {
     margin-left: 20px;
     margin-right: 20px;
@@ -145,7 +145,7 @@ th {
     font-weight: bold;
 }
 
-/* New styles for Save Changes button */
+
 .save-changes-container {
     text-align: center;
     margin-top: 20px;
@@ -167,7 +167,7 @@ th {
     background-color: #007bff;
 }
 
-/* New styles for action-buttons */
+
 .action-buttons {
     display: flex;
     margin-left: 20px;
@@ -183,7 +183,7 @@ th {
     border-radius: 5px;
 }
 
-/* New styles for text boxes */
+
 .text-boxes {
     display: flex;
     align-items: center;

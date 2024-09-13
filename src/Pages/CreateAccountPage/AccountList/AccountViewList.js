@@ -166,7 +166,7 @@ function AccountViewList() {
   };
 
   const handleAddNew = () => {
-    navigate('/accountlist'); // Adjust the path to match your routing
+    navigate('/accountlist'); 
   };
 
   if (loading) {
@@ -333,7 +333,7 @@ function AccountViewList() {
           onClose={() => setShowExportModal(false)}
           accountDetails={accountDetails}
           onExport={() => setShowExportModal(false)}
-          token={token} // Pass token to AccountExportPage
+          token={token} 
         />
       }
       {showImportModal && (
@@ -344,7 +344,7 @@ function AccountViewList() {
             setShowImportModal(false);
             fetchAllAccountDetails(token);
           }}
-          token={token} // Pass token to AccountImportPage
+          token={token} 
         />
       )}
     </div>

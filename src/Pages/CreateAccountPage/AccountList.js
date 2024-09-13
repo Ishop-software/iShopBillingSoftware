@@ -47,7 +47,7 @@ function AccountList() {
     }
   }, [navigate]);
   useEffect(() => {
-    // Fetching group options from the backend
+    
     const fetchGroupOptions = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/groupaccounts/getAllGroupAccount', {
@@ -70,7 +70,7 @@ function AccountList() {
       }
     };
 
-    fetchGroupOptions(); // Fetch group options on component mount
+    fetchGroupOptions(); 
   }, []);
 
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Import axios for API requests
+import axios from 'axios'; 
 import { FaTimes } from 'react-icons/fa';
 import './GroupEntry.css';
 
@@ -11,7 +11,7 @@ const GroupEntry = ({ closeGroupEntry, onGroupUpdate }) => {
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
-    // Fetching all group accounts from the backend
+    
     const fetchGroupAccounts = async () => {
       try {
         const response = await axios.post('http://localhost:5000/api/groupaccounts/getAllGroupAccount');
@@ -61,7 +61,7 @@ const GroupEntry = ({ closeGroupEntry, onGroupUpdate }) => {
       }
     };
 
-    fetchGroupAccounts(); // Fetch group accounts on component mount
+    fetchGroupAccounts(); 
   }, []);
 
   const handleSave = async () => {
@@ -75,10 +75,10 @@ const GroupEntry = ({ closeGroupEntry, onGroupUpdate }) => {
       const response = await axios.post('http://localhost:5000/api/groupaccounts/addGroupAccount', newRow);
 
       if (response.data.success) {
-        // Notify the parent component of the new group
+        
         onGroupUpdate(group);
 
-        // Reset form fields after saving
+        
         setGroup('');
         setUnderGroup('');
         setIsPrimaryGroup(false);
@@ -93,7 +93,7 @@ const GroupEntry = ({ closeGroupEntry, onGroupUpdate }) => {
   };
 
   const handleDelete = () => {
-    // Remove the last added row from the table
+    
     setTableData(tableData.slice(0, -1));
   };
 
