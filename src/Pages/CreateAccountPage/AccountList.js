@@ -11,50 +11,74 @@ function AccountList() {
   const [showSettingModal, setShowSettingModal] = useState(false);
   const [showGroupEntry, setShowGroupEntry] = useState(false);
   const [showGetAccount, setShowGetAccount] = useState(false);
-  const [token, setToken] = useState(null); 
+  const [token, setToken] = useState(null);
+  const [groupOptions, setGroupOptions] = useState([ ]);
 
   const navigate = useNavigate();
 
-  const groupOptions = ['Assets', 'Liabilities', 'Equity', 'Revenue', 'Expenses'];
-
   const [formData, setFormData] = useState({
-    name: "",
-    printAs: "",
-    group: "",
-    openingBal: "",
-    DR_CR: "dr",
-    taxNo: "",
-    Address1: "",
-    Address2: "",
-    city: "",
-    pincode: "",
-    state: "",
-    stateCode: "",
-    mobileNo: "",
-    phone: "",
-    email: "",
-    contactPerson: "",
-    panCardNo: ""
+    name: '',
+    printAs: '',
+    group: '',
+    openingBal: '',
+    DR_CR: '',
+    taxNo: '',
+    Address1: '',
+    Address2: '',
+    city: '',
+    pincode: '',
+    state: '',
+    stateCode: '',
+    mobileNo: '',
+    phone: '',
+    email: '',
+    contactPerson: '',
+    panCardNo: ''
   });
 
-  // Retrieving token from localStorage and redirecting to login if not found
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     setToken(storedToken);
-    console.log("Retrieved Token:", storedToken);  
+    console.log('Retrieved Token:', storedToken);
 
     if (!storedToken) {
       alert('No token found, redirecting to login');
-      navigate('/login');  
+      navigate('/login');
     }
   }, [navigate]);
+  useEffect(() => {
+    // Fetching group options from the backend
+    const fetchGroupOptions = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/groupaccounts/getAllGroupAccount', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          setGroupOptions(result.message.map(group => group.groupName));
+        } else {
+          alert(result.message || 'Failed to fetch group options');
+        }
+      } catch (error) {
+        console.error('Error fetching group options:', error);
+        alert('An error occurred while fetching group options.');
+      }
+    };
+
+    fetchGroupOptions(); // Fetch group options on component mount
+  }, []);
+
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
   };
 
-  // Handling save with token authorization
   const handleSave = async () => {
     if (!token) {
       alert('No token found. Please log in again.');
@@ -66,9 +90,9 @@ function AccountList() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': token  
+          Authorization: token
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData)
       });
 
       const result = await response.json();
@@ -109,8 +133,12 @@ function AccountList() {
   };
 
   const goToViewList = () => {
-    console.log("Navigating with token:", token); 
-     navigate(`/accountviewlist?token=${token}`);
+    console.log('Navigating with token:', token);
+    navigate(`/accountviewlist?token=${token}`);
+  };
+
+  const handleGroupUpdate = (newGroup) => {
+    setGroupOptions((prevOptions) => [...prevOptions, newGroup]);
   };
 
   return (
@@ -147,22 +175,39 @@ function AccountList() {
       <div className="header-container">
         <h1>CREATE ACCOUNT</h1>
         <div className="header-buttons">
-          <button className="btn setting" onClick={handleSettingClick}>Setting</button>
+          <button className="btn setting" onClick={handleSettingClick}>
+            Setting
+          </button>
           <button className="btn delete">Delete</button>
-          <button className="btn list" onClick={goToViewList}>List</button>
-          <button className="btn get" onClick={toggleGetAccount}>Get Account Information with GST.NO</button>
+          <button className="btn list" onClick={goToViewList}>
+            List
+          </button>
+          <button className="btn get" onClick={toggleGetAccount}>
+            Get Account Information with GST.NO
+          </button>
         </div>
       </div>
 
       <div className="form-container">
-        {/* Form fields */}
         <div className="form-item">
           <label htmlFor="name"></label>
-          <input id="name" type="text" placeholder="Name" value={formData.name} onChange={handleInputChange} />
+          <input
+            id="name"
+            type="text"
+            placeholder="Name"
+            value={formData.name}
+            onChange={handleInputChange}
+          />
         </div>
         <div className="form-item">
           <label htmlFor="printAs"></label>
-          <input id="printAs" type="text" placeholder="Print As" value={formData.printAs} onChange={handleInputChange} />
+          <input
+            id="printAs"
+            type="text"
+            placeholder="Print As"
+            value={formData.printAs}
+            onChange={handleInputChange}
+          />
         </div>
         <div className="form-row">
           <div className="form-item group-item">
@@ -173,24 +218,42 @@ function AccountList() {
                 value={formData.group}
                 onChange={handleInputChange}
               >
-                <option value="" disabled>Select Group</option>
+                <option value="" disabled>
+                  Select Group
+                </option>
                 {groupOptions.map((group, index) => (
-                  <option key={index} value={group}>{group}</option>
+                  <option key={index} value={group}>
+                    {group}
+                  </option>
                 ))}
               </select>
               <div className="form-actions">
-                <button className="action-btn plus-btn" onClick={openGroupEntry}>+</button>
-                <button className="action-btn edit-btn"><FaEdit /></button>
+                <button className="action-btn plus-btn" onClick={openGroupEntry}>
+                  +
+                </button>
+                <button className="action-btn edit-btn">
+                  <FaEdit />
+                </button>
               </div>
             </div>
           </div>
           <div className="form-item opening-bal-item">
             <label htmlFor="openingBal">Opening Bal</label>
-            <input id="openingBal" type="text" placeholder="Opening Bal" value={formData.openingBal} onChange={handleInputChange} />
+            <input
+              id="openingBal"
+              type="text"
+              placeholder="Opening Bal"
+              value={formData.openingBal}
+              onChange={handleInputChange}
+            />
           </div>
           <div className="form-item dr-cr-item">
             <label htmlFor="drCr">Dr./Cr.</label>
-            <select id="drCr" value={formData.drCr} onChange={handleInputChange}>
+            <select
+              id="drCr"
+              value={formData.drCr}
+              onChange={handleInputChange}
+            >
               <option value="dr">Dr.</option>
               <option value="cr">Cr.</option>
             </select>
@@ -198,15 +261,19 @@ function AccountList() {
           <div className="form-item tax-no-item">
             <label htmlFor="taxNo">Tax No (GSTIN/VAT.NO)</label>
             <div className="tax-no-container">
-              <input id="taxNo" type="text" placeholder="Tax No" value={formData.taxNo} onChange={handleInputChange} />
+              <input
+                id="taxNo"
+                type="text"
+                placeholder="Tax No"
+                value={formData.taxNo}
+                onChange={handleInputChange}
+              />
               <div className="eye-icon-box">
                 <FaEye className="eye-icon" />
               </div>
             </div>
           </div>
         </div>
-
-       
         <div className="form-item">
           <label htmlFor="addressLine1"></label>
           <input id="Address1" type="text" placeholder="Address Line 1" value={formData.addressLine1} onChange={handleInputChange} />
@@ -258,14 +325,20 @@ function AccountList() {
           </div>
         </div>
       </div>
+    
 
       <div className="form-actions">
-        <button className="btn save" onClick={handleSave}>Save</button>
+        <button className="btn save" onClick={handleSave}>
+          Save
+        </button>
       </div>
 
+      {/* Modals */}
       {showSettingModal && <CreateSetting closeModal={closeModal} />}
-      {showGroupEntry && <GroupEntry closeGroupEntry={closeGroupEntry} />}
-      {showGetAccount && <GetAccount toggleGetAccount={toggleGetAccount} />}
+      {showGroupEntry && (
+        <GroupEntry closeGroupEntry={closeGroupEntry} onGroupUpdate={handleGroupUpdate} />
+      )}
+      {showGetAccount && <GetAccount closeModal={toggleGetAccount} />}
     </div>
   );
 }

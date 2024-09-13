@@ -86,32 +86,11 @@
     color: #35affd;
 }
 
-.buttons {
-    display: flex;
-    gap: 10px;
-    margin-left: auto; /* Push buttons to the right */
-}
-
-.btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.btn:hover {
-    background-color: #007bff;
-    color: white;
-}
-
-/* Individual button styles */
 .header-buttons {
     margin-left: 80px;
     display: flex;
     gap: 10px;
-    margin-bottom: px;
+    margin-bottom: 20px; /* Added margin-bottom for spacing */
 }
 
 .add-new,
@@ -139,6 +118,55 @@
 .import { width: 120px; }
 .search { width: 120px; }
 
+/* New styles for table-container */
+.table-container {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+    text-align: left;
+}
+
+thead {
+    background-color: #f1f1f1;
+}
+
+th {
+    font-weight: bold;
+}
+
+/* New styles for Save Changes button */
+.save-changes-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.save-changes {
+    background-color: #35affd;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.save-changes:hover {
+    background-color: #007bff;
+}
+
 /* New styles for action-buttons */
 .action-buttons {
     display: flex;
@@ -155,6 +183,7 @@
     border-radius: 5px;
 }
 
+/* New styles for text boxes */
 .text-boxes {
     display: flex;
     align-items: center;
@@ -167,71 +196,36 @@
     margin-left: 2px;
 }
 
+.text-box1,
+.text-box2,
+.text-box3,
+.text-box4,
+.text-box5,
+.text-box6,
+.text-box7,
+.text-box8,
+.text-box9,
+.text-box10,
+.text-box11 {
+    border: 2px solid #35affd;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 2px;
+}
+
 .text-box1 {
     width: 30px;
     height: 30px;
 }
 
-.text-box2 {
-    flex-grow: 1;
-    border: 2px solid #35affd;
-    border-radius: 5px;
-    padding: 5px;
-    margin-left: 2px;
-}
-
-.text-box3 {
-    flex-grow: 1;
-    border: 2px solid #35affd;
-    border-radius: 5px;
-    padding: 5px;
-    margin-left: 2px;
-}
-
-.text-box4 {
-    flex-grow: 1;
-    border: 2px solid #35affd;
-    border-radius: 5px;
-    padding: 5px;
-    margin-left: 2px;
-}
-
-.text-box5 {
-    flex-grow: 1;
-    border: 2px solid #35affd;
-    border-radius: 5px;
-    padding: 5px;
-    margin-left: 2px;
-}
-
-.text-box6 {
-    flex-grow: 1;
-    border: 2px solid #35affd;
-    border-radius: 5px;
-    padding: 5px;
-    margin-left: 2px;
-}
-
-.text-box7 {
-    flex-grow: 1;
-    border: 2px solid #35affd;
-    border-radius: 5px;
-    padding: 5px;
-    margin-left: 2px;
-}
-
+.text-box2,
+.text-box3,
+.text-box4,
+.text-box5,
+.text-box6,
+.text-box7,
 .text-box8 {
     flex-grow: 1;
-    border: 2px solid #35affd;
-    border-radius: 5px;
-    padding: 5px;
-    margin-left: 2px;
-}
-
-.text-box9,
-.text-box10,
-.text-box11 {
-    margin-left: 2px;
 }
 
 .icon1,
