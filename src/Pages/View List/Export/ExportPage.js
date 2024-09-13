@@ -1,34 +1,60 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ExportPage.css';
 
 const ExportPage = ({ show, onClose, onExport }) => {
   const [selectedOption, setSelectedOption] = useState('');
+  const [productItems, setProductItems] = useState([]);
 
-  if (!show) return null;
+  useEffect(() => {
+    
+    if (show) {
+      fetchProductItems();
+    }
+  }, [show]);
+
+  const fetchProductItems = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/exportProtuctItemData', {}, {
+        headers: { 'Content-Type': 'application/json' }, 
+      });
+      if (response.data.success) {
+        setProductItems(response.data.message);
+      } else {
+        console.error('Failed to fetch product items:', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error fetching product items:', error);
+    }
+  };
 
   const handleExport = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/export', 
-        { exportType: selectedOption }, {
-        responseType: 'blob', 
-      });
+      if (selectedOption === 'all-accounts') {
+        const response = await axios.post('http://localhost:5000/api/export', 
+          { exportType: selectedOption, data: productItems }, {
+          responseType: 'blob',
+          headers: { 'Content-Type': 'application/json' }, 
+        });
 
-     
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'accounts.xlsx'); 
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'product-items.xlsx'); 
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
 
-      onExport();
+        onExport();
+      } else {
+        console.error('Invalid export option selected.');
+      }
     } catch (error) {
       console.error('Export failed', error);
     }
   };
+
+  if (!show) return null;
 
   return (
     <>
