@@ -1,7 +1,7 @@
 .sales-container {
   padding: 20px;
   font-family: Arial, sans-serif;
-  overflow: hidden;
+  overflow-y: auto; /* Enable vertical scrolling */
   display: flex;
   flex-direction: column;
   height: 100vh; /* Full viewport height */
@@ -160,8 +160,9 @@ input[type="text"].small-input, input[type="date"].small-input {
 
 .content-sections {
   display: flex;
-  flex: 1; /* Allow it to grow and fill available space */
+  flex: 1; 
   overflow: hidden;
+  height: 50px;
 }
 
 .items-section, .charges-section {
