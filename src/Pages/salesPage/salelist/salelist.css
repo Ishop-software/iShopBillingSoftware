@@ -1,3 +1,10 @@
+.salelist{
+    position: fixed;
+    top:0px;
+    left: 0px;
+}
+
+
 .saleviewnavbar {
     display: flex;
     justify-content: space-between;
@@ -7,7 +14,8 @@
     border-bottom: 1px solid #ddd;
     border-radius: 6px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    margin-top: 200px;
+    
+  
   }
   
   .left-section {
@@ -66,6 +74,8 @@
 .saleviewcontainer{
     margin-bottom: 580px;
     background-color: #fff;
+    max-height: 90vh;
+    overflow: scroll;
 }
 .salebuttons {
     display: flex;
@@ -94,6 +104,8 @@
     gap: 10px;
     margin-top: 15px;
     margin-left: 20px;
+   
+
 }
 
 .text-box1,

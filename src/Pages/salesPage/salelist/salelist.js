@@ -90,16 +90,15 @@
 import React, { useState, useEffect } from 'react';
 import { FaTrash, FaArrowLeft, FaCog, FaUser } from 'react-icons/fa';
 import './salelist.css';
+
 function Salelist() {
   const [salesData, setSalesData] = useState([]);
-  const [chargesData, setChargesData] = useState([]);
 
   useEffect(() => {
-    
     const fetchSalesData = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/usercharge/getAllChargeList', {
-          method: 'POST', 
+          method: 'POST',
           headers: { 'Content-Type': 'application/json' }
         });
         const result = await response.json();
@@ -117,17 +116,15 @@ function Salelist() {
   }, []);
 
   const handleDelete = (index) => {
-  
     console.log(`Delete clicked for text box ${index}`);
   };
 
   const handleBackClick = () => {
-   
     console.log('Back button clicked');
   };
 
   return (
-    <div>
+    <div className="salelist">
       <div className="saleviewnavbar">
         <div className="left-section">
           <div className="back-icon" onClick={handleBackClick}>
@@ -154,38 +151,38 @@ function Salelist() {
       
       <div className="saleviewcontainer">
         <div className="salebuttons">
-        <button className="saletick">Tick</button>
-      <button className="salecharges">Charges Heading</button>
-           <button className="saleaccount">Account</button>
+          <button className="saletick">Tick</button>
+          <button className="salecharges">Charges Heading</button>
+          <button className="saleaccount">Account</button>
           <button className="salepuls">+/-</button>
-           <button className="saleinput">Input As</button>
-           <button className="saleapply">Apply On</button>
-           <button className="salecal">Calculate @</button>
-           <button className="ro">R.O</button>
-           <button className="saletax">Tax</button>
-           <button className="saleslab">Slab</button>
-           <button className="salehsn">HSN Code</button>
-           <button className="saledelete">Delete</button>
+          <button className="saleinput">Input As</button>
+          <button className="saleapply">Apply On</button>
+          <button className="salecal">Calculate @</button>
+          <button className="ro">R.O</button>
+          <button className="saletax">Tax</button>
+          <button className="saleslab">Slab</button>
+          <button className="salehsn">HSN Code</button>
+          <button className="saledelete">Delete</button>
         </div>
 
         {salesData.map((sale, index) => (
-  <div className="saletexts" key={index}>
-    <input type="checkbox" className="text-box1" />
-    <input type="text" className="text-box2" placeholder="Product Name" value={sale.chargesHeading || ''} readOnly />
-    <input type="text" className="text-box3" placeholder="Name" value={sale.accountHeadToPost || ''} readOnly />
-    <input type="text" className="text-box4" placeholder="" value={(sale.typesOfCharges && sale.typesOfCharges[0]) || ''} readOnly />
-    <input type="text" className="text-box5" placeholder="" value={(sale.inputAmountOfChargesAs && sale.inputAmountOfChargesAs[1]) || ''} readOnly />
-    <input type="text" className="text-box6" placeholder="" value={(sale.otherFields && sale.otherFields[2]) || ''} readOnly />
-    <input type="text" className="text-box7" placeholder="" value={(sale.otherFields && sale.otherFields[3]) || ''} readOnly />
-    <input type="text" className="text-box8" placeholder="" value={(sale.otherFields && sale.otherFields[4]) || ''} readOnly />
-    <input type="text" className="text-box9" placeholder="" value={(sale.taxApplicable && sale.taxApplicable[5]) || ''} readOnly />
-    <input type="text" className="text-box10" placeholder="" value={(sale.taxSlab && sale.taxSlab[6]) || ''} readOnly />
-    <input type="text" className="text-box11" placeholder="" value={(sale.HSNCode && sale.HSNCode[7]) || ''} readOnly />
-    <div className="text-box12">
-      <FaTrash className="icon2" onClick={() => handleDelete(index)} />
-    </div>
-  </div>
-))}
+          <div className="saletexts" key={index}>
+            <input type="checkbox" className="text-box1" />
+            <input type="text" className="text-box2" placeholder="Charges Heading" value={sale.chargesHeading || ''} readOnly />
+            <input type="text" className="text-box3" placeholder="Account Head" value={sale.accountHeadToPost || ''} readOnly />
+            <input type="text" className="text-box4" placeholder="Types of Charges" value={sale.typesOfCharges || ''} readOnly />
+            <input type="text" className="text-box5" placeholder="Input As" value={sale.inputAmountOfChargesAs || ''} readOnly />
+            <input type="text" className="text-box6" placeholder="Applyon" value={sale.applyOn || ''} readOnly />
+            <input type="text" className="text-box7" placeholder="Calculate@" value={sale.CalculateAt || ''} readOnly />
+            <input type="text" className="text-box8" placeholder="R.O" value={sale.ro || ''} readOnly />
+            <input type="text" className="text-box9" placeholder="HSN Code" value={sale.taxSettings && sale.taxSettings[0]?.HSNCode || ''} readOnly />
+            <input type="text" className="text-box10" placeholder="Tax Slab" value={sale.taxSettings && sale.taxSettings[0]?.taxSlab || ''} readOnly />
+            <input type="text" className="text-box11" placeholder="Tax Applicable" value={sale.taxSettings && sale.taxSettings[0]?.taxApplicable ? 'Yes' : 'No'} readOnly />
+            <div className="text-box10">
+              <FaTrash className="icon2" onClick={() => handleDelete(index)} />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
