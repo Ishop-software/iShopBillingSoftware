@@ -121,32 +121,66 @@ const Charges = ({ onClose }) => {
   const [formData, setFormData] = useState({
     chargesHeading: '',
     printAs: '',
-    accountHead: '',
+    accountHeadToPost: '',
+    typeOfCharges: 'plus',
+    inputAmountOfChargesAs:'',
     applyOn: '',
     percentage: '',
     calculateAt: '',
     roundOff: false,
-    chargeType: 'plus',
     amountType: 'absolute',
-    taxSlab: '',
-    hsnCode: '',
-    taxApplicable: false,
+    taxSettings: [
+      {
+        taxSlab: '',
+        HSNCode: '',
+        taxApplicable: false,
+      }
+    ],
   });
   const navigate = useNavigate();
 
+ 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
+    console.log(`Updating field ${name} with value ${value}`);
     setFormData({
       ...formData,
       [name]: type === 'checkbox' ? checked : value,
     });
   };
+  
+  const handleTaxSettingsChange = (index, e) => {
+    const { name, value, type, checked } = e.target;
+    console.log(`Updating taxSettings index ${index} with ${name} = ${value}`);
+    const newTaxSettings = [...formData.taxSettings];
+    newTaxSettings[index] = {
+      ...newTaxSettings[index],
+      [name]: type === 'checkbox' ? checked : value,
+    };
+    setFormData({
+      ...formData,
+      taxSettings: newTaxSettings,
+    });
+  };
+  
+  const handleAddTaxSetting = () => {
+    setFormData({
+      ...formData,
+      taxSettings: [
+        ...formData.taxSettings,
+        {
+          taxSlab: '',
+          HSNCode: '',
+          taxApplicable: false,
+        },
+      ],
+    });
+  };
 
   const handlecharges = async () => {
     try {
-
       console.log('Data being sent to the server:', formData);
-      const token = localStorage.getItem('token'); 
+      const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:5000/api/usercharge/addChargeRegister', {
         method: 'POST',
         headers: {
@@ -171,11 +205,11 @@ const Charges = ({ onClose }) => {
 
   const handleRadioChange = (event) => {
     setShowPercentageBox(event.target.value === 'percentage');
-    handleInputChange(event); 
+    handleInputChange(event);
   };
 
   const handleViewList = () => {
-    const token = localStorage.getItem('token'); 
+    const token = localStorage.getItem('token');
     navigate(`/salelist?token=${token}`);
   };
 
@@ -223,7 +257,7 @@ const Charges = ({ onClose }) => {
                 type="text"
                 id="account-head"
                 name="accountHead"
-                value={formData.accountHead}
+                value={formData.accountHeadToPost}
                 onChange={handleInputChange}
               />
             </div>
@@ -290,18 +324,18 @@ const Charges = ({ onClose }) => {
                 <label>
                   <input
                     type="radio"
-                    name="chargeType"
+                    name="typeOfCharge"
                     value="plus"
-                    checked={formData.chargeType === 'plus'}
+                    checked={formData.typeOfCharge === 'plus'}
                     onChange={handleRadioChange}
                   /> Plus (+)
                 </label>
                 <label>
                   <input
                     type="radio"
-                    name="chargeType"
+                    name="typeOfCharge"
                     value="minus"
-                    checked={formData.chargeType === 'minus'}
+                    checked={formData.typeOfCharge === 'minus'}
                     onChange={handleRadioChange}
                   /> Minus (-)
                 </label>
@@ -359,42 +393,46 @@ const Charges = ({ onClose }) => {
               </div>
             </div>
 
-            <div className="box tax-settings">
-              <div className="form-group">
-                <label htmlFor="tax-slab">Tax Slab</label>
-                <select
-                  id="tax-slab"
-                  name="taxSlab"
-                  value={formData.taxSlab}
-                  onChange={handleInputChange}
-                >
-                  <option value="slab1">Slab 1</option>
-                  <option value="slab2">Slab 2</option>
-                  <option value="slab3">Slab 3</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label htmlFor="hsn-code">HSN Code</label>
-                <input
-                  type="text"
-                  id="hsn-code"
-                  name="hsnCode"
-                  value={formData.hsnCode}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group checkbox-group">
-                <label>
+            {formData.taxSettings.map((taxSetting, index) => (
+              <div key={index} className="box tax-settings">
+                <div className="form-group">
+                  <label htmlFor={`tax-slab-${index}`}>Tax Slab</label>
+                  <select
+                    id={`tax-slab-${index}`}
+                    name="taxSlab"
+                    value={taxSetting.taxSlab}
+                    onChange={(e) => handleTaxSettingsChange(index, e)}
+                  >
+                    <option value="">Select Slab</option>
+                    <option value="slab1">Slab 1</option>
+                    <option value="slab2">Slab 2</option>
+                    <option value="slab3">Slab 3</option>
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label htmlFor={`hsn-code-${index}`}>HSN Code</label>
                   <input
-                    type="checkbox"
-                    id="tax-applicable"
-                    name="taxApplicable"
-                    checked={formData.taxApplicable}
-                    onChange={handleInputChange}
-                  /> Tax Applicable
-                </label>
+                    type="text"
+                    id={`hsn-code-${index}`}
+                    name="HSNCode"
+                    value={taxSetting.HSNCode}
+                    onChange={(e) => handleTaxSettingsChange(index, e)}
+                  />
+                </div>
+                <div className="form-group checkbox-group">
+                  <label>
+                    <input
+                      type="checkbox"
+                      id={`tax-applicable-${index}`}
+                      name="taxApplicable"
+                      checked={taxSetting.taxApplicable}
+                      onChange={(e) => handleTaxSettingsChange(index, e)}
+                    /> Tax Applicable
+                  </label>
+                </div>
               </div>
-            </div>
+            ))}
+            <button className="add-tax-setting-button" onClick={handleAddTaxSetting}>+ Add Tax Setting</button>
           </div>
         </div>
       </div>

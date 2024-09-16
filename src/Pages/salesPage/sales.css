@@ -141,6 +141,7 @@ input[type="text"].small-input, input[type="date"].small-input {
   display: flex;
 }
 
+
 .add-party-btn {
   margin-left: 260px;
   font-weight: bold;
@@ -164,8 +165,7 @@ input[type="text"].small-input, input[type="date"].small-input {
 .content-sections {
   display: flex;
   flex: 1; 
-  overflow: hidden; 
-  overflow: hidden;
+  
   height: 50px;
 }
 

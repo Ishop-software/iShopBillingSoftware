@@ -412,6 +412,7 @@
 // };
 
 // export default Sales;
+
 import React, { useState, useEffect } from 'react';
 import Charges from './charges/charges';
 import CashPage from './cashPage/cash'; 
@@ -433,6 +434,8 @@ const Sales = () => {
   const [basicAmt, setBasicAmt] = useState('');
   const [netValue, setNetValue] = useState('');
   const [summaryData, setSummaryData] = useState([]); // State to hold summary data
+  const [accountOptions, setAccountOptions] = useState([]); // State to hold account options
+  const [selectedAccount, setSelectedAccount] = useState('');
   const token = searchParams.get('token');
   const navigate = useNavigate();
 
@@ -468,6 +471,40 @@ const Sales = () => {
     fetchItemNames();
   }, [token]);
 
+  useEffect(() => {
+   // sale.js
+const fetchAccountOptions = async () => {
+  try {
+    const response = await fetch('http://localhost:5000/api/users/getAllAccountDetails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      if (Array.isArray(data.data)) {
+        setAccountOptions(data.data);
+      } else {
+        console.error('Fetched data.data is not an array:', data.data);
+        setAccountOptions([]);
+      }
+    } else {
+      console.error('Failed to fetch account options');
+      setAccountOptions([]);
+    }
+  } catch (error) {
+    console.error('Error fetching account options:', error);
+    setAccountOptions([]);
+  }
+};
+
+
+    fetchAccountOptions();
+  }, [token]);
+
   const handleItemChange = (e) => {
     const selectedItemName = e.target.value;
     setSelectedItem(selectedItemName);
@@ -480,6 +517,10 @@ const Sales = () => {
       setRate('');
       setTaxSlab('');
     }
+  };
+
+  const handleAccountChange = (e) => {
+    setSelectedAccount(e.target.value);
   };
 
   const handleaddnewitem = () => {
@@ -656,12 +697,22 @@ const Sales = () => {
           <button className="attach-btn">Attach</button>
         </div>
       </div>
-
+       
       <div className="party-info">
         <div className="party-details">
           <div className="party-name">
             <label>Party Name</label>
-            <input type="text" />
+            <select
+              value={selectedAccount}
+              onChange={handleAccountChange}
+            >
+              <option value="">Select Party</option>
+              {accountOptions.map((account) => (
+                <option key={account.id} value={account.id}>
+                  {account.name}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="bill-no">
             <label>Bill No</label>
@@ -677,7 +728,7 @@ const Sales = () => {
           <button className="edit-party-btn">Edit</button>
         </div>
       </div>
-
+      
       <div className="content-sections">
         <div className="items-section">
           <label className="section-title">ITEMS</label>
@@ -831,10 +882,11 @@ const Sales = () => {
           />
           <input type="text" placeholder="change" />
         </div>
+    
       </div>
-
       {showCharges && <Charges onClose={handleCloseCharges} />}
       {showCashPage && <CashPage onClose={handleCloseCashPage} />} 
+      
     </div>
   );
 };
