@@ -112,7 +112,7 @@
 
 // export default Charges;
 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './charges.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -122,13 +122,13 @@ const Charges = ({ onClose }) => {
     chargesHeading: '',
     printAs: '',
     accountHeadToPost: '',
-    typeOfCharges: 'plus',
-    inputAmountOfChargesAs:'',
+    typeOfCharges: 'plus', // For types of charges (plus or minus)
+    inputAmountOfChargesAs: '', // For input amount types
     applyOn: '',
     percentage: '',
     calculateAt: '',
     roundOff: false,
-    amountType: 'absolute',
+    amountType: 'absolute', // For amount type options (absolute, on-qty, etc.)
     taxSettings: [
       {
         taxSlab: '',
@@ -137,8 +137,36 @@ const Charges = ({ onClose }) => {
       }
     ],
   });
+  
+
+  const [accountNames, setAccountNames] = useState([]);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchAccountNames = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://localhost:5000/api/users/getAllAccountDetails', {
+          method: 'POST', // Changed to POST
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token, // Pass the token for authentication
+          },
+        });
+        const result = await response.json();
+        if (response.ok) {
+          setAccountNames(result.data); // Assuming result.data contains account names
+        } else {
+          alert('Error fetching account names');
+        }
+      } catch (error) {
+        alert('Error: ' + error.message);
+      }
+    };
+  
+    fetchAccountNames();
+  }, []);
+  
  
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -189,9 +217,9 @@ const Charges = ({ onClose }) => {
         },
         body: JSON.stringify(formData),
       });
-
+  
       const result = await response.json();
-
+  
       if (response.ok) {
         alert(result.message);
         navigate('/salelist');
@@ -202,11 +230,25 @@ const Charges = ({ onClose }) => {
       alert('Error saving sales register: ' + error.message);
     }
   };
-
+  
   const handleRadioChange = (event) => {
-    setShowPercentageBox(event.target.value === 'percentage');
-    handleInputChange(event);
+    const { name, value } = event.target;
+  
+    if (name === 'typeOfCharges') {
+      setFormData({
+        ...formData,
+        typeOfCharges: value,
+      });
+    } else if (name === 'amountType') {
+      setFormData({
+        ...formData,
+        amountType: value,
+        // Show or hide percentage box based on the selected amount type
+        ...(value === 'percentage' ? { showPercentageBox: true } : { showPercentageBox: false }),
+      });
+    }
   };
+  
 
   const handleViewList = () => {
     const token = localStorage.getItem('token');
@@ -253,13 +295,19 @@ const Charges = ({ onClose }) => {
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="account-head">Account Head to Post</label>
-              <input
-                type="text"
+              <select
                 id="account-head"
-                name="accountHead"
+                name="accountHeadToPost"
                 value={formData.accountHeadToPost}
                 onChange={handleInputChange}
-              />
+              >
+                <option value="">Select Account</option>
+                {accountNames.map((account) => (
+                  <option key={account._id} value={account._id}>
+                    {account.name} {/* Assuming account object has a 'name' field */}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {showPercentageBox && (
@@ -322,22 +370,22 @@ const Charges = ({ onClose }) => {
               <label>Types of Charges</label>
               <div className="radio-group">
                 <label>
-                  <input
-                    type="radio"
-                    name="typeOfCharge"
-                    value="plus"
-                    checked={formData.typeOfCharge === 'plus'}
-                    onChange={handleRadioChange}
-                  /> Plus (+)
+                <input
+  type="radio"
+  name="typeOfCharges"
+  value="plus"
+  checked={formData.typeOfCharges === 'plus'}
+  onChange={handleRadioChange}
+/> Plus (+)
                 </label>
                 <label>
-                  <input
-                    type="radio"
-                    name="typeOfCharge"
-                    value="minus"
-                    checked={formData.typeOfCharge === 'minus'}
-                    onChange={handleRadioChange}
-                  /> Minus (-)
+                <input
+  type="radio"
+  name="typeOfCharges"
+  value="minus"
+  checked={formData.typeOfCharges === 'minus'}
+  onChange={handleRadioChange}
+/> Minus (-)
                 </label>
               </div>
             </div>
@@ -346,49 +394,49 @@ const Charges = ({ onClose }) => {
               <label>Input Amount of Charges as</label>
               <div className="radio-group">
                 <label>
-                  <input
-                    type="radio"
-                    name="amountType"
-                    value="absolute"
-                    checked={formData.amountType === 'absolute'}
-                    onChange={handleRadioChange}
-                  /> Absolute Amount
+                <input
+  type="radio"
+  name="amountType"
+  value="absolute"
+  checked={formData.amountType === 'absolute'}
+  onChange={handleRadioChange}
+/> Absolute Amount
                 </label>
                 <label>
-                  <input
-                    type="radio"
-                    name="amountType"
-                    value="on-qty"
-                    checked={formData.amountType === 'on-qty'}
-                    onChange={handleRadioChange}
-                  /> On Qty
+                <input
+  type="radio"
+  name="amountType"
+  value="on-qty"
+  checked={formData.amountType === 'on-qty'}
+  onChange={handleRadioChange}
+/> On Qty
                 </label>
                 <label>
-                  <input
-                    type="radio"
-                    name="amountType"
-                    value="percentage"
-                    checked={formData.amountType === 'percentage'}
-                    onChange={handleRadioChange}
-                  /> Percentage
+                <input
+  type="radio"
+  name="amountType"
+  value="percentage"
+  checked={formData.amountType === 'percentage'}
+  onChange={handleRadioChange}
+/> Percentage
                 </label>
                 <label>
-                  <input
-                    type="radio"
-                    name="amountType"
-                    value="on-bags"
-                    checked={formData.amountType === 'on-bags'}
-                    onChange={handleRadioChange}
-                  /> On Bags
+                <input
+  type="radio"
+  name="amountType"
+  value="on-bags"
+  checked={formData.amountType === 'on-bags'}
+  onChange={handleRadioChange}
+/> On Bags
                 </label>
                 <label>
-                  <input
-                    type="radio"
-                    name="amountType"
-                    value="on-weight-bags"
-                    checked={formData.amountType === 'on-weight-bags'}
-                    onChange={handleRadioChange}
-                  /> On Weights / Bags
+                <input
+  type="radio"
+  name="amountType"
+  value="on-weight-bags"
+  checked={formData.amountType === 'on-weight-bags'}
+  onChange={handleRadioChange}
+/> On Weights / Bags
                 </label>
               </div>
             </div>
