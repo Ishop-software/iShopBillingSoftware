@@ -172,13 +172,13 @@ function Salelist() {
             <input type="text" className="text-box3" placeholder="Account Head" value={sale.accountHeadToPost || ''} readOnly />
             <input type="text" className="text-box4" placeholder="Types of Charges" value={sale.typesOfCharges || ''} readOnly />
             <input type="text" className="text-box5" placeholder="Input As" value={sale.inputAmountOfChargesAs || ''} readOnly />
-            <input type="text" className="text-box6" placeholder="Applyon" value={sale.applyOn || ''} readOnly />
-            <input type="text" className="text-box7" placeholder="Calculate@" value={sale.CalculateAt || ''} readOnly />
-            <input type="text" className="text-box8" placeholder="R.O" value={sale.ro || ''} readOnly />
+            <input type="text" className="text-box6" placeholder="Apply On" value={sale.applyOn || ''} readOnly />
+            <input type="text" className="text-box7" placeholder="Calculate @" value={sale.calculateAt || ''} readOnly />
+            <input type="text" className="text-box8" placeholder="R.O" value={sale.roundOff ? 'Yes' : 'No'} readOnly />
             <input type="text" className="text-box9" placeholder="HSN Code" value={sale.taxSettings && sale.taxSettings[0]?.HSNCode || ''} readOnly />
             <input type="text" className="text-box10" placeholder="Tax Slab" value={sale.taxSettings && sale.taxSettings[0]?.taxSlab || ''} readOnly />
             <input type="text" className="text-box11" placeholder="Tax Applicable" value={sale.taxSettings && sale.taxSettings[0]?.taxApplicable ? 'Yes' : 'No'} readOnly />
-            <div className="text-box10">
+            <div className="text-box12">
               <FaTrash className="icon2" onClick={() => handleDelete(index)} />
             </div>
           </div>

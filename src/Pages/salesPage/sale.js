@@ -551,7 +551,7 @@ const fetchAccountOptions = async () => {
     const data = {
       userId: 'yourUserId',
       saleRegId: 'someSaleRegId',
-      partyName: document.querySelector('.party-name input').value,
+      // partyName: document.querySelector('.party-name input').value,
       billNo: parseInt(document.querySelector('.bill-no input').value, 10),
       dueDate: document.querySelector('.due-date input').value,
       itemName: selectedItem,
