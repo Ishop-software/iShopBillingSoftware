@@ -254,6 +254,14 @@ const Charges = ({ onClose }) => {
     const token = localStorage.getItem('token');
     navigate(`/salelist?token=${token}`);
   };
+  const handleaccountname = () => {
+    const token = localStorage.getItem('token');
+    navigate(`/accountlist?token=${token}`);
+  };
+  const handleeditpartybutton = () => {
+    const token = localStorage.getItem('token');
+    navigate(`/accountlist?token=${token}`);
+  };
 
   return (
     <div className="charges-modal">
@@ -361,8 +369,8 @@ const Charges = ({ onClose }) => {
           </div>
 
           <div className="button-group">
-            <button className="add-party-button">+ Add New Party Name</button>
-            <button className="edit-party-button">Edit</button>
+            <button className="add-party-button" onClick={handleaccountname}>+ Add New Party Name</button>
+            <button className="edit-party-button" onClick={handleeditpartybutton}>Edit</button>
           </div>
 
           <div className="box-container">

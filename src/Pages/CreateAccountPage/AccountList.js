@@ -187,6 +187,11 @@ function AccountList() {
           </button>
         </div>
       </div>
+      <div className="form-actions">
+        <button className="btn save" onClick={handleSave}>
+          Save
+        </button>
+      </div>
 
       <div className="form-container">
         <div className="form-item">
@@ -327,11 +332,11 @@ function AccountList() {
       </div>
     
 
-      <div className="form-actions">
+      {/* <div className="form-actions">
         <button className="btn save" onClick={handleSave}>
           Save
         </button>
-      </div>
+      </div> */}
 
       {/* Modals */}
       {showSettingModal && <CreateSetting closeModal={closeModal} />}
