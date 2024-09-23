@@ -112,6 +112,7 @@
 
 // export default Charges;
 
+
 import React, { useState,useEffect } from 'react';
 import './charges.css';
 import { useNavigate } from 'react-router-dom';
@@ -243,11 +244,13 @@ const Charges = ({ onClose }) => {
       setFormData({
         ...formData,
         amountType: value,
-        // Show or hide percentage box based on the selected amount type
-        ...(value === 'percentage' ? { showPercentageBox: true } : { showPercentageBox: false }),
       });
+  
+      // This should be outside setFormData
+      setShowPercentageBox(value === 'percentage');
     }
   };
+    
   
 
   const handleViewList = () => {
@@ -325,43 +328,19 @@ const Charges = ({ onClose }) => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="apply-on">Apply On</label>
-                  <input
-                    type="text"
-                    id="apply-on"
-                    name="applyOn"
-                    value={formData.applyOn}
-                    onChange={handleInputChange}
-                  />
+                  <input type="text" id="apply-on" />
                 </div>
                 <div className="form-group">
                   <label htmlFor="percentage">Percentage</label>
-                  <input
-                    type="text"
-                    id="percentage"
-                    name="percentage"
-                    value={formData.percentage}
-                    onChange={handleInputChange}
-                  />
+                  <input type="text" id="percentage" />
                 </div>
                 <div className="form-group">
                   <label htmlFor="calculate-at">Calculate @</label>
-                  <input
-                    type="text"
-                    id="calculate-at"
-                    name="calculateAt"
-                    value={formData.calculateAt}
-                    onChange={handleInputChange}
-                  />
+                  <input type="text" id="calculate-at" />
                 </div>
                 <div className="checkbox-group">
                   <label>
-                    <input
-                      type="checkbox"
-                      id="round-off"
-                      name="roundOff"
-                      checked={formData.roundOff}
-                      onChange={handleInputChange}
-                    /> Round Off Amount of Charges
+                    <input type="checkbox" id="round-off" /> Round Off Amount of Charges
                   </label>
                 </div>
               </div>
